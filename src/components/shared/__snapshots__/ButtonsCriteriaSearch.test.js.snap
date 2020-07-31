@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CriteriaSearch/> should equals to snapshot of CriteriaSearch 1`] = `
+Array [
+  <p>
+    Sort
+     by
+  </p>,
+  <div
+    aria-label="Basic example"
+    className="btn-group"
+    role="group"
+  >
+    <button
+      className="btn btn-danger"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Release date
+    </button>
+    <button
+      className="btn btn-secondary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Rating
+    </button>
+  </div>,
+]
+`;

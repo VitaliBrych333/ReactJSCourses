@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StartPage/> should equals to snapshot of CriteriaSearch 1`] = `
+Array [
+  <header
+    className="sc-bwzfXH kfyadn"
+  >
+    <h1>
+      Find your movie
+    </h1>
+    <div
+      className="sc-bdVaJa lmvhs mb-3 input-group"
+    >
+      <input
+        aria-describedby="basic-addon2"
+        aria-label="Recipient's username"
+        className="form-control"
+        onChange={[Function]}
+        placeholder="Please write the film name"
+      />
+      <div
+        className="input-group-append"
+      >
+        <button
+          className="btn btn-outline-danger"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+    <p>
+      Search
+       by
+    </p>
+    <div
+      aria-label="Basic example"
+      className="btn-group"
+      role="group"
+    >
+      <button
+        className="btn btn-danger"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Title
+      </button>
+      <button
+        className="btn btn-secondary"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Genre
+      </button>
+    </div>
+    <div
+      className="count-movie"
+    >
+      <p>
+        Sort
+         by
+      </p>
+      <div
+        aria-label="Basic example"
+        className="btn-group"
+        role="group"
+      >
+        <button
+          className="btn btn-danger"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Release date
+        </button>
+        <button
+          className="btn btn-secondary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Rating
+        </button>
+      </div>
+    </div>
+  </header>,
+  <h3
+    className="sc-htpNat hNvbdx"
+  >
+    No films found
+  </h3>,
+]
+`;
