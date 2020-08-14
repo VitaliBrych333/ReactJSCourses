@@ -41,6 +41,7 @@ class SearchFilm extends Component {
     render() {
         return (
             <Fragment>
+                <Button className="add-movie" variant="outline-danger" onClick={this.handleClick.bind(this)} disabled={this.state.disabled}>+ Add movie</Button>
                 <h1>Find your movie</h1>
                 <StyledGroup className="mb-3">
                     <FormControl
@@ -54,7 +55,7 @@ class SearchFilm extends Component {
                         <Button variant="outline-danger" onClick={this.handleClick.bind(this)} disabled={this.state.disabled}>Search</Button>
                     </InputGroup.Append>
                 </StyledGroup>
-                <ButtonsCriteriaSearch buttonNames={this.state}/>
+                {/* <ButtonsCriteriaSearch buttonNames={this.state}/> */}
             </Fragment>
         )
     }

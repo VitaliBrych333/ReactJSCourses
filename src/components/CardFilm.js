@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchMoviesByGenre, fetchMovieId } from '../redux/actions/moviesActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const StyledCartTitle = styled(Card.Title)`
     display: flex;
@@ -38,6 +39,10 @@ const StyledCard = styled(Card)`
         height: 300px;
     }
 
+    img:hover {
+        cursor: pointer;
+    }
+
     .card-text, .card-text p {
         margin: 0;
         padding: 0;
@@ -56,9 +61,26 @@ const StyledCard = styled(Card)`
         cursor: pointer;
         text-decoration: underline;
     }
+
+    .show {
+        display: block;
+        border-radius: 50%;
+        background-color: gray;
+        position: absolute;
+        z-index: 2;
+        margin: 5px 5px 0 197px;
+    }
+
+    .no-show {
+        display: none;
+    }
 `;
 
 class Item extends Component {
+
+    state = {
+        dotsIsVisible: "no-show"
+    };
 
     handleClick(e) {
         this.props.dispatch(
@@ -75,10 +97,20 @@ class Item extends Component {
         }
     }
 
+    setIsShown(e, boolean) {
+        boolean ? this.setState({ dotsIsVisible: "show" })
+                : this.setState({ dotsIsVisible: "no-show" });
+    }
+
     render() {
         return (
             <StyledCard>
-                <Card.Img variant="top" src={this.props.info.poster_path} />
+                <MoreVertIcon className={this.state.dotsIsVisible}/>
+                <Card.Img variant="top"
+                          src={this.props.info.poster_path}
+                          onMouseEnter={(e) => this.setIsShown(e, true)}
+                          onMouseLeave={(e) => this.setIsShown(e, false)}
+                />
                 <Card.Body>
                     <StyledCartTitle>
                         <Link to={{pathname: `/movies/${this.props.info.id}`}} onClick={e => this.handleRequests(e, this.props.info.genres)}>{this.props.info.title}</Link>
