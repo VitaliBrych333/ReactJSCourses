@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../../redux/actions/moviesActions';
 import ButtonsCriteriaSearch from './ButtonsCriteriaSearch';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledGroup = styled(InputGroup)`
     padding: 0 50px;
@@ -41,7 +42,9 @@ class SearchFilm extends Component {
     render() {
         return (
             <Fragment>
-                <Button className="add-movie" variant="outline-danger" onClick={this.handleClick.bind(this)} disabled={this.state.disabled}>+ Add movie</Button>
+                <Button className="add-movie" variant="outline-danger">
+                    <Link to={{pathname: '/add'}}>+ Add movie</Link>
+                </Button>
                 <h1>Find your movie</h1>
                 <StyledGroup className="mb-3">
                     <FormControl

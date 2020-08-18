@@ -3,6 +3,7 @@ import ErrorBoundary from './shared/ErrorBoundary';
 import { connect } from 'react-redux';
 import IncorrectPath from './IncorrectPath';
 import StartPage from './StartPage';
+import AddPage from './AddPage';
 import DetailsPage from './DetailsPage';
 import {
     BrowserRouter as Router, Switch, Route, Redirect
@@ -31,6 +32,14 @@ class App extends Component {
                                 <StartPage data={this.props.data}/>
                             </ErrorBoundary>
                         </Route>
+                        <Route path="/add">
+                            <ErrorBoundary>
+                                <AddPage
+                                  // data={this.props.data}
+                                  />
+                            </ErrorBoundary>
+                        </Route>
+
                         <Route path='/404'>
                             <ErrorBoundary>
                                 <IncorrectPath/>
