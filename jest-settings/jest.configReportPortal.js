@@ -22,7 +22,12 @@ module.exports = {
       ]
   ],
   automock: false,
-    setupFiles: [
-      "./setupJest.js"
-    ]
+  setupFiles: [
+      "./jest-settings/setupJest.js"
+  ],
+  testMatch: [
+      "<rootDir>/src/**/*.(test).{js,jsx,ts,tsx}",
+      "<rootDir>/reportPortal.io/*.(spec|test).{js,jsx,ts,tsx}"
+  ],
+  rootDir: "../"
 };

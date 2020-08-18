@@ -1,7 +1,8 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const { merge } = require('webpack-merge');
 
 module.exports = function(configDirs) {
-  let prodConfig = Object.assign({}, require('../common')(configDirs));
+  let prodConfig = merge({ mode: 'production' }, require('../common')(configDirs));
 
   prodConfig.plugins.push(new UglifyJsPlugin({
     uglifyOptions: {
