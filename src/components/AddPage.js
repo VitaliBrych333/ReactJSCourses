@@ -7,7 +7,6 @@ import FormInfo from './shared/FormInfo';
 
 const StyledSection = styled.section`
     padding: 25px;
-    background-color:  rgb(209, 189, 189);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -38,7 +37,9 @@ class AddPage extends Component {
             <Fragment>
                 {/* <SearchHeader count={this.props.total}/>
                 {main} */}
-                <FormInfo></FormInfo>
+                <StyledSection>
+                    <FormInfo></FormInfo>
+                </StyledSection>
             </Fragment>
         );
     }

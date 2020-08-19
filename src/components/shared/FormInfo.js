@@ -11,9 +11,6 @@ const StyledGroup = styled(InputGroup)`
     margin: 0 auto;
     max-width: 700px;
 
-    .input-group-append {
-        background-color: bisque;
-    }
 `;
 
 class FormInfo extends Component {
@@ -43,6 +40,10 @@ class FormInfo extends Component {
         return (
             <Fragment>
                 <Form>
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2>Add movie</h2>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Title</Form.Label>
                         <Form.Control type="title" placeholder="Title" />
