@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CardFilm/> should equals to snapshot of CardFilm 1`] = `
+<div
+  className="sc-bwzfXH grzvku card"
+>
+  <img
+    className="card-img-top"
+    src="test"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="sc-bdVaJa gQwpgX card-title h5"
+    >
+      <a
+        href="/movies/1"
+        onClick={[Function]}
+      >
+        test
+      </a>
+      <span
+        className="badge badge-secondary"
+      >
+        test
+      </span>
+    </div>
+    <p
+      className="card-text"
+    />
+  </div>
+</div>
+`;
