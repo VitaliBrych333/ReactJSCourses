@@ -5,62 +5,59 @@ import { connect } from 'react-redux';
 import { fetchMovies } from '../../redux/actions/moviesActions';
 import ButtonsCriteriaSearch from './ButtonsCriteriaSearch';
 import styled from 'styled-components';
+import ButtonsFormGroup from './ButtonsFormGroup';
 
-const StyledGroup = styled(InputGroup)`
-    padding: 0 50px;
-    margin: 0 auto;
-    max-width: 700px;
+const StyledGroup = styled.div`
+    label {
+        color: #F65261;
+    }
+
+    h2, .close, a {
+        color: #FFF;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
 
 `;
 
 class FormInfo extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         kind: 'Search',
-    //         left: 'Title',
-    //         right: 'Genre',
-    //         disabled: true
-    //     }
-    // }
-
-    handleClick() {
-        this.props.dispatch(
-            fetchMovies(this.props.sort, this.props.search, this.myInput.value));
-    }
-
-    handleChange() {
-        const value = this.myInput.value;
-
-        value ? this.setState({disabled: false})
-              : this.setState({disabled: true})
-    }
 
     render() {
+        const data = this.props.data;
         return (
             <Fragment>
-                <Form>
-                    <button type="button" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+              <StyledGroup>
+              <Form>
+                    <button type="button" className="close" aria-label="Close">
+                       <Link to={{pathname: '/'}}><span aria-hidden="true">&times;</span></Link>
                     </button>
-                    <h2>Add movie</h2>
+                    <h2>{this.props.namePage}</h2>
+
                     <Form.Group controlId="formBasicEmail">
+                        {
+                            data && <Fragment>
+                                        <Form.Label>Movie id</Form.Label>
+                                        <Form.Control type="title" placeholder="Id" defaultValue={data.id} />
+                                    </Fragment>
+                        }
                         <Form.Label>Title</Form.Label>
                         <Form.Control type="title" placeholder="Title" />
 
                         <Form.Label>Release date</Form.Label>
-                        <Form.Control type="date" placeholder="Select Date" />
+                        <Form.Control type="date" placeholder="Select Date"/>
 
                         <Form.Label>Movie URL</Form.Label>
                         <Form.Control type="url" placeholder="Movie URL here" />
 
                         <Form.Label>Example select</Form.Label>
                         <Form.Control as="select" placeholder="Select Genre">
+                            <option>Select Genre</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
-                            <option>5</option>
                         </Form.Control>
 
                         <Form.Label>Overview</Form.Label>
@@ -68,33 +65,10 @@ class FormInfo extends Component {
 
                         <Form.Label>Runtime</Form.Label>
                         <Form.Control type="number" placeholder="Runtime here" />
-
-
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Reset
-                    </Button>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                    <ButtonsFormGroup nameButton={this.props.nameButton}></ButtonsFormGroup>
                 </Form>
-                {/* <Button className="add-movie" variant="outline-danger">
-                    <Link to={{pathname: '/add'}}>+ Add movie</Link>
-                </Button>
-                <h1>Find your movie</h1>
-                <StyledGroup className="mb-3">
-                    <FormControl
-                        placeholder="Please write the film name"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                        ref={value => { this.myInput = value; }}
-                        onChange={() => this.handleChange()}
-                    />
-                    <InputGroup.Append>
-                        <Button variant="outline-danger" onClick={this.handleClick.bind(this)} disabled={this.state.disabled}>Search</Button>
-                    </InputGroup.Append>
-                </StyledGroup>
-                <ButtonsCriteriaSearch buttonNames={this.state}/> */}
+              </StyledGroup>
             </Fragment>
         )
     }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import IncorrectPath from './IncorrectPath';
 import StartPage from './StartPage';
 import AddPage from './AddPage';
+import EditPage from './EditPage';
 import DetailsPage from './DetailsPage';
 import {
     BrowserRouter as Router, Switch, Route, Redirect
@@ -34,9 +35,13 @@ class App extends Component {
                         </Route>
                         <Route path="/add">
                             <ErrorBoundary>
-                                <AddPage
-                                  // data={this.props.data}
-                                  />
+                                <AddPage />
+                            </ErrorBoundary>
+                        </Route>
+
+                        <Route path="/edit">
+                            <ErrorBoundary>
+                                <EditPage />
                             </ErrorBoundary>
                         </Route>
 

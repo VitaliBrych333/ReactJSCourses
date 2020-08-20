@@ -18,18 +18,28 @@ const StyledSection = styled.section`
     }
 `;
 
-class AddPage extends Component {
-
+class EditPage extends Component {
     state = {
-        namePage: 'Add movie',
-        nameButton: 'Submit'
+      namePage: 'Edit movie',
+      nameButton: 'Save',
+      data: {
+        id: 1,
+        title: 'Moana',
+        date: new Date(),
+        url: 'www.moana.com',
+        genre: 'comedy',
+        overview: 'overview fake',
+        runtime: 180
+      }
     }
 
     render() {
         return (
             <Fragment>
                 <StyledSection>
-                    <FormInfo namePage={this.state.namePage} nameButton={this.state.nameButton}></FormInfo>
+                    <FormInfo namePage={this.state.namePage}
+                              nameButton={this.state.nameButton}
+                              data={this.state.data}></FormInfo>
                 </StyledSection>
             </Fragment>
         );
@@ -43,4 +53,4 @@ const mapStateToProps = state => ({
     error: state.movieReducer.error,
 });
 
-export default connect(mapStateToProps)(AddPage);
+export default connect(mapStateToProps)(EditPage);
