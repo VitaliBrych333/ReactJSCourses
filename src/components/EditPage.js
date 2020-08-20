@@ -27,9 +27,9 @@ class EditPage extends Component {
         title: 'Moana',
         date: new Date(),
         url: 'www.moana.com',
-        genre: 'comedy',
+        genre: 3,
         overview: 'overview fake',
-        runtime: 180
+        time: 180
       }
     }
 

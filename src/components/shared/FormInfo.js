@@ -39,32 +39,32 @@ class FormInfo extends Component {
                         {
                             data && <Fragment>
                                         <Form.Label>Movie id</Form.Label>
-                                        <Form.Control type="title" placeholder="Id" defaultValue={data.id} />
+                                        <Form.Control type="title" placeholder="Id" defaultValue={data.id ? data.id : null} />
                                     </Fragment>
                         }
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="title" placeholder="Title" />
+                        <Form.Control type="title" placeholder="Title" defaultValue={data.title ? data.title : null}/>
 
                         <Form.Label>Release date</Form.Label>
                         <Form.Control type="date" placeholder="Select Date"/>
 
                         <Form.Label>Movie URL</Form.Label>
-                        <Form.Control type="url" placeholder="Movie URL here" />
+                        <Form.Control type="url" placeholder="Movie URL here" defaultValue={data.url ? data.url : null} />
 
                         <Form.Label>Example select</Form.Label>
                         <Form.Control as="select" placeholder="Select Genre">
                             <option>Select Genre</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            <option>Horror</option>
+                            <option>Action</option>
+                            <option>Comedy</option>
                             <option>4</option>
                         </Form.Control>
 
                         <Form.Label>Overview</Form.Label>
-                        <Form.Control type="text" placeholder="Overview here" />
+                        <Form.Control type="text" placeholder="Overview here" defaultValue={data.overview ? data.overview : null}/>
 
                         <Form.Label>Runtime</Form.Label>
-                        <Form.Control type="number" placeholder="Runtime here" />
+                        <Form.Control type="number" placeholder="Runtime here" defaultValue={data.time ? data.time : null}/>
                     </Form.Group>
                     <ButtonsFormGroup nameButton={this.props.nameButton}></ButtonsFormGroup>
                 </Form>
