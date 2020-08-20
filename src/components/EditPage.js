@@ -27,7 +27,7 @@ class EditPage extends Component {
         title: 'Moana',
         date: new Date(),
         url: 'www.moana.com',
-        genre: 3,
+        genre: 'Comedy',
         overview: 'overview fake',
         time: 180
       }
@@ -39,7 +39,8 @@ class EditPage extends Component {
                 <StyledSection>
                     <FormInfo namePage={this.state.namePage}
                               nameButton={this.state.nameButton}
-                              data={this.state.data}></FormInfo>
+                              data={this.state.data}>
+                    </FormInfo>
                 </StyledSection>
             </Fragment>
         );

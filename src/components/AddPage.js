@@ -22,14 +22,18 @@ class AddPage extends Component {
 
     state = {
         namePage: 'Add movie',
-        nameButton: 'Submit'
+        nameButton: 'Submit',
+        
     }
 
     render() {
         return (
             <Fragment>
                 <StyledSection>
-                    <FormInfo namePage={this.state.namePage} nameButton={this.state.nameButton}></FormInfo>
+                    <FormInfo namePage={this.state.namePage}
+                              nameButton={this.state.nameButton}
+                              >
+                    </FormInfo>
                 </StyledSection>
             </Fragment>
         );
