@@ -62,7 +62,7 @@ class FormInfo extends Component {
                         <Form.Control type="title" placeholder="Title" defaultValue={(data && data.title) ? data.title : null}/>
 
                         <Form.Label>Release date</Form.Label>
-                        <Form.Control type="date" placeholder="Select Date"/>
+                        <Form.Control type="date" placeholder="Select Date" defaultValue={(data && data.date) ? data.date : null} />
 
                         <Form.Label>Movie URL</Form.Label>
                         <Form.Control type="url" placeholder="Movie URL here" defaultValue={(data && data.url) ? data.url : null} />

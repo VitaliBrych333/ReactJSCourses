@@ -25,7 +25,7 @@ class EditPage extends Component {
       data: {
         id: 1,
         title: 'Moana',
-        date: new Date(),
+        date: '2018-07-22',
         url: 'www.moana.com',
         genre: 'Comedy',
         overview: 'overview fake',
