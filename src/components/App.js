@@ -5,6 +5,7 @@ import IncorrectPath from './IncorrectPath';
 import StartPage from './StartPage';
 import AddPage from './AddPage';
 import EditPage from './EditPage';
+import Popup from './Popup';
 import DetailsPage from './DetailsPage';
 import {
     BrowserRouter as Router, Switch, Route, Redirect
@@ -42,6 +43,12 @@ class App extends Component {
                         <Route path="/edit">
                             <ErrorBoundary>
                                 <EditPage />
+                            </ErrorBoundary>
+                        </Route>
+
+                        <Route path="/delete/:id">
+                            <ErrorBoundary>
+                                <Popup/>
                             </ErrorBoundary>
                         </Route>
 

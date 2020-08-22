@@ -79,7 +79,7 @@ const StyledCard = styled(Card)`
 class Item extends Component {
 
     state = {
-        dotsIsVisible: "no-show"
+        dotsIsVisible: 'no-show'
     };
 
     handleClick(e) {
@@ -98,8 +98,8 @@ class Item extends Component {
     }
 
     setIsShown(e, boolean) {
-        boolean ? this.setState({ dotsIsVisible: "show" })
-                : this.setState({ dotsIsVisible: "no-show" });
+        boolean ? this.setState({ dotsIsVisible: 'show' })
+                : this.setState({ dotsIsVisible: 'no-show' });
     }
 
     render() {

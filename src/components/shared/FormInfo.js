@@ -1,25 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { InputGroup, FormControl, Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { fetchMovies } from '../../redux/actions/moviesActions';
-import ButtonsCriteriaSearch from './ButtonsCriteriaSearch';
 import styled from 'styled-components';
 import ButtonsFormGroup from './ButtonsFormGroup';
+import NamePage from './NamePage';
 
 const StyledGroup = styled.div`
     label {
         color: #F65261;
     }
-
-    h2, .close, a {
-        color: #FFF;
-    }
-
-    a:hover {
-        text-decoration: none;
-    }
-
 `;
 
 class FormInfo extends Component {
@@ -30,6 +19,10 @@ class FormInfo extends Component {
 
     handleChange(e) {
         console.log('value was changed on', e.target.value)
+    }
+
+    componentWillUnmount() {
+        console.log('component was deleted')
     }
 
     componentDidMount() {
@@ -46,10 +39,7 @@ class FormInfo extends Component {
             <Fragment>
               <StyledGroup>
               <Form>
-                    <button type="button" className="close" aria-label="Close">
-                       <Link to={{pathname: '/'}}><span aria-hidden="true">&times;</span></Link>
-                    </button>
-                    <h2>{this.props.namePage}</h2>
+                    <NamePage namePage={this.props.namePage}></NamePage>
 
                     <Form.Group controlId="formBasicEmail">
                         {

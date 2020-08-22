@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import NotFound from './NotFound';
 import styled from 'styled-components';
 import CardFilm from './CardFilm';
-import { useParams } from "react-router";
+import { useParams } from 'react-router';
 import FilmDetails from './FilmDetails';
 import { connect } from 'react-redux';
 

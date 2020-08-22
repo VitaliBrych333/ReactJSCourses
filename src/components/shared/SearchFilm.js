@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../../redux/actions/moviesActions';
-import ButtonsCriteriaSearch from './ButtonsCriteriaSearch';
 import styled from 'styled-components';
 
 const StyledGroup = styled(InputGroup)`
@@ -15,6 +14,20 @@ const StyledGroup = styled(InputGroup)`
         background-color: bisque;
     }
 `;
+
+const StyleDiv = styled.div`
+    a {
+        color: #F65261;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    button:hover > a {
+        color: #FFF;
+  }
+`
 
 class SearchFilm extends Component {
     constructor(props) {
@@ -42,10 +55,12 @@ class SearchFilm extends Component {
     render() {
         return (
             <Fragment>
-                <Button className="add-movie" variant="outline-danger">
-                    <Link to={{pathname: '/add'}}>+ Add movie</Link>
-                </Button>
-                <h1>Find your movie</h1>
+                <StyleDiv>
+                    <Button className="add-movie" variant="outline-danger">
+                        <Link to={{pathname: '/add'}}>+ Add movie</Link>
+                    </Button>
+                    <h1>Find your movie</h1>
+                </StyleDiv>
                 <StyledGroup className="mb-3">
                     <FormControl
                         placeholder="Please write the film name"
@@ -58,7 +73,6 @@ class SearchFilm extends Component {
                         <Button variant="outline-danger" onClick={this.handleClick.bind(this)} disabled={this.state.disabled}>Search</Button>
                     </InputGroup.Append>
                 </StyledGroup>
-                {/* <ButtonsCriteriaSearch buttonNames={this.state}/> */}
             </Fragment>
         )
     }

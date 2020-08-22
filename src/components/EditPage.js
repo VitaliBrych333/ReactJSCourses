@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import SearchHeader from './SearchHeader';
-import NotFound from './NotFound';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import FormInfo from './shared/FormInfo';

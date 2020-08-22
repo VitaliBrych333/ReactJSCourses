@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Button, ButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { setSearch, setSort } from '../../redux/actions/criteriaActions';
-import { sortRelease, sortRating } from '../../redux/actions/moviesActions';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -26,17 +24,26 @@ const StyledDiv = styled.div`
 class ButtonsFormGroup extends Component {
     constructor(props) {
         super(props);
-        console.log('hhhhhhhhhhhhhhhhh', props)
+    }
+
+    handleReset(e) {
+        console.log('reset', e.target)
+    }
+
+    handleClick(e) {
+        console.log('click', e.target)
     }
 
     render() {
         return (
             <Fragment>
               <StyledDiv>
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" onClick={(e) => this.handleReset(e)}>
                       Reset
                   </Button>
-                  <Button variant="primary" type="submit">{this.props.nameButton}</Button>
+                  <Button variant="primary" onClick={(e) => this.handleClick(e)}>
+                      {this.props.nameButton}
+                  </Button>
               </StyledDiv>
             </Fragment>
         )
