@@ -18,10 +18,6 @@ const StyledSection = styled.section`
 `;
 
 class StartPage extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         const { error, loading, data } = this.props;
         let main;

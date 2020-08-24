@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { Nav } from 'react-bootstrap';
-import { Button, ButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import SearchFilm from './shared/SearchFilm';
 import ButtonsCriteriaSearch from './shared/ButtonsCriteriaSearch';
 import styled from 'styled-components'
@@ -66,10 +65,21 @@ const StyledHeader = styled.header`
 `;
 
 class SearchHeader extends Component {
-
-    state = {
+    constructor(props) {
+      super(props);
+      this.state = {
         kind: 'Sort',
         left: 'Release date',
+      };
+
+      this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(e) {
+        e.target.parentElement.parentElement.childNodes.forEach(item => {
+            item.childNodes[0].style.borderBottom = 'none';
+        })
+        e.target.style.borderBottom = '2px solid red'
     }
 
     render() {
@@ -79,7 +89,7 @@ class SearchHeader extends Component {
                     <SearchFilm/>
                     <div className="types">
                         <Nav activeKey="/home"
-                            onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
+                            onClick={this.handleClick}>
                             <Nav.Item>
                               <Nav.Link eventKey="All" style={{borderBottom: "2px solid red"}}>All</Nav.Link>
                             </Nav.Item>
