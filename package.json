@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:report": "jest --config ./jest.configHtmlReporter.js",
-    "test": "jest --no-colors --config ./jest.configReportPortal.js",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development --env=dev",
-    "test:coverage": "jest --coverage --config ./jest.configHtmlReporter.js",
-    "build": "webpack --mode production --env=prod"
+    "test:report": "jest --config ./jest-settings/jest.configHtmlReporter.js",
+    "test": "jest --no-colors --config ./jest-settings/jest.configReportPortal.js",
+    "start": "webpack-dev-server --config ./webpack.config.js --env=dev",
+    "test:coverage": "jest --coverage --config ./jest-settings/jest.configHtmlReporter.js",
+    "build": "webpack --env=prod"
   },
   "repository": {
     "type": "git",
@@ -71,6 +71,7 @@
     "reportportal-client": "^5.5.0",
     "style-loader": "^1.0.1",
     "styled-components": "^4.4.1",
-    "uglifyjs-webpack-plugin": "^2.2.0"
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-merge": "^5.1.1"
   }
 }
