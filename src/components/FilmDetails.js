@@ -35,35 +35,29 @@ const StyledDiv = styled.div`
     height: 45px;
 `;
 
-class Details extends Component {
-    constructor(props) {
-      super(props);
-    }
-
-    render() {
-        const value = this.props.filmId.data;
-        return (
-            <Fragment>
-                <SignSearch/>
-                    {
-                        value && <Fragment>
-                                     <StyledWrapper>
-                                         <img src={value.poster_path} width="200" height="200" alt="Picture film"/>
-                                         <div className="describe">
-                                             <Rating propValue={value}/>
-                                             <Duration propValue={value}/>
-                                             <p>{value.overview}</p>
-                                         </div>
-                                     </StyledWrapper>
-                                     <StyledDiv>
-                                         <p>{value.genres.join(' ')}</p>
-                                     </StyledDiv>
-                                 </Fragment>
+const Details = (props) => {
+    const value = props.filmId.data;
+    return (
+        <Fragment>
+            <SignSearch/>
+                {
+                    value && <Fragment>
+                                  <StyledWrapper>
+                                      <img src={value.poster_path} width="200" height="200" alt="Picture film"/>
+                                      <div className="describe">
+                                          <Rating propValue={value}/>
+                                          <Duration propValue={value}/>
+                                          <p>{value.overview}</p>
+                                      </div>
+                                  </StyledWrapper>
+                                  <StyledDiv>
+                                      <p>{value.genres.join(' ')}</p>
+                                  </StyledDiv>
+                              </Fragment>
                     }
             </Fragment>
         )
-    }
-}
+};
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,

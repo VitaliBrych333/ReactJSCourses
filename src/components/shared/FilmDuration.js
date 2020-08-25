@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components'
 
 const StyledDiv = styled.div`
-  p {
-    margin: 0 30px 0 0;
-    font-size: 18px;
-    display: inline-block;
-  }
+    p {
+        margin: 0 30px 0 0;
+        font-size: 18px;
+        display: inline-block;
+    }
 
-  span {
-    color: red;
-  }
+    span {
+        color: red;
+    }
 `;
 
 const Duration = (props) => {

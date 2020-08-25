@@ -77,10 +77,15 @@ const StyledCard = styled(Card)`
 `;
 
 class Item extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dotsIsVisible: "no-show"
+        };
 
-    state = {
-        dotsIsVisible: "no-show"
-    };
+        this.showDots = this.showDots.bind(this);
+        this.hideDots = this.hideDots.bind(this);
+    }
 
     handleClick(e) {
         this.props.dispatch(
@@ -97,9 +102,12 @@ class Item extends Component {
         }
     }
 
-    setIsShown(e, boolean) {
-        boolean ? this.setState({ dotsIsVisible: "show" })
-                : this.setState({ dotsIsVisible: "no-show" });
+    showDots() {
+        this.setState({ dotsIsVisible: "show" });
+    }
+
+    hideDots() {
+        this.setState({ dotsIsVisible: "no-show" });
     }
 
     render() {
@@ -108,8 +116,8 @@ class Item extends Component {
                 <MoreVertIcon className={this.state.dotsIsVisible}/>
                 <Card.Img variant="top"
                           src={this.props.info.poster_path}
-                          onMouseEnter={(e) => this.setIsShown(e, true)}
-                          onMouseLeave={(e) => this.setIsShown(e, false)}
+                          onMouseEnter={this.showDots}
+                          onMouseLeave={this.hideDots}
                 />
                 <Card.Body>
                     <StyledCartTitle>

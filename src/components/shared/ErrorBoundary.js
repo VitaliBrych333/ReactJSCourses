@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
 export default class ErrorBoundary extends Component {
-    state = {
-        hasError: false,
-        textError: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasError: false,
+            textError: null
+        };
+    }
 
     componentDidCatch(error, info) {
         console.log('error', error);

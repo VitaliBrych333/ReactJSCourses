@@ -1,34 +1,15 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment } from 'react';
 import DropdownCustom from './DropdownCustom';
 
-class CriteriaSearch extends Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
+const CriteriaSearch = (props) => {
+    return (
+        <Fragment>
+            <div>
+                <p>Sort by</p>
+                <DropdownCustom propsValue={props}></DropdownCustom>
+            </div>
+        </Fragment>
+    )
+};
 
-    handleClick(e) {
-        e.preventDefault();
-        e.target.className = 'btn btn-danger';
-    }
-
-    render() {
-        return (
-            <Fragment>
-                <div>
-                    <p>Sort by</p>
-                    <DropdownCustom propsValue={this.props}></DropdownCustom>
-                </div>
-            </Fragment>
-        )
-    }
-}
-
-function mapStateToProps(state) {
-    return {
-        data: state.movieReducer.movies,
-    };
-}
-
-export default connect(mapStateToProps)(CriteriaSearch);
+export default CriteriaSearch;
