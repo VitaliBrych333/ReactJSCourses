@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledDiv = styled.div`
     p {
@@ -21,5 +22,12 @@ const Duration = (props) => {
         </StyledDiv>
     );
 };
+
+Duration.propTypes = {
+    propValue: PropTypes.shape({
+        release_date: PropTypes.string,
+        runtime: PropTypes.number
+    })
+}
 
 export default Duration;

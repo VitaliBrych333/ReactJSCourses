@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Badge, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { fetchMoviesByGenre, fetchMovieId } from '../redux/actions/moviesActions';
@@ -131,6 +132,16 @@ class Item extends Component {
             </StyledCard>
         )
     }
+}
+
+Item.propTypes = {
+    sort: PropTypes.string,
+    info: PropTypes.shape({
+        id : PropTypes.number,
+        title: PropTypes.string,
+        genres: PropTypes.array,
+        release_date: PropTypes.string
+    })
 }
 
 const mapStateToProps = state => ({

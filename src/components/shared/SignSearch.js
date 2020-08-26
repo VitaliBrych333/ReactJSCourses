@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBIcon } from "mdbreact";
+import { MDBIcon } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 

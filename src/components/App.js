@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import ErrorBoundary from './shared/ErrorBoundary';
 import { connect } from 'react-redux';
 import IncorrectPath from './IncorrectPath';
@@ -42,6 +43,10 @@ class App extends Component {
             </Fragment>
         );
     }
+}
+
+App.propTypes = {
+    data: PropTypes.array
 }
 
 const mapStateToProps = state => ({

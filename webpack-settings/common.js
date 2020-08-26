@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 function buildConfig(configDirs) {
   return {
@@ -53,15 +52,6 @@ function buildConfig(configDirs) {
     plugins: [
       new HtmlWebpackPlugin({
           template: configDirs.APP_DIR + '/index.html'
-      }),
-      new UglifyJsPlugin({
-        uglifyOptions: {
-        warnings: false,
-        ie8: false,
-        output: {
-          comments: false
-        }
-        }
       })
     ]
   };

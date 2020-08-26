@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchMovies } from '../../redux/actions/moviesActions';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledGroup = styled(InputGroup)`
     padding: 0 50px;
@@ -56,6 +57,12 @@ class SearchFilm extends Component {
             </Fragment>
         )
     }
+}
+
+SearchFilm.propTypes = {
+    sort:  PropTypes.string,
+    search: PropTypes.string,
+    myInput: PropTypes.object,
 }
 
 const mapStateToProps = state => ({

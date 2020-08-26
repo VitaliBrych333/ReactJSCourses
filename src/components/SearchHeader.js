@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
 import SearchFilm from './shared/SearchFilm';
 import ButtonsCriteriaSearch from './shared/ButtonsCriteriaSearch';
@@ -115,6 +116,10 @@ class SearchHeader extends Component {
             </Fragment>
         );
     }
+}
+
+SearchHeader.propTypes = {
+    count: PropTypes.number,
 }
 
 export default SearchHeader;

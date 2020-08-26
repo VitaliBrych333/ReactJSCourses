@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Duration from './shared/FilmDuration';
 import Rating from './shared/FilmRating';
 import SignSearch from './shared/SignSearch';
@@ -58,6 +59,16 @@ const Details = (props) => {
             </Fragment>
         )
 };
+
+Details.propTypes = {
+    filmId: PropTypes.shape({
+        data: PropTypes.shape({
+            poster_path: PropTypes.string,
+            overview: PropTypes.string,
+            genres: PropTypes.array
+        })
+    })
+}
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,

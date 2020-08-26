@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import NotFound from './NotFound';
 import styled from 'styled-components';
 import CardFilm from './CardFilm';
-import { useParams } from "react-router";
+import { useParams } from 'react-router';
 import FilmDetails from './FilmDetails';
 import { connect } from 'react-redux';
 
@@ -37,6 +38,13 @@ const DetailsPage = (props) => {
         </Fragment>
     );
 };
+
+DetailsPage.propTypes = {
+    data: PropTypes.array,
+    filmId: PropTypes.shape({
+        data: PropTypes.object
+    })
+}
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,
