@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchMovies } from '../../redux/actions/moviesActions';
-import ButtonsCriteriaSearch from './ButtonsCriteriaSearch';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledGroup = styled(InputGroup)`
     padding: 0 50px;
@@ -23,7 +23,9 @@ class SearchFilm extends Component {
             left: 'Title',
             right: 'Genre',
             disabled: true
-        }
+        };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleClick() {
@@ -34,30 +36,33 @@ class SearchFilm extends Component {
     handleChange() {
         const value = this.myInput.value;
 
-        value ? this.setState({disabled: false})
-              : this.setState({disabled: true})
+        this.setState({ disabled: !value });
     }
 
     render() {
         return (
             <Fragment>
+                <Button className="add-movie" variant="outline-danger" onClick={this.handleClick} disabled={this.state.disabled}>+ Add movie</Button>
                 <h1>Find your movie</h1>
                 <StyledGroup className="mb-3">
                     <FormControl
                         placeholder="Please write the film name"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
                         ref={value => { this.myInput = value; }}
-                        onChange={() => this.handleChange()}
+                        onChange={this.handleChange}
                     />
                     <InputGroup.Append>
-                        <Button variant="outline-danger" onClick={this.handleClick.bind(this)} disabled={this.state.disabled}>Search</Button>
+                        <Button variant="outline-danger" onClick={this.handleClick} disabled={this.state.disabled}>Search</Button>
                     </InputGroup.Append>
                 </StyledGroup>
-                <ButtonsCriteriaSearch buttonNames={this.state}/>
             </Fragment>
         )
     }
+}
+
+SearchFilm.propTypes = {
+    sort:  PropTypes.string,
+    search: PropTypes.string,
+    myInput: PropTypes.object,
 }
 
 const mapStateToProps = state => ({

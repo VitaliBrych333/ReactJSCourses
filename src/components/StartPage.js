@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import SearchHeader from './SearchHeader';
 import NotFound from './NotFound';
 import styled from 'styled-components'
@@ -17,31 +18,30 @@ const StyledSection = styled.section`
     }
 `;
 
-class StartPage extends Component {
-    constructor(props) {
-        super(props)
+const StartPage = (props) => {
+    const data = props.data;
+    let main;
+
+    if (props.data.length) {
+        main =  <StyledSection>
+                    {data.map(item => <CardFilm key={item.id} info={item}/> )}
+                </StyledSection>
+    } else {
+        main = <NotFound/>;
     }
 
-    render() {
-        const { error, loading, data } = this.props;
-        let main;
-
-        if (this.props.data.length) {
-            main =  <StyledSection>
-                        {data.map(item => <CardFilm key={item.id} info={item}/> )}
-                    </StyledSection>
-        } else {
-            main = <NotFound/>;
-        }
-
-        return (
-            <Fragment>
-                <SearchHeader count={this.props.total}/>
+    return (
+        <Fragment>
+            <SearchHeader count={props.total}/>
                 {main}
-            </Fragment>
-        );
-    }
+        </Fragment>
+    );
 };
+
+StartPage.propTypes = {
+    data: PropTypes.array,
+    total: PropTypes.number
+}
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,

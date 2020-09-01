@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ErrorBoundary extends Component {
-    state = {
-        hasError: false,
-        textError: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasError: false,
+            textError: null
+        };
+    }
 
     componentDidCatch(error, info) {
         console.log('error', error);
@@ -24,4 +28,8 @@ export default class ErrorBoundary extends Component {
             return this.props.children;
         }
     }
+}
+
+ErrorBoundary.propTypes = {
+    children: PropTypes.element
 }

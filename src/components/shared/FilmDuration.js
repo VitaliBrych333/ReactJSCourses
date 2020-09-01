@@ -1,16 +1,17 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledDiv = styled.div`
-  p {
-    margin: 0 30px 0 0;
-    font-size: 18px;
-    display: inline-block;
-  }
+    p {
+        margin: 0 30px 0 0;
+        font-size: 18px;
+        display: inline-block;
+    }
 
-  span {
-    color: red;
-  }
+    span {
+        color: red;
+    }
 `;
 
 const Duration = (props) => {
@@ -21,5 +22,12 @@ const Duration = (props) => {
         </StyledDiv>
     );
 };
+
+Duration.propTypes = {
+    propValue: PropTypes.shape({
+        release_date: PropTypes.string,
+        runtime: PropTypes.number
+    })
+}
 
 export default Duration;

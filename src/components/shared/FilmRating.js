@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components'
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledDiv = styled.div`
     display: flex;
@@ -34,5 +35,12 @@ const Rating = (props) => {
         </StyledDiv>
     );
 };
+
+Rating.propTypes = {
+    propValue: PropTypes.shape({
+        title: PropTypes.string,
+        vote_average: PropTypes.number
+    })
+}
 
 export default Rating;

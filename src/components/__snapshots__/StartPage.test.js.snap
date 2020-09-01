@@ -3,8 +3,16 @@
 exports[`<StartPage/> should equals to snapshot of CriteriaSearch 1`] = `
 Array [
   <header
-    className="sc-bwzfXH kfyadn"
+    className="sc-htpNat jNWOnz"
   >
+    <button
+      className="add-movie btn btn-outline-danger"
+      disabled={true}
+      onClick={[Function]}
+      type="button"
+    >
+      + Add movie
+    </button>
     <h1>
       Find your movie
     </h1>
@@ -12,8 +20,6 @@ Array [
       className="sc-bdVaJa lmvhs mb-3 input-group"
     >
       <input
-        aria-describedby="basic-addon2"
-        aria-label="Recipient's username"
         className="form-control"
         onChange={[Function]}
         placeholder="Please write the film name"
@@ -31,65 +37,147 @@ Array [
         </button>
       </div>
     </div>
-    <p>
-      Search
-       by
-    </p>
     <div
-      aria-label="Basic example"
-      className="btn-group"
-      role="group"
+      className="types"
     >
-      <button
-        className="btn btn-danger"
-        disabled={false}
+      <div
+        className="nav"
         onClick={[Function]}
-        type="button"
+        onKeyDown={[Function]}
       >
-        Title
-      </button>
-      <button
-        className="btn btn-secondary"
-        disabled={false}
-        onClick={[Function]}
-        type="button"
-      >
-        Genre
-      </button>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="All"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            style={
+              Object {
+                "borderBottom": "2px solid red",
+              }
+            }
+          >
+            All
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Documentary"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Documentary
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Comedy"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Comedy
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Horror"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Horror
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Crime"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Crime
+          </a>
+        </div>
+      </div>
+      <div>
+        <p>
+          Sort by
+        </p>
+        <div
+          className="sc-bwzfXH hbUpNA dropdown"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="drop dropdown"
+            onKeyDown={[Function]}
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label={null}
+              className="dropdown-toggle btn btn-secondary"
+              onClick={[Function]}
+              type="button"
+            >
+              Release date
+            </button>
+            <div
+              aria-hidden={true}
+              className="dropdown-menu"
+              role="menu"
+              tabIndex="-1"
+            >
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Earlier than 2020
+              </button>
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Earlier than 2019
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       className="count-movie"
-    >
-      <p>
-        Sort
-         by
-      </p>
-      <div
-        aria-label="Basic example"
-        className="btn-group"
-        role="group"
-      >
-        <button
-          className="btn btn-danger"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Release date
-        </button>
-        <button
-          className="btn btn-secondary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Rating
-        </button>
-      </div>
-    </div>
+    />
   </header>,
   <h3
-    className="sc-htpNat hNvbdx"
+    className="sc-bxivhb loheCa"
   >
     No films found
   </h3>,
