@@ -2,17 +2,25 @@
 
 exports[`<SearchFilm/> should equals to snapshot of CriteriaSearch 1`] = `
 Array [
-  <button
-    className="add-movie btn btn-outline-danger"
-    disabled={true}
-    onClick={[Function]}
-    type="button"
+  <div
+    className="sc-bwzfXH fedcza"
   >
-    + Add movie
-  </button>,
-  <h1>
-    Find your movie
-  </h1>,
+    <button
+      className="add-movie btn btn-outline-danger"
+      disabled={false}
+      type="button"
+    >
+      <a
+        href="/add"
+        onClick={[Function]}
+      >
+        + Add movie
+      </a>
+    </button>
+    <h1>
+      Find your movie
+    </h1>
+  </div>,
   <div
     className="sc-bdVaJa lmvhs mb-3 input-group"
   >

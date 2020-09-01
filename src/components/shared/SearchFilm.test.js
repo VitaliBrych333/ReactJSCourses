@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount, shallow } from 'enzyme';
 import SearchFilm from './SearchFilm';
@@ -39,13 +40,13 @@ describe('<SearchFilm/>', () => {
   });
 
   it('should equals to snapshot of CriteriaSearch', () => {
-    const renderedValue = renderer.create(<Provider store={store}><SearchFilm /></Provider>).toJSON();
+    const renderedValue = renderer.create(<Router><Provider store={store}><SearchFilm /></Provider></Router>).toJSON();
     expect(renderedValue).toMatchSnapshot();
   });
 
   it('should not call onChange', () => {
     const onChange = jest.fn();
-    const wrap = mount(<Provider store={store}><SearchFilm /></Provider>);
+    const wrap = mount(<Router><Provider store={store}><SearchFilm /></Provider></Router>);
     wrap.find(FormControl).simulate('change');
     expect(onChange).toHaveBeenCalledTimes(0);
   });

@@ -7,7 +7,7 @@ describe('<Rating/>', () => {
     const mockPropValue = {
       title: 'test',
       tagline: 'test',
-      vote_average: 'test'
+      vote_average: 1
     };
     const renderedValue = renderer.create(<Rating propValue={mockPropValue}/>).toJSON();
     expect(renderedValue).toMatchSnapshot();

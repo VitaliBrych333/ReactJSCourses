@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,6 +15,20 @@ const StyledGroup = styled(InputGroup)`
         background-color: bisque;
     }
 `;
+
+const StyleDiv = styled.div`
+    a {
+        color: #F65261;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    button:hover > a {
+        color: #FFF;
+  }
+`
 
 class SearchFilm extends Component {
     constructor(props) {
@@ -42,8 +57,12 @@ class SearchFilm extends Component {
     render() {
         return (
             <Fragment>
-                <Button className="add-movie" variant="outline-danger" onClick={this.handleClick} disabled={this.state.disabled}>+ Add movie</Button>
-                <h1>Find your movie</h1>
+                <StyleDiv>
+                    <Button className="add-movie" variant="outline-danger">
+                        <Link to={{pathname: '/add'}}>+ Add movie</Link>
+                    </Button>
+                    <h1>Find your movie</h1>
+                </StyleDiv>
                 <StyledGroup className="mb-3">
                     <FormControl
                         placeholder="Please write the film name"

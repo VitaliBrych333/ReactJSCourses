@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
 import StartPage from './StartPage';
@@ -41,7 +42,7 @@ describe('<StartPage/>', () => {
   });
 
   it('should equals to snapshot of CriteriaSearch', () => {
-    const renderedValue = renderer.create(<Provider store={store}><StartPage /></Provider>).toJSON();
+    const renderedValue = renderer.create(<Router><Provider store={store}><StartPage /></Provider></Router>).toJSON();
     expect(renderedValue).toMatchSnapshot();
   });
 })

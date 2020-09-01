@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import IncorrectPath from './IncorrectPath';
 import StartPage from './StartPage';
 import DetailsPage from './DetailsPage';
+import AddPage from './AddPage';
+import EditPage from './EditPage';
+import Popup from './Popup';
 import {
     BrowserRouter as Router, Switch, Route, Redirect
 } from 'react-router-dom';
@@ -30,6 +33,21 @@ class App extends Component {
                         <Route path="/search/Search20Query">
                             <ErrorBoundary>
                                 <StartPage data={this.props.data}/>
+                            </ErrorBoundary>
+                        </Route>
+                        <Route path="/add">
+                            <ErrorBoundary>
+                                <AddPage />
+                            </ErrorBoundary>
+                        </Route>
+                        <Route path="/edit">
+                            <ErrorBoundary>
+                                <EditPage />
+                            </ErrorBoundary>
+                        </Route>
+                        <Route path="/delete/:id">
+                            <ErrorBoundary>
+                                <Popup/>
                             </ErrorBoundary>
                         </Route>
                         <Route path='/404'>
