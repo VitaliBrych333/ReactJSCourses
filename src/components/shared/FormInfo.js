@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -11,41 +11,34 @@ const StyledGroup = styled.div`
     }
 `;
 
-class FormInfo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: 'Select Genre',
-            genres: ['Select Genre', 'Horror', 'Action', 'Comedy']
-        }
+const FormInfo = (props) => {
+    const [valueState, setValue] = useState({
+        value: 'Select Genre',
+    });
 
-        this.handleChange = this.handleChange.bind(this);
-    }
+    const [genreState] = useState({
+        genres: ['Select Genre', 'Horror', 'Action', 'Comedy']
+    });
 
-    handleChange(e) {
-        console.log('value was changed on', e.target.value)
-        this.setState({value: e.target.value})
-    }
+    const data = props.data;
 
-    componentWillUnmount() {
-        console.log('component was deleted')
-    }
+    const handleChange = useCallback((e) => {
+        setValue({value: e.target.value});
+        }, []
+    );
 
-    componentDidMount() {
-        const newDate = this.props.data;
+    useEffect(() => {
+        setTimeout(() => {
+            data ? setValue({value: data.genre})
+                 : null
+        }, 500);
+    }, []);
 
-        newDate ? this.setState({value: newDate.genre})
-                : null
-    }
-
-    render() {
-        const data = this.props.data;
-
-        return (
-            <Fragment>
-              <StyledGroup>
-              <Form>
-                    <NamePage namePage={this.props.namePage}></NamePage>
+    return (
+        <Fragment>
+            <StyledGroup>
+                <Form>
+                    <NamePage namePage={props.namePage}></NamePage>
 
                     <Form.Group controlId="formBasicEmail">
                         {
@@ -64,8 +57,8 @@ class FormInfo extends Component {
                         <Form.Control type="url" placeholder="Movie URL here" defaultValue={(data && data.url) ? data.url : null} />
 
                         <Form.Label>Example select</Form.Label>
-                        <Form.Control as="select" placeholder="Select Genre" value={this.state.value} onChange={this.handleChange}>
-                            {this.state.genres.map((item, index) => <option key={index} value={item}>{item}</option> )}
+                        <Form.Control as="select" placeholder="Select Genre" value={valueState.value} onChange={handleChange}>
+                            {genreState.genres.map((item, index) => <option key={index} value={item}>{item}</option> )}
                         </Form.Control>
 
                         <Form.Label>Overview</Form.Label>
@@ -74,12 +67,11 @@ class FormInfo extends Component {
                         <Form.Label>Runtime</Form.Label>
                         <Form.Control type="number" placeholder="Runtime here" defaultValue={(data && data.time) ? data.time : null}/>
                     </Form.Group>
-                    <ButtonsFormGroup nameButton={this.props.nameButton}></ButtonsFormGroup>
+                    <ButtonsFormGroup nameButton={props.nameButton}></ButtonsFormGroup>
                 </Form>
-              </StyledGroup>
-            </Fragment>
-        )
-    }
+            </StyledGroup>
+        </Fragment>
+    )
 }
 
 const mapStateToProps = state => ({

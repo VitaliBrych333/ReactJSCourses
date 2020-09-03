@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Nav } from 'react-bootstrap';
 import SearchFilm from './shared/SearchFilm';
 import ButtonsCriteriaSearch from './shared/ButtonsCriteriaSearch';
+import NavCustom from './shared/NavCustom';
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`
@@ -72,15 +72,6 @@ class SearchHeader extends Component {
           kind: 'Sort',
           left: 'Release date',
         };
-
-        this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick(e) {
-        e.target.parentElement.parentElement.childNodes.forEach(item => {
-            item.childNodes[0].style.borderBottom = 'none';
-        })
-        e.target.style.borderBottom = '2px solid red'
     }
 
     render() {
@@ -89,24 +80,7 @@ class SearchHeader extends Component {
                 <StyledHeader>
                     <SearchFilm/>
                     <div className="types">
-                        <Nav activeKey="/home"
-                            onClick={this.handleClick}>
-                            <Nav.Item>
-                              <Nav.Link eventKey="All" style={{borderBottom: "2px solid red"}}>All</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Documentary">Documentary</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Comedy">Comedy</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Horror">Horror</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Crime">Crime</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
+                        <NavCustom></NavCustom>
                         <ButtonsCriteriaSearch buttonNames={this.state}/>
                     </div>
                     <div className="count-movie">
@@ -116,10 +90,10 @@ class SearchHeader extends Component {
             </Fragment>
         );
     }
-}
+};
 
 SearchHeader.propTypes = {
     count: PropTypes.number,
-}
+};
 
 export default SearchHeader;

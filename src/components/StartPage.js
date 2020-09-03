@@ -41,7 +41,7 @@ const StartPage = (props) => {
 StartPage.propTypes = {
     data: PropTypes.array,
     total: PropTypes.number
-}
+};
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,

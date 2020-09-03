@@ -30,11 +30,11 @@ class ButtonsFormGroup extends Component {
     }
 
     handleReset(e) {
-        console.log('reset', e.target)
+        console.log('reset', e.target);
     }
 
     handleClick(e) {
-        console.log('click', e.target)
+        console.log('click', e.target);
     }
 
     render() {

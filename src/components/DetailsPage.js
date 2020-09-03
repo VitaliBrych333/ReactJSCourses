@@ -20,6 +20,7 @@ const StyledSection = styled.section`
 `;
 
 const DetailsPage = (props) => {
+
     let main;
     let { id } = useParams();
 
@@ -44,7 +45,7 @@ DetailsPage.propTypes = {
     filmId: PropTypes.shape({
         data: PropTypes.object
     })
-}
+};
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,

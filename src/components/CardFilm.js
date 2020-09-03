@@ -97,10 +97,10 @@ class Item extends Component {
         this.props.dispatch(
             fetchMovieId(this.props.info.id));
 
-        if (array.length) {
-            this.props.dispatch(
-              fetchMoviesByGenre(this.props.sort, array));
-        }
+        // if (array.length) {
+        //     this.props.dispatch(
+        //       fetchMoviesByGenre(this.props.sort, array));
+        // }
     }
 
     showDots() {
