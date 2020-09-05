@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchMovies } from '../../redux/actions/moviesActions';
 import styled from 'styled-components';
+import AddPage from '../AddPage';
+import { fetchMovies } from '../../redux/actions/moviesActions';
+import { showAddPage } from '../../redux/actions/windowActions';
 
 const StyledGroup = styled(InputGroup)`
     padding: 0 50px;
@@ -39,8 +40,10 @@ class SearchFilm extends Component {
             right: 'Genre',
             disabled: true
         };
+
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     handleClick() {
@@ -54,12 +57,19 @@ class SearchFilm extends Component {
         this.setState({ disabled: !value });
     }
 
+    handleAdd() {
+        this.props.dispatch(showAddPage(true));
+    }
+
     render() {
         return (
             <Fragment>
                 <StyleDiv>
-                    <Button className="add-movie" variant="outline-danger">
-                        <Link to={{pathname: '/add'}}>+ Add movie</Link>
+                    <AddPage></AddPage>
+                    <Button className="add-movie"
+                            variant="outline-danger"
+                            onClick={this.handleAdd}>
+                        + Add movie
                     </Button>
                     <h1>Find your movie</h1>
                 </StyleDiv>
@@ -74,15 +84,15 @@ class SearchFilm extends Component {
                     </InputGroup.Append>
                 </StyledGroup>
             </Fragment>
-        )
-    }
-}
+        );
+    };
+};
 
 SearchFilm.propTypes = {
     sort:  PropTypes.string,
     search: PropTypes.string,
     myInput: PropTypes.object,
-}
+};
 
 const mapStateToProps = state => ({
     search: state.criteriaReducer.search,

@@ -6,12 +6,11 @@ export const setSearch = text => ({
     payload: {
         search: text
     }
-})
+});
 
 export const setSort = text => ({
     type: SET_SORT,
     payload: {
         sort: text
     }
-})
-
+});

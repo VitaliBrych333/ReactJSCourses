@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import SearchHeader from './SearchHeader';
-import NotFound from './NotFound';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import CardFilm from './CardFilm';
+import EditPage from './EditPage';
+import DeleteWindow from './DeleteWindow';
+import SearchHeader from './SearchHeader';
+import NotFound from './NotFound';
 
 const StyledSection = styled.section`
     padding: 25px;
@@ -32,6 +34,8 @@ const StartPage = (props) => {
 
     return (
         <Fragment>
+            <EditPage/>
+            <DeleteWindow/>
             <SearchHeader count={props.total}/>
                 {main}
         </Fragment>
@@ -41,11 +45,13 @@ const StartPage = (props) => {
 StartPage.propTypes = {
     data: PropTypes.array,
     total: PropTypes.number
-}
+};
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,
     total: state.movieReducer.movies.total,
+    showEditPage: state.windowReducer.showEditPage,
+    showDeletePage: state.windowReducer.showDeletePage,
     loading: state.movieReducer.loading,
     error: state.movieReducer.error,
 });

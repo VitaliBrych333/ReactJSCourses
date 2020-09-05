@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-    width: 150px;
-    margin-left: 190px;
+    width: 173px;
+    margin-left: 170px;
     display: flex;
     justify-content: space-between;
 
@@ -30,33 +30,31 @@ class ButtonsFormGroup extends Component {
     }
 
     handleReset(e) {
-        console.log('reset', e.target)
+        console.log('reset', e.target);
     }
 
     handleClick(e) {
-        console.log('click', e.target)
+        console.log('click', e.target);
     }
 
     render() {
         return (
-            <Fragment>
-              <StyledDiv>
-                  <Button variant="primary" onClick={this.handleReset}>
-                      Reset
-                  </Button>
-                  <Button variant="primary" onClick={this.handleClick}>
-                      {this.props.nameButton}
-                  </Button>
-              </StyledDiv>
-            </Fragment>
-        )
-    }
-}
+            <StyledDiv>
+                <Button variant="primary" onClick={this.props.handleReset}>
+                    Reset
+                </Button>
+                <Button variant="primary" onClick={this.handleClick}>
+                    {this.props.nameButton}
+                </Button>
+            </StyledDiv>
+        );
+    };
+};
 
 function mapStateToProps(state) {
     return {
         data: state.movieReducer.movies,
     };
-}
+};
 
 export default connect(mapStateToProps)(ButtonsFormGroup);

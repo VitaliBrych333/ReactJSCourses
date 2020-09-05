@@ -18,6 +18,12 @@ describe('<SearchFilm/>', () => {
     },
     movieReducer: {
       movies: [{id: 1}]
+    },
+    windowReducer: {
+      showModal: false,
+      showEditPage: false,
+      showDeletePage: false,
+      showAddPage: false
     }
   };
   const mockStore = configureStore();
@@ -47,7 +53,7 @@ describe('<SearchFilm/>', () => {
   it('should not call onChange', () => {
     const onChange = jest.fn();
     const wrap = mount(<Router><Provider store={store}><SearchFilm /></Provider></Router>);
-    wrap.find(FormControl).simulate('change');
+    wrap.find(FormControl).at(0).simulate('change');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 })

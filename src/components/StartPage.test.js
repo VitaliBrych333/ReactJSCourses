@@ -21,6 +21,12 @@ describe('<StartPage/>', () => {
       search: 'search',
       sort: 'sort'
     },
+    windowReducer: {
+      showModal: false,
+      showEditPage: false,
+      showDeletePage: false,
+      showAddPage: false
+    }
   };
   const mockStore = configureStore();
   let store, wrapper;

@@ -23,6 +23,12 @@ describe('<CardFilm/>', () => {
       search: 'search',
       sort: 'sort',
     },
+    windowReducer: {
+      showModal: false,
+      showEditPage: false,
+      showDeletePage: false,
+      showAddPage: false
+    }
   };
 
   const info = {
@@ -101,6 +107,6 @@ describe('<CardFilm/>', () => {
       link.dispatchEvent(new MouseEvent('click', { bubbles: true }));
       button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
-    expect(dispath).toHaveBeenCalledTimes(3);
+    expect(dispath).toHaveBeenCalledTimes(2);
   });
 })

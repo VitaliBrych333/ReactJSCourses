@@ -1,56 +1,69 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import FormInfo from './shared/FormInfo';
 
 const StyledSection = styled.section`
-    width: 400px;
-    padding: 25px;
-    margin: 50px auto;
-    border: 3px solid black;
-    background-color: #424242;
-    div {
-        margin-bottom: 10px;
+    .modal {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-main {
+        position:fixed;
+        width: 400px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        padding: 25px;
+        margin: 50px auto;
+        border: 3px solid black;
+        background-color: #424242;
+    }
+
+    .display-block {
+        display: block;
+    }
+
+    .display-none {
+        display: none;
     }
 `;
 
-class EditPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            namePage: 'Edit movie',
-            nameButton: 'Save',
-            data: {
-                id: 1,
-                title: 'Moana',
-                date: '2018-07-22',
-                url: 'www.moana.com',
-                genre: 'Comedy',
-                overview: 'overview fake',
-                time: 180
-            }
-        };
-    }
+const EditPage = (props) => {
+    const showHideClassName = props.showEditPage ? "modal display-block" : "modal display-none";
 
-    render() {
-        return (
-            <Fragment>
-                <StyledSection>
-                    <FormInfo namePage={this.state.namePage}
-                              nameButton={this.state.nameButton}
-                              data={this.state.data}>
+    const state = {
+        namePage: 'Edit movie',
+        nameButton: 'Save',
+        data: {
+            id: 1,
+            title: 'Moana',
+            date: '2018-07-22',
+            url: 'www.moana.com',
+            genre: 'Comedy',
+            overview: 'overview fake',
+            time: 180
+        }
+    };
+
+    return (
+        <StyledSection>
+            <div className={showHideClassName}>
+                <section className="modal-main">
+                    <FormInfo namePage={state.namePage}
+                              nameButton={state.nameButton}
+                              data={state.data}
+                    >
                     </FormInfo>
-                </StyledSection>
-            </Fragment>
-        );
-    }
+                </section>
+            </div>
+        </StyledSection>
+    );
 };
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
-    total: state.movieReducer.movies.total,
-    loading: state.movieReducer.loading,
-    error: state.movieReducer.error,
+    showEditPage: state.windowReducer.showEditPage,
+    filmId: state.movieReducer.filmId
 });
 
 export default connect(mapStateToProps)(EditPage);

@@ -3,26 +3,169 @@
 exports[`<SearchFilm/> should equals to snapshot of CriteriaSearch 1`] = `
 Array [
   <div
-    className="sc-bwzfXH fedcza"
+    className="sc-EHOje bkceaG"
   >
+    <section
+      className="sc-bxivhb iSvxix"
+    >
+      <div
+        className="modal display-none"
+      >
+        <section
+          className="modal-main"
+        >
+          <div
+            className="sc-htpNat jluENN"
+          >
+            <form
+              className=""
+            >
+              <div
+                className="sc-bwzfXH flAbvz"
+              >
+                <button
+                  className="close"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span>
+                    ×
+                  </span>
+                </button>
+                <h2>
+                  Add movie
+                </h2>
+              </div>
+              <div
+                className="Add movie form-group"
+              >
+                <label
+                  className="form-label"
+                >
+                  Title
+                </label>
+                <input
+                  className="form-control"
+                  defaultValue={null}
+                  placeholder="Title"
+                  type="title"
+                />
+                <label
+                  className="form-label"
+                >
+                  Release date
+                </label>
+                <input
+                  className="form-control"
+                  defaultValue={null}
+                  placeholder="Select Date"
+                  type="date"
+                />
+                <label
+                  className="form-label"
+                >
+                  Movie URL
+                </label>
+                <input
+                  className="form-control"
+                  defaultValue={null}
+                  placeholder="Movie URL here"
+                  type="url"
+                />
+                <label
+                  className="form-label"
+                >
+                  Example select
+                </label>
+                <select
+                  className="form-control"
+                  onChange={[Function]}
+                  placeholder="Select Genre"
+                  value="Select Genre"
+                >
+                  <option
+                    value="Select Genre"
+                  >
+                    Select Genre
+                  </option>
+                  <option
+                    value="Horror"
+                  >
+                    Horror
+                  </option>
+                  <option
+                    value="Action"
+                  >
+                    Action
+                  </option>
+                  <option
+                    value="Comedy"
+                  >
+                    Comedy
+                  </option>
+                </select>
+                <label
+                  className="form-label"
+                >
+                  Overview
+                </label>
+                <input
+                  className="form-control"
+                  defaultValue={null}
+                  placeholder="Overview here"
+                  type="text"
+                />
+                <label
+                  className="form-label"
+                >
+                  Runtime
+                </label>
+                <input
+                  className="form-control"
+                  defaultValue={null}
+                  placeholder="Runtime here"
+                  type="number"
+                />
+              </div>
+              <div
+                className="sc-bdVaJa ckknig"
+              >
+                <button
+                  className="btn btn-primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Reset
+                </button>
+                <button
+                  className="btn btn-primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </section>
     <button
       className="add-movie btn btn-outline-danger"
       disabled={false}
+      onClick={[Function]}
       type="button"
     >
-      <a
-        href="/add"
-        onClick={[Function]}
-      >
-        + Add movie
-      </a>
+      + Add movie
     </button>
     <h1>
       Find your movie
     </h1>
   </div>,
   <div
-    className="sc-bdVaJa lmvhs mb-3 input-group"
+    className="sc-ifAKCX glRfyB mb-3 input-group"
   >
     <input
       className="form-control"

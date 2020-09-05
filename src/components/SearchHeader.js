@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
+import styled from 'styled-components';
 import SearchFilm from './shared/SearchFilm';
 import ButtonsCriteriaSearch from './shared/ButtonsCriteriaSearch';
-import styled from 'styled-components'
 
 const StyledHeader = styled.header`
     height: 333px;
@@ -73,53 +73,51 @@ class SearchHeader extends Component {
           left: 'Release date',
         };
 
-        this.handleClick = this.handleClick.bind(this)
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(e) {
         e.target.parentElement.parentElement.childNodes.forEach(item => {
             item.childNodes[0].style.borderBottom = 'none';
-        })
-        e.target.style.borderBottom = '2px solid red'
+        });
+        e.target.style.borderBottom = '2px solid red';
     }
 
     render() {
         return (
-            <Fragment>
-                <StyledHeader>
-                    <SearchFilm/>
-                    <div className="types">
-                        <Nav activeKey="/home"
-                            onClick={this.handleClick}>
-                            <Nav.Item>
-                              <Nav.Link eventKey="All" style={{borderBottom: "2px solid red"}}>All</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Documentary">Documentary</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Comedy">Comedy</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Horror">Horror</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                              <Nav.Link eventKey="Crime">Crime</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                        <ButtonsCriteriaSearch buttonNames={this.state}/>
-                    </div>
-                    <div className="count-movie">
-                        {this.props.count > 0 && <p className="count">{this.props.count} Movies found</p>}
-                    </div>
-                </StyledHeader>
-            </Fragment>
+            <StyledHeader>
+                <SearchFilm/>
+                <div className="types">
+                    <Nav activeKey="/home"
+                         onClick={this.handleClick}>
+                        <Nav.Item>
+                            <Nav.Link eventKey="All" style={{borderBottom: "2px solid red"}}>All</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="Documentary">Documentary</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="Comedy">Comedy</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="Horror">Horror</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="Crime">Crime</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    <ButtonsCriteriaSearch buttonNames={this.state} />
+                </div>
+                <div className="count-movie">
+                    {this.props.count > 0 && <p className="count">{this.props.count} Movies found</p>}
+                </div>
+            </StyledHeader>
         );
-    }
-}
+    };
+};
 
 SearchHeader.propTypes = {
     count: PropTypes.number,
-}
+};
 
 export default SearchHeader;

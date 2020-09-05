@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledGroup = styled(Dropdown)`
     display: inline-block;
@@ -29,12 +29,12 @@ const DropdownCustom = (props) => {
             </Dropdown>
         </StyledGroup>
     );
-}
+};
 
 DropdownCustom.propTypes = {
     propValue: PropTypes.shape({
         buttonNames: PropTypes.string,
     })
-}
+};
 
 export default DropdownCustom;

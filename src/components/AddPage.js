@@ -1,47 +1,53 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { connect } from 'react-redux';
 import FormInfo from './shared/FormInfo';
 
 const StyledSection = styled.section`
-    width: 400px;
-    padding: 25px;
-    margin: 50px auto;
-    border: 3px solid black;
-    background-color: #424242;
-    div {
-        margin-bottom: 10px;
+    .modal-main {
+        position:fixed;
+        width: 400px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        padding: 25px;
+        margin: 50px auto;
+        border: 3px solid black;
+        background-color: #424242;
+    }
+
+    .display-block {
+        display: block;
+    }
+
+    .display-none {
+        display: none;
+    }
+
+    .modal {
+        background: rgba(0, 0, 0, 0.6);
     }
 `;
 
-class AddPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            namePage: 'Add movie',
-            nameButton: 'Submit',
-        };
-    }
+const AddPage = (props) => {
+    const showHideClassName = props.showAddPage ? "modal display-block" : "modal display-none";
 
-    render() {
-        return (
-            <Fragment>
-                <StyledSection>
-                    <FormInfo namePage={this.state.namePage}
-                              nameButton={this.state.nameButton}
-                              >
+    return (
+        <StyledSection>
+            <div className={showHideClassName}>
+                <section className="modal-main">
+                    <FormInfo namePage='Add movie'
+                              nameButton='Submit'
+                    >
                     </FormInfo>
-                </StyledSection>
-            </Fragment>
-        );
-    }
+                </section>
+            </div>
+        </StyledSection>
+    );
 };
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
-    total: state.movieReducer.movies.total,
-    loading: state.movieReducer.loading,
-    error: state.movieReducer.error,
+    showAddPage: state.windowReducer.showAddPage,
 });
 
 export default connect(mapStateToProps)(AddPage);

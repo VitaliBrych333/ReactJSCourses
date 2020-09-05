@@ -1,32 +1,27 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components'
+import { connect } from 'react-redux';
 
 const Styled = styled.div`
-    h2, .close, a {
+    h2, .close {
         color: #FFF;
     }
 
     h2 {
         text-transform: uppercase;
     }
-
-    a:hover {
-        text-decoration: none;
-    }
 `;
 
-const NamePage = (props) => {
+const NamePage = ({ namePage, handleClose }) => {
     return (
-        <Fragment>
-            <Styled>
-                <button type="button" className="close" aria-label="Close">
-                    <Link to={{pathname: '/'}}><span aria-hidden="true">&times;</span></Link>
-                </button>
-                <h2>{props.namePage}</h2>
-          </Styled>
-        </Fragment>
+        <Styled>
+            <button type="button" className="close" onClick={handleClose}>
+                <span>&times;</span>
+            </button>
+            <h2>{namePage}</h2>
+        </Styled>
     );
 };
 
-export default NamePage;
+export default connect()(NamePage);
+
