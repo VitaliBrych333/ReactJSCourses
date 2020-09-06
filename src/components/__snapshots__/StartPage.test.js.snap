@@ -36,17 +36,7 @@ Array [
             <div
               className="Edit movie form-group"
             >
-              <label
-                className="form-label"
-              >
-                Movie id
-              </label>
-              <input
-                className="form-control"
-                defaultValue={1}
-                placeholder="Id"
-                type="title"
-              />
+              
               <label
                 className="form-label"
               >
@@ -54,7 +44,7 @@ Array [
               </label>
               <input
                 className="form-control"
-                defaultValue="Moana"
+                defaultValue={null}
                 placeholder="Title"
                 type="title"
               />
@@ -65,7 +55,7 @@ Array [
               </label>
               <input
                 className="form-control"
-                defaultValue="2018-07-22"
+                defaultValue={null}
                 placeholder="Select Date"
                 type="date"
               />
@@ -76,7 +66,7 @@ Array [
               </label>
               <input
                 className="form-control"
-                defaultValue="www.moana.com"
+                defaultValue={null}
                 placeholder="Movie URL here"
                 type="url"
               />
@@ -89,7 +79,7 @@ Array [
                 className="form-control"
                 onChange={[Function]}
                 placeholder="Select Genre"
-                value="Comedy"
+                value="Select Genre"
               >
                 <option
                   value="Select Genre"
@@ -119,7 +109,7 @@ Array [
               </label>
               <input
                 className="form-control"
-                defaultValue="overview fake"
+                defaultValue={null}
                 placeholder="Overview here"
                 type="text"
               />
@@ -130,7 +120,7 @@ Array [
               </label>
               <input
                 className="form-control"
-                defaultValue={180}
+                defaultValue={null}
                 placeholder="Runtime here"
                 type="number"
               />
@@ -239,6 +229,7 @@ Array [
                 <div
                   className="Add movie form-group"
                 >
+                  
                   <label
                     className="form-label"
                   >
@@ -369,6 +360,7 @@ Array [
     >
       <input
         className="form-control"
+        defaultValue=""
         onChange={[Function]}
         placeholder="Please write the film name"
       />
@@ -497,6 +489,15 @@ Array [
               role="menu"
               tabIndex="-1"
             >
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Release date
+              </button>
               <button
                 className="dropdown-item"
                 onClick={[Function]}

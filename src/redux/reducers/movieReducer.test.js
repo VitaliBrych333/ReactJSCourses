@@ -24,7 +24,7 @@ const create = () => {
 
 describe('movieReducer', () => {
     it('should return the initial state', () => {
-        expect(movieReducer(undefined, {})).toEqual({ movies: { data: [], total: 0 }, filmId: {}, loading: false, error: null});
+        expect(movieReducer(undefined, {})).toEqual({ movies: { data: [], total: 0 }, filmId: {}, filmEdit: [], loading: false, error: null});
     });
 
     it('should set up loading is true', () => {
@@ -35,6 +35,7 @@ describe('movieReducer', () => {
         const expectState = {
             movies: { data: [], total: 0 },
             filmId: {},
+            filmEdit: [],
             loading: true,
             error: null
         };
@@ -53,6 +54,7 @@ describe('movieReducer', () => {
         const expectState = {
             movies: { data: [1, 2], total: 2 },
             filmId: {},
+            filmEdit: [],
             loading: false,
             error: null
         };
@@ -71,6 +73,7 @@ describe('movieReducer', () => {
         const expectState = {
             movies: { data: [], total: 0 },
             filmId: {},
+            filmEdit: [],
             loading: false,
             error: 'error'
         };
@@ -86,6 +89,7 @@ describe('movieReducer', () => {
         const expectState = {
             movies: { data: [], total: 0 },
             filmId: {},
+            filmEdit: [],
             loading: true,
             error: null
         };
@@ -102,6 +106,7 @@ describe('movieReducer', () => {
         const expectState = {
             movies: { data: [], total: 0 },
             filmId: { id: 'test'},
+            filmEdit: [],
             loading: false,
             error: null
         };
@@ -120,6 +125,7 @@ describe('movieReducer', () => {
         const expectState = {
             movies: { data: [], total: 0 },
             filmId: {},
+            filmEdit: [],
             loading: false,
             error: 'error'
         };

@@ -6,12 +6,14 @@ import {
     FETCH_FILMID_SUCCESS,
     FETCH_FILMID_FAILURE,
     SORT_RELEASE,
-    SORT_RATING
+    SORT_RATING,
+    SET_EDITFILM
 } from '../actions/moviesActions';
 
 const initialState = {
     movies: { data: [], total: 0 },
     filmId: {},
+    filmEdit: [],
     loading: false,
     error: null
 };
@@ -79,6 +81,12 @@ export default function movieReducer(state = initialState, action) {
                     total: state.movies.total
                 }
             });
+
+        case SET_EDITFILM:
+            return {
+                ...state,
+                filmEdit: action.payload.filmEdit,
+            };
 
         default:
             return state;

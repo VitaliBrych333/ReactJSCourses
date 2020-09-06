@@ -9,6 +9,8 @@ export const FETCH_FILMID_FAILURE = 'FETCH_FILMID_FAILURE';
 export const SORT_RELEASE = 'SORT_RELEASE';
 export const SORT_RATING = 'SORT_RATING';
 
+export const SET_EDITFILM = 'SET_EDITFILM';
+
 export const fetchMoviesBegin = () => ({
     type: FETCH_MOVIES_BEGIN
 });
@@ -48,6 +50,13 @@ export const sortRating = data => ({
     type: SORT_RATING,
     payload: {
         data: data
+    }
+});
+
+export const setEditFilm = filmEdit => ({
+    type: SET_EDITFILM,
+    payload: {
+        filmEdit: filmEdit
     }
 });
 

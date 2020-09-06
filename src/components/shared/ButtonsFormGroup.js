@@ -26,11 +26,6 @@ class ButtonsFormGroup extends Component {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
-        this.handleReset = this.handleReset.bind(this);
-    }
-
-    handleReset(e) {
-        console.log('reset', e.target);
     }
 
     handleClick(e) {

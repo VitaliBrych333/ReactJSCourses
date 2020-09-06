@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useCallback, useState, createRef } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AddPage from '../AddPage';
+import useLocalStorageState from './useLocalStorageState';
 import { fetchMovies } from '../../redux/actions/moviesActions';
 import { showAddPage } from '../../redux/actions/windowActions';
 
@@ -30,62 +31,56 @@ const StyleDiv = styled.div`
         color: #FFF;
   }
 `
+const SearchFilm = (props) => {
 
-class SearchFilm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            kind: 'Search',
-            left: 'Title',
-            right: 'Genre',
-            disabled: true
-        };
+    const [controlValue, setValue] = useState({
+        kind: 'Search',
+        left: 'Title',
+        right: 'Genre',
+        disabled: true,
+        myRef: createRef()
+    });
 
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
-    }
+    const [defaultValue, setState] = useLocalStorageState('my-app-defaultValueSearch', '');
 
-    handleClick() {
-        this.props.dispatch(
-            fetchMovies(this.props.sort, this.props.search, this.myInput.value));
-    }
+    const handleClick = useCallback(() => {
+        props.dispatch(
+            fetchMovies(props.sort, props.search, controlValue.myRef.value));
+    });
 
-    handleChange() {
-        const value = this.myInput.value;
+    const handleChange = useCallback(() => {
+        setValue({ disabled: !controlValue.myRef.value });
+        setState(controlValue.myRef.value);
+    });
 
-        this.setState({ disabled: !value });
-    }
+    const handleAdd = useCallback(() => {
+        props.dispatch(showAddPage(true));
+    });
 
-    handleAdd() {
-        this.props.dispatch(showAddPage(true));
-    }
-
-    render() {
-        return (
-            <Fragment>
-                <StyleDiv>
-                    <AddPage></AddPage>
-                    <Button className="add-movie"
-                            variant="outline-danger"
-                            onClick={this.handleAdd}>
+    return (
+        <Fragment>
+            <StyleDiv>
+                <AddPage />
+                <Button className="add-movie"
+                        variant="outline-danger"
+                        onClick={handleAdd}>
                         + Add movie
-                    </Button>
-                    <h1>Find your movie</h1>
-                </StyleDiv>
-                <StyledGroup className="mb-3">
-                    <FormControl
-                        placeholder="Please write the film name"
-                        ref={value => { this.myInput = value; }}
-                        onChange={this.handleChange}
-                    />
-                    <InputGroup.Append>
-                        <Button variant="outline-danger" onClick={this.handleClick} disabled={this.state.disabled}>Search</Button>
-                    </InputGroup.Append>
-                </StyledGroup>
-            </Fragment>
-        );
-    };
+                </Button>
+                <h1>Find your movie</h1>
+            </StyleDiv>
+            <StyledGroup className="mb-3">
+                <FormControl
+                    placeholder="Please write the film name"
+                    ref={controlInput => controlValue.myRef = controlInput}
+                    onChange={handleChange}
+                    defaultValue={defaultValue}
+                />
+                <InputGroup.Append>
+                    <Button variant="outline-danger" onClick={handleClick} disabled={controlValue.disabled && !defaultValue}>Search</Button>
+                </InputGroup.Append>
+            </StyledGroup>
+        </Fragment>
+    );
 };
 
 SearchFilm.propTypes = {

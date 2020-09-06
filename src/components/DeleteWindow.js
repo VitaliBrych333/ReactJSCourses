@@ -58,7 +58,7 @@ const DeleteWindow = (props) => {
         <StyledSection>
             <div className={showHideClassName}>
                 <section className="modal-main">
-                    <NamePage namePage="Delete Movie" handleClose={handleClose}></NamePage>
+                    <NamePage namePage="Delete Movie" handleClose={handleClose} />
                     <p>Are you sure you want to delete this movie?</p>
                     <Button variant="primary" onClick={handleClick}>Confirm</Button>
                 </section>

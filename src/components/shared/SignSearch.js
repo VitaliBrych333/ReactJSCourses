@@ -7,6 +7,7 @@ const StyledSpan = styled.span`
     display: flex;
     justify-content: flex-end;
     padding-right: 25px;
+    background-color: rgb(161,144,144);
 
     i {
         margin-top: 25px;
