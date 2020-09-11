@@ -22,13 +22,7 @@ const StyledDiv = styled.div`
 `;
 
 class ButtonsFormGroup extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(e) {
+    handleClick = (e) => {
         console.log('click', e.target);
     }
 

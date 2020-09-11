@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { Nav } from 'react-bootstrap';
 
 class NavCustom extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this)
+    handleClick = (e) => {
+        e.target.parentElement.parentElement.childNodes.forEach(item => {
+            item.childNodes[0].style.borderBottom = 'none';
+        })
+        e.target.style.borderBottom = '2px solid red'
     }
-
-  handleClick(e) {
-      e.target.parentElement.parentElement.childNodes.forEach(item => {
-          item.childNodes[0].style.borderBottom = 'none';
-      })
-      e.target.style.borderBottom = '2px solid red'
-  }
 
     render() {
         return (

@@ -44,7 +44,7 @@ const FormInfo = (props) => {
         }
     };
 
-    const handleReset =  useCallback(() => {
+    const handleReset = useCallback(() => {
         getInputs();
 
         if (elemInputs.length) {

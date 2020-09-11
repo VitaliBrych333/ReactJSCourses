@@ -14,11 +14,13 @@ const StyledDiv = styled.div`
         text-align: center;
         padding: 7px;
         font-size: 20px;
+        cursor: default
     }
 
     h3 {
         margin-right: 15px;
         margin-top: 5px;
+        cursor: default;
     }
 
     & span {

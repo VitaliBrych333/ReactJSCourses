@@ -30,6 +30,10 @@ const StyledWrapper = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    p {
+        cursor: default;
+    }
 `;
 
 const StyledHeader = styled.header`

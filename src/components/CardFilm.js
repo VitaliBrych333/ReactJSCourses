@@ -92,49 +92,43 @@ class Item extends Component {
             dotsIsVisible: "no-show",
             showModalWindow: false,
         };
-
-        this.showDots = this.showDots.bind(this);
-        this.hideDots = this.hideDots.bind(this);
-
-        this.showModal = this.showModal.bind(this);
-        this.hideModal = this.hideModal.bind(this);
-
-        this.handleClickTag = this.handleClickTag.bind(this);
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         this.props.dispatch(
             fetchMoviesByGenre(this.props.sort, e.target.value));
     }
 
-    handleRequests(e, array) {
+    handleRequests = (e) => {
         this.props.dispatch(
             fetchMovieId(this.props.info.id));
 
-        if (array.length) {
+        const genres = this.props.info.genres;
+
+        if (genres.length) {
             this.props.dispatch(
-              fetchMoviesByGenre(this.props.sort, array));
+              fetchMoviesByGenre(this.props.sort, genres));
         }
     }
 
-    showDots() {
+    showDots = () => {
         this.setState({ dotsIsVisible: "show" });
     }
 
-    hideDots() {
+    hideDots = () => {
         this.setState({ dotsIsVisible: "no-show" });
     }
 
-    showModal() {
+    showModal = () => {
         this.hideDots();
         this.setState({ showModalWindow: true });
     }
 
-    hideModal() {
+    hideModal = () => {
         this.setState({ showModalWindow: false });
     }
 
-    handleClickTag(e) {
+    handleClickTag = (e) => {
         this.hideDots();
         this.hideModal();
 
@@ -170,13 +164,13 @@ class Item extends Component {
                 <Card.Body>
                     <StyledCartTitle>
                         <Link to={{pathname: `/movies/${this.props.info.id}`}}
-                              onClick={e => this.handleRequests(e, this.props.info.genres)}>
+                              onClick={this.handleRequests}>
                             {this.props.info.title}
                         </Link>
                         <Badge variant="secondary">{this.props.info.release_date.trim().slice(0, 4)}</Badge>
                     </StyledCartTitle>
                     <Card.Text>
-                        {this.props.info.genres.map((item, index) => <button onClick={e => this.handleClick(e, 'value')}
+                        {this.props.info.genres.map((item, index) => <button onClick={this.handleClick}
                                                                              value={item}
                                                                              href='#'
                                                                              key={index}
