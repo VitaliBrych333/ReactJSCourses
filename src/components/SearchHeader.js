@@ -72,11 +72,9 @@ class SearchHeader extends Component {
           kind: 'Sort',
           left: 'Release date',
         };
-
-        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         e.target.parentElement.parentElement.childNodes.forEach(item => {
             item.childNodes[0].style.borderBottom = 'none';
         });

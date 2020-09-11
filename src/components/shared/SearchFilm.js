@@ -40,24 +40,20 @@ class SearchFilm extends Component {
             right: 'Genre',
             disabled: true
         };
-
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleAdd = this.handleAdd.bind(this);
     }
 
-    handleClick() {
+    handleClick = () => {
         this.props.dispatch(
             fetchMovies(this.props.sort, this.props.search, this.myInput.value));
     }
 
-    handleChange() {
+    handleChange = () => {
         const value = this.myInput.value;
 
         this.setState({ disabled: !value });
     }
 
-    handleAdd() {
+    handleAdd = () => {
         this.props.dispatch(showAddPage(true));
     }
 

@@ -35,17 +35,13 @@ class FormInfo extends Component {
             genres: ['Select Genre', 'Horror', 'Action', 'Comedy'],
             dataForm: Object.assign({}, this.initialState)
         }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleReset = this.handleReset.bind(this);
-        this.handleClose = this.handleClose.bind(this);
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({ value: e.target.value })
     }
 
-    handleReset() {
+    handleReset = () => {
         if (this.props.showEditPage) {
             this.elemInputs = document.querySelectorAll('.Edit input')
 
@@ -63,7 +59,7 @@ class FormInfo extends Component {
         this.setState({ value: 'Select Genre' });
     }
 
-    handleClose() {
+    handleClose = () => {
         switch (this.props.namePage) {
             case 'Edit movie':
                 this.setState({ value: this.newState.genre });
