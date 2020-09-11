@@ -2,12 +2,14 @@
 
 exports[`<CardFilm/> should equals to snapshot of CardFilm 1`] = `
 <div
-  className="sc-bwzfXH fXyrDf card"
+  className="sc-htpNat eiymxp card"
 >
   <svg
     aria-hidden="true"
     className="MuiSvgIcon-root-1 no-show"
     focusable="false"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
     role="presentation"
     viewBox="0 0 24 24"
   >
@@ -15,6 +17,40 @@ exports[`<CardFilm/> should equals to snapshot of CardFilm 1`] = `
       d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
     />
   </svg>
+  <div
+    className="sc-bdVaJa hZeCMe"
+  >
+    <div
+      className="modal display-none"
+    >
+      <section
+        className="modal-main"
+      >
+        <button
+          aria-label="Close"
+          className="close"
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+        <p
+          onClick={[Function]}
+        >
+          Edit
+        </p>
+        <p
+          onClick={[Function]}
+        >
+          Delete
+        </p>
+      </section>
+    </div>
+  </div>
   <img
     className="card-img-top"
     onMouseEnter={[Function]}
@@ -25,7 +61,7 @@ exports[`<CardFilm/> should equals to snapshot of CardFilm 1`] = `
     className="card-body"
   >
     <div
-      className="sc-bdVaJa gQwpgX card-title h5"
+      className="sc-bwzfXH bYqITe card-title h5"
     >
       <a
         href="/movies/1"

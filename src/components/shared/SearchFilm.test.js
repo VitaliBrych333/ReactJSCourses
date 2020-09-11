@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount, shallow } from 'enzyme';
 import SearchFilm from './SearchFilm';
@@ -17,6 +18,12 @@ describe('<SearchFilm/>', () => {
     },
     movieReducer: {
       movies: [{id: 1}]
+    },
+    windowReducer: {
+      showModal: false,
+      showEditPage: false,
+      showDeletePage: false,
+      showAddPage: false
     }
   };
   const mockStore = configureStore();
@@ -39,14 +46,14 @@ describe('<SearchFilm/>', () => {
   });
 
   it('should equals to snapshot of CriteriaSearch', () => {
-    const renderedValue = renderer.create(<Provider store={store}><SearchFilm /></Provider>).toJSON();
+    const renderedValue = renderer.create(<Router><Provider store={store}><SearchFilm /></Provider></Router>).toJSON();
     expect(renderedValue).toMatchSnapshot();
   });
 
   it('should not call onChange', () => {
     const onChange = jest.fn();
-    const wrap = mount(<Provider store={store}><SearchFilm /></Provider>);
-    wrap.find(FormControl).simulate('change');
+    const wrap = mount(<Router><Provider store={store}><SearchFilm /></Provider></Router>);
+    wrap.find(FormControl).at(0).simulate('change');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 })

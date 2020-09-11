@@ -23,7 +23,9 @@ const StyledSpan = styled.span`
 const SignSearch = () => {
     return (
         <StyledSpan>
-            <Link to={{pathname: '/search/Search20Query'}}><MDBIcon icon="search" size="1x" className="pr-3" /></Link>
+            <Link to={{ pathname: '/search/Search20Query' }}>
+                <MDBIcon icon="search" size="1x" className="pr-3" />
+            </Link>
         </StyledSpan>
     );
 };

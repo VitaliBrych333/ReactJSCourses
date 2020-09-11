@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Badge, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { fetchMoviesByGenre, fetchMovieId } from '../redux/actions/moviesActions';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { fetchMoviesByGenre, fetchMovieId } from '../redux/actions/moviesActions';
+import { showEditPage, showDeletePage } from '../redux/actions/windowActions';
+import ModalWindow from './shared/ModalWindow';
 
 const StyledCartTitle = styled(Card.Title)`
     display: flex;
@@ -38,6 +40,7 @@ const StyledCard = styled(Card)`
     img {
         width: 230px;
         height: 300px;
+        margin-top: -10px;
     }
 
     img:hover {
@@ -72,6 +75,10 @@ const StyledCard = styled(Card)`
         margin: 5px 5px 0 197px;
     }
 
+    svg: hover {
+        cursor: pointer;
+    }
+
     .no-show {
         display: none;
     }
@@ -80,59 +87,103 @@ const StyledCard = styled(Card)`
 class Item extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            dotsIsVisible: "no-show"
-        };
 
-        this.showDots = this.showDots.bind(this);
-        this.hideDots = this.hideDots.bind(this);
+        this.state = {
+            dotsIsVisible: "no-show",
+            showModalWindow: false,
+        };
     }
 
-    handleClick(e) {
+    handleClick = (e) => {
         this.props.dispatch(
             fetchMoviesByGenre(this.props.sort, e.target.value));
     }
 
-    handleRequests(e, array) {
+    handleRequests = (e) => {
         this.props.dispatch(
             fetchMovieId(this.props.info.id));
 
-        if (array.length) {
+        const genres = this.props.info.genres;
+
+        if (genres.length) {
             this.props.dispatch(
-              fetchMoviesByGenre(this.props.sort, array));
+              fetchMoviesByGenre(this.props.sort, genres));
         }
     }
 
-    showDots() {
+    showDots = () => {
         this.setState({ dotsIsVisible: "show" });
     }
 
-    hideDots() {
+    hideDots = () => {
         this.setState({ dotsIsVisible: "no-show" });
+    }
+
+    showModal = () => {
+        this.hideDots();
+        this.setState({ showModalWindow: true });
+    }
+
+    hideModal = () => {
+        this.setState({ showModalWindow: false });
+    }
+
+    handleClickTag = (e) => {
+        this.hideDots();
+        this.hideModal();
+
+        switch (e.target.innerHTML) {
+            case 'Edit':
+                this.props.dispatch(showEditPage(true));
+                break;
+            case 'Delete':
+                this.props.dispatch(showDeletePage(true));
+                break;
+            default:
+                break;
+         }
     }
 
     render() {
         return (
             <StyledCard>
-                <MoreVertIcon className={this.state.dotsIsVisible}/>
+                <MoreVertIcon className={this.state.dotsIsVisible}
+                               onMouseEnter={this.showDots}
+                               onClick={this.showModal} />
+
+                <ModalWindow show={this.state.showModalWindow} handleClose={this.hideModal} onMouseOut={this.hideModal}>
+                    <p onClick={this.handleClickTag}>Edit</p>
+                    <p onClick={this.handleClickTag}>Delete</p>
+                </ModalWindow>
+
                 <Card.Img variant="top"
                           src={this.props.info.poster_path}
                           onMouseEnter={this.showDots}
-                          onMouseLeave={this.hideDots}
-                />
+                          onMouseLeave={this.hideDots} />
+
                 <Card.Body>
                     <StyledCartTitle>
-                        <Link to={{pathname: `/movies/${this.props.info.id}`}} onClick={e => this.handleRequests(e, this.props.info.genres)}>{this.props.info.title}</Link>
+                        <Link to={{pathname: `/movies/${this.props.info.id}`}}
+                              onClick={this.handleRequests}>
+                            {this.props.info.title}
+                        </Link>
                         <Badge variant="secondary">{this.props.info.release_date.trim().slice(0, 4)}</Badge>
                     </StyledCartTitle>
                     <Card.Text>
-                        {this.props.info.genres.map((item, index) => <button onClick={e => this.handleClick(e, 'value')} value={item} href='#' key={index} info={item} variant="secondary">{item}</button> )}
+                        {this.props.info.genres.map((item, index) => <button onClick={this.handleClick}
+                                                                             value={item}
+                                                                             href='#'
+                                                                             key={index}
+                                                                             info={item}
+                                                                             variant="secondary">{item}
+                                                                     </button>
+                                                    )}
                     </Card.Text>
                 </Card.Body>
             </StyledCard>
-        )
-    }
-}
+        );
+    };
+};
 
 Item.propTypes = {
     sort: PropTypes.string,
@@ -142,11 +193,12 @@ Item.propTypes = {
         genres: PropTypes.array,
         release_date: PropTypes.string
     })
-}
+};
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,
-    sort: state.criteriaReducer.sort
+    sort: state.criteriaReducer.sort,
+    showEditPage: state.windowReducer.showEditPage
 });
 
 export default connect(mapStateToProps)(Item);

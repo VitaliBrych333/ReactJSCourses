@@ -1,0 +1,53 @@
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+    width: 173px;
+    margin-left: 170px;
+    display: flex;
+    justify-content: space-between;
+
+    .btn-primary {
+        background-color: #232323;
+        border-color: #F65261;
+        color: #F65261;
+    }
+
+    .btn-primary: hover {
+        background-color: #F65261;
+        color: #FFF;
+    }
+`;
+
+class ButtonsFormGroup extends Component {
+    handleReset = (e) => {
+        console.log('reset', e.target);
+    }
+
+    handleClick = (e) => {
+        console.log('click', e.target);
+    }
+
+    render() {
+        return (
+            <StyledDiv>
+                <Button variant="primary" onClick={this.props.handleReset}>
+                    Reset
+                </Button>
+                <Button variant="primary" onClick={this.handleClick}>
+                    {this.props.nameButton}
+                </Button>
+            </StyledDiv>
+        );
+    };
+};
+
+function mapStateToProps(state) {
+    return {
+        data: state.movieReducer.movies,
+    };
+};
+
+export default connect(mapStateToProps)(ButtonsFormGroup);

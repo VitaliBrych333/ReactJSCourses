@@ -42,14 +42,14 @@ export const sortRelease = data => ({
     payload: {
         data: data
     }
-})
+});
 
 export const sortRating = data => ({
     type: SORT_RATING,
     payload: {
         data: data
     }
-})
+});
 
 export function fetchMovies(sortBy, searchBy, value) {
     const request = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=desc&search=${value}&searchBy=${searchBy}`
@@ -64,7 +64,7 @@ export function fetchMovies(sortBy, searchBy, value) {
             })
             .catch(error => dispatch(fetchMoviesFailure(error)));
     };
-}
+};
 
 export function fetchMoviesByGenre(sortBy, value) {
 
@@ -72,7 +72,7 @@ export function fetchMoviesByGenre(sortBy, value) {
         value = value.join('%2C%20');
     }
 
-    const request = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=desc&searchBy=genres&filter=${value}`
+    const request = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=desc&searchBy=genres&filter=${value}`;
 
     return dispatch => {
         dispatch(fetchMoviesBegin());
@@ -84,7 +84,7 @@ export function fetchMoviesByGenre(sortBy, value) {
             })
             .catch(error => dispatch(fetchMoviesFailure(error)));
     };
-}
+};
 
 export function fetchMovieId(id) {
     const request = `https://reactjs-cdp.herokuapp.com/movies/${id}`
@@ -99,4 +99,4 @@ export function fetchMovieId(id) {
             })
             .catch(error => dispatch(fetchFilmIdFailure(error)));
     };
-}
+};

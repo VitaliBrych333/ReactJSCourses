@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import NotFound from './NotFound';
 import styled from 'styled-components';
-import CardFilm from './CardFilm';
-import { useParams } from 'react-router';
-import FilmDetails from './FilmDetails';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router';
+import CardFilm from './CardFilm';
+import FilmDetails from './FilmDetails';
+import EditPage from './EditPage';
+import DeleteWindow from './DeleteWindow';
+import NotFound from './NotFound';
 
 const StyledSection = styled.section`
     padding: 25px;
@@ -33,6 +35,8 @@ const DetailsPage = (props) => {
 
     return (
         <Fragment>
+            <EditPage></EditPage>
+            <DeleteWindow></DeleteWindow>
             <FilmDetails propsId={{ id }}/>
             {main}
         </Fragment>
@@ -44,7 +48,7 @@ DetailsPage.propTypes = {
     filmId: PropTypes.shape({
         data: PropTypes.object
     })
-}
+};
 
 const mapStateToProps = state => ({
     data: state.movieReducer.movies.data,
