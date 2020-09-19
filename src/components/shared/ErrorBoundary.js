@@ -27,8 +27,8 @@ export default class ErrorBoundary extends Component {
         } else {
             return this.props.children;
         }
-    };
-};
+    }
+}
 
 ErrorBoundary.propTypes = {
     children: PropTypes.element

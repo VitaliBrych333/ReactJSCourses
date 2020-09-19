@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import NamePage from './shared/NamePage';
 import { showDeletePage } from '../redux/actions/windowActions';
+import { deleteMovie, setMoviesByGenre, fetchMoviesSuccess } from '../redux/actions/moviesActions.js';
 
 const StyledSection = styled.section`
     .modal {
@@ -51,8 +52,20 @@ const StyledSection = styled.section`
 const DeleteWindow = (props) => {
     const showHideClassName = props.showDeletePage ? "modal display-block" : "modal display-none";
 
-    const handleClick = (e) => console.log('delete', e.target);
     const handleClose = () => props.dispatch(showDeletePage(false));
+    const handleClick = () => {
+        props.dispatch(deleteMovie(props.filmEdit.id));
+
+        const newValueMovies = {
+            data: props.moviesByCriteria.data.filter(item => item.id !== props.filmEdit.id),
+            totalAmount: props.moviesByCriteria.totalAmount - 1
+        };
+
+        props.dispatch(setMoviesByGenre(newValueMovies));
+        props.dispatch(fetchMoviesSuccess(newValueMovies))
+
+        handleClose();
+    }
 
     return (
         <StyledSection>
@@ -69,6 +82,8 @@ const DeleteWindow = (props) => {
 
 const mapStateToProps = state => ({
     showDeletePage: state.windowReducer.showDeletePage,
+    filmEdit: state.movieReducer.filmEdit,
+    moviesByCriteria: state.movieReducer.moviesByCriteria,
 });
 
 export default connect(mapStateToProps)(DeleteWindow);

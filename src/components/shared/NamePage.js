@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components'
-import { connect } from 'react-redux';
 
 const Styled = styled.div`
     h2, .close {
@@ -23,5 +22,5 @@ const NamePage = ({ namePage, handleClose }) => {
     );
 };
 
-export default connect()(NamePage);
+export default NamePage;
 

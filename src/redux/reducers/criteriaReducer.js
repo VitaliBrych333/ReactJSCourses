@@ -1,25 +1,25 @@
-import { SET_SEARCH, SET_SORT } from '../actions/criteriaActions';
+import { SET_SORT, SET_GENRE } from '../actions/criteriaActions';
 
 const initialState = {
-    search: 'title',
-    sort: 'release_date'
+    sort: 'release_date',
+    genre: 'all'
 };
 
 function criteriaReducer(state = initialState, action) {
     switch(action.type) {
-        case SET_SEARCH:
-            return Object.assign({}, state, {
-                search: action.payload.search
-            });
-
         case SET_SORT:
             return Object.assign({}, state, {
                 sort: action.payload.sort
             });
 
+        case SET_GENRE:
+            return Object.assign({}, state, {
+                genre: action.payload.genre
+            });
+
         default:
             return state;
-    };
-};
+    }
+}
 
 export default criteriaReducer;

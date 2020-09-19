@@ -97,10 +97,6 @@ const StyledHeader = styled.header`
 
 const Details = (props) => {
     const value = props.filmId.data;
-    const state = {
-        kind: 'Sort',
-        left: 'Release date',
-    };
 
     return (
         <Fragment>
@@ -111,15 +107,15 @@ const Details = (props) => {
                                       <StyledWrapper>
                                           <img src={value.poster_path} width="200" height="200" alt="Picture film"/>
                                           <div className="describe">
-                                              <Rating propValue={value}/>
-                                              <Duration propValue={value}/>
+                                              <Rating />
+                                              <Duration />
                                               <p>{value.overview}</p>
                                           </div>
                                       </StyledWrapper>
 
                                       <div className="types">
                                           <NavCustom></NavCustom>
-                                          <ButtonsCriteriaSearch buttonNames={state}/>
+                                          <ButtonsCriteriaSearch />
                                       </div>
                                           <div className="count-movie">
                                               {props.total > 0 && <p className="count">{props.total} Movies found</p>}
@@ -142,9 +138,9 @@ Details.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
+    data: state.movieReducer.moviesByCriteria.data,
     filmId: state.movieReducer.filmId,
-    total: state.movieReducer.movies.total,
+    total: state.movieReducer.moviesByCriteria.totalAmount,
 });
 
 export default connect(mapStateToProps)(Details);

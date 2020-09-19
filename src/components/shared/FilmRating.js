@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
     display: flex;
@@ -30,19 +31,23 @@ const StyledDiv = styled.div`
 `;
 
 const Rating = (props) => {
+    const filmId = props.filmId;
     return (
         <StyledDiv>
-            <h3>{props.propValue.title} <span>{props.propValue.tagline}</span></h3>
-            <div>{props.propValue.vote_average}</div>
+            <h3>{filmId.title} <span>{filmId.tagline}</span></h3>
+            <div>{filmId.vote_average}</div>
         </StyledDiv>
     );
 };
 
 Rating.propTypes = {
-    propValue: PropTypes.shape({
-        title: PropTypes.string,
-        vote_average: PropTypes.number
-    })
+    filmId: PropTypes.object
 };
 
-export default Rating;
+const mapStateToProps = state => ({
+    filmId: state.movieReducer.filmId.data,
+});
+
+export default connect(mapStateToProps)(Rating);
+
+

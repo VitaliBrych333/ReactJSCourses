@@ -7,13 +7,15 @@ import {
     FETCH_FILMID_FAILURE,
     SORT_RELEASE,
     SORT_RATING,
-    SET_EDITFILM
+    SET_EDITFILM,
+    SET_MOVIES_BY_GENRE
 } from '../actions/moviesActions';
 
 const initialState = {
-    movies: { data: [], total: 0 },
+    movies: { data: [], totalAmount: 0 },
+    moviesByCriteria: { data: [], totalAmount: 0 },
     filmId: {},
-    filmEdit: [],
+    filmEdit: null,
     loading: false,
     error: null
 };
@@ -65,20 +67,20 @@ export default function movieReducer(state = initialState, action) {
             };
 
         case SORT_RELEASE:
-            let sortDataByRelease = state.movies.data.slice().sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+            const sortDataByRelease = state.moviesByCriteria.data.slice().sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
             return Object.assign({}, state, {
-                movies: {
+                moviesByCriteria: {
                     data: sortDataByRelease,
-                    total: state.movies.total
+                    totalAmount: state.moviesByCriteria.totalAmount
                 }
             });
 
         case SORT_RATING:
-            let sortDataByRating = state.movies.data.slice().sort((a, b) => b.vote_average - a.vote_average);
+            const sortDataByRating = state.moviesByCriteria.data.slice().sort((a, b) => b.vote_average - a.vote_average);
             return Object.assign({}, state, {
-                movies: {
+                moviesByCriteria: {
                     data: sortDataByRating,
-                    total: state.movies.total
+                    totalAmount: state.moviesByCriteria.totalAmount
                 }
             });
 
@@ -88,7 +90,13 @@ export default function movieReducer(state = initialState, action) {
                 filmEdit: action.payload.filmEdit,
             };
 
+        case SET_MOVIES_BY_GENRE:
+            return {
+                ...state,
+                moviesByCriteria: action.payload.moviesByCriteria
+            };
+
         default:
             return state;
-    };
-};
+    }
+}

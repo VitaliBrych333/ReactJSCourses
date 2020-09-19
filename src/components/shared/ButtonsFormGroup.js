@@ -22,28 +22,24 @@ const StyledDiv = styled.div`
 `;
 
 class ButtonsFormGroup extends Component {
-    handleClick = (e) => {
-        console.log('click', e.target);
-    }
-
     render() {
         return (
             <StyledDiv>
                 <Button variant="primary" onClick={this.props.handleReset}>
                     Reset
                 </Button>
-                <Button variant="primary" onClick={this.handleClick}>
+                <Button variant="primary" onClick={this.props.handleSave}>
                     {this.props.nameButton}
                 </Button>
             </StyledDiv>
         );
-    };
-};
+    }
+}
 
 function mapStateToProps(state) {
     return {
-        data: state.movieReducer.movies,
+        data: state.movieReducer.moviesByCriteria,
     };
-};
+}
 
 export default connect(mapStateToProps)(ButtonsFormGroup);

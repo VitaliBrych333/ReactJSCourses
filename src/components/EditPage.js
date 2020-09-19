@@ -27,32 +27,21 @@ const StyledSection = styled.section`
     .display-none {
         display: none;
     }
+
+    button {
+        text-transform: uppercase;
+    }
 `;
 
 const EditPage = (props) => {
     const showHideClassName = props.showEditPage ? "modal display-block" : "modal display-none";
 
-    const state = {
-        namePage: 'Edit movie',
-        nameButton: 'Save',
-        data: {
-            id: 1,
-            title: 'Moana',
-            date: '2018-07-22',
-            url: 'www.moana.com',
-            genre: 'Comedy',
-            overview: 'overview fake',
-            time: 180
-        }
-    };
-
     return (
         <StyledSection>
             <div className={showHideClassName}>
                 <section className="modal-main">
-                    <FormInfo namePage={state.namePage}
-                              nameButton={state.nameButton}
-                              data={state.data}
+                    <FormInfo namePage="Edit movie"
+                              nameButton="Save"
                     >
                     </FormInfo>
                 </section>
@@ -63,7 +52,6 @@ const EditPage = (props) => {
 
 const mapStateToProps = state => ({
     showEditPage: state.windowReducer.showEditPage,
-    filmId: state.movieReducer.filmId
 });
 
 export default connect(mapStateToProps)(EditPage);

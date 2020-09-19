@@ -1,5 +1,4 @@
 import React, { Component  } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ErrorBoundary from './shared/ErrorBoundary';
 import IncorrectPath from './IncorrectPath';
@@ -18,7 +17,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/">
                         <ErrorBoundary>
-                            <StartPage data={this.props.data}/>
+                            <StartPage />
                         </ErrorBoundary>
                     </Route>
                     <Route path="/movies/:id">
@@ -28,7 +27,7 @@ class App extends Component {
                     </Route>
                     <Route path="/search/Search20Query">
                         <ErrorBoundary>
-                            <StartPage data={this.props.data}/>
+                            <StartPage />
                         </ErrorBoundary>
                     </Route>
                     <Route path='/404'>
@@ -40,15 +39,10 @@ class App extends Component {
                 </Switch>
             </Router>
         );
-    };
-};
-
-App.propTypes = {
-    data: PropTypes.array
-};
+    }
+}
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
     loading: state.movieReducer.loading,
     error: state.movieReducer.error
 });

@@ -48,12 +48,8 @@ StartPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
-    total: state.movieReducer.movies.total,
-    showEditPage: state.windowReducer.showEditPage,
-    showDeletePage: state.windowReducer.showDeletePage,
-    loading: state.movieReducer.loading,
-    error: state.movieReducer.error,
+    data: state.movieReducer.moviesByCriteria.data,
+    total: state.movieReducer.moviesByCriteria.totalAmount,
 });
 
 export default connect(mapStateToProps)(StartPage);

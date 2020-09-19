@@ -27,6 +27,10 @@ const StyledSection = styled.section`
     .modal {
         background: rgba(0, 0, 0, 0.6);
     }
+
+    .select div{
+        text-transform : none
+    }
 `;
 
 const AddPage = (props) => {

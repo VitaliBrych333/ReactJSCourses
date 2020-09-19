@@ -7,6 +7,7 @@ import AddPage from '../AddPage';
 import useLocalStorageState from './useLocalStorageState';
 import { fetchMovies } from '../../redux/actions/moviesActions';
 import { showAddPage } from '../../redux/actions/windowActions';
+import { setGenre } from '../../redux/actions/criteriaActions';
 
 const StyledGroup = styled(InputGroup)`
     padding: 0 50px;
@@ -34,9 +35,6 @@ const StyleDiv = styled.div`
 const SearchFilm = (props) => {
 
     const [controlValue, setValue] = useState({
-        kind: 'Search',
-        left: 'Title',
-        right: 'Genre',
         disabled: true,
         myRef: createRef()
     });
@@ -44,8 +42,14 @@ const SearchFilm = (props) => {
     const [defaultValue, setState] = useLocalStorageState('my-app-defaultValueSearch', '');
 
     const handleClick = useCallback(() => {
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.style.borderBottom = 'none';
+        });
+        document.querySelector('.nav a').style.borderBottom = '2px solid red';
+
+        props.dispatch(setGenre('All'));
         props.dispatch(
-            fetchMovies(props.sort, props.search, controlValue.myRef.value));
+            fetchMovies(props.sort, controlValue.myRef.value));
     });
 
     const handleChange = useCallback(() => {
@@ -85,12 +89,10 @@ const SearchFilm = (props) => {
 
 SearchFilm.propTypes = {
     sort:  PropTypes.string,
-    search: PropTypes.string,
     myInput: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
-    search: state.criteriaReducer.search,
     sort: state.criteriaReducer.sort
 });
 

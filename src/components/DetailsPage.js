@@ -35,8 +35,8 @@ const DetailsPage = (props) => {
 
     return (
         <Fragment>
-            <EditPage></EditPage>
-            <DeleteWindow></DeleteWindow>
+            <EditPage />
+            <DeleteWindow />
             <FilmDetails propsId={{ id }}/>
             {main}
         </Fragment>
@@ -51,8 +51,8 @@ DetailsPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
-    filmId: state.movieReducer.filmId
+    data: state.movieReducer.moviesByCriteria.data,
+    filmId: state.movieReducer.filmId,
 });
 
 export default connect(mapStateToProps)(DetailsPage);

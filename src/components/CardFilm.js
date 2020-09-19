@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { fetchMoviesByGenre, fetchMovieId } from '../redux/actions/moviesActions';
+import { fetchMoviesByGenre, fetchMovieId, setEditFilm } from '../redux/actions/moviesActions';
 import { showEditPage, showDeletePage } from '../redux/actions/windowActions';
 import ModalWindow from './shared/ModalWindow';
 
@@ -99,16 +99,9 @@ class Item extends Component {
             fetchMoviesByGenre(this.props.sort, e.target.value));
     }
 
-    handleRequests = (e) => {
+    handleRequests = () => {
         this.props.dispatch(
             fetchMovieId(this.props.info.id));
-
-        const genres = this.props.info.genres;
-
-        if (genres.length) {
-            this.props.dispatch(
-              fetchMoviesByGenre(this.props.sort, genres));
-        }
     }
 
     showDots = () => {
@@ -134,9 +127,11 @@ class Item extends Component {
 
         switch (e.target.innerHTML) {
             case 'Edit':
+                this.props.dispatch(setEditFilm(this.props.info))
                 this.props.dispatch(showEditPage(true));
                 break;
             case 'Delete':
+                this.props.dispatch(setEditFilm(this.props.info))
                 this.props.dispatch(showDeletePage(true));
                 break;
             default:
@@ -182,8 +177,8 @@ class Item extends Component {
                 </Card.Body>
             </StyledCard>
         );
-    };
-};
+    }
+}
 
 Item.propTypes = {
     sort: PropTypes.string,
@@ -196,8 +191,6 @@ Item.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    data: state.movieReducer.movies.data,
-    sort: state.criteriaReducer.sort,
     showEditPage: state.windowReducer.showEditPage
 });
 

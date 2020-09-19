@@ -3,23 +3,23 @@ import * as actions from '../actions/moviesActions';
 import expect from 'expect';
 
 const thunk = ({ dispatch, getState }) => next => action => {
-  if (typeof action === 'function') {
-    return action(dispatch, getState);
-  }
+    if (typeof action === 'function') {
+      return action(dispatch, getState);
+    }
 
-  return next(action);
+    return next(action);
 }
 
 const create = () => {
-  const store = {
-    getState: jest.fn(() => ({})),
-    dispatch: jest.fn()
-  }
-  const next = jest.fn()
+    const store = {
+      getState: jest.fn(() => ({})),
+      dispatch: jest.fn()
+    }
+    const next = jest.fn()
 
-  const invoke = action => thunk(store)(next)(action);
+    const invoke = action => thunk(store)(next)(action);
 
-  return { store, next, invoke };
+    return { store, next, invoke };
 }
 
 describe('movieReducer', () => {

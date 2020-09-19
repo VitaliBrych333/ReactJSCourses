@@ -66,29 +66,21 @@ const StyledHeader = styled.header`
 `;
 
 class SearchHeader extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          kind: 'Sort',
-          left: 'Release date',
-        };
-    }
-
     render() {
         return (
             <StyledHeader>
-                <SearchFilm/>
+                <SearchFilm />
                 <div className="types">
                     <NavCustom></NavCustom>
-                    <ButtonsCriteriaSearch buttonNames={this.state}/>
+                    <ButtonsCriteriaSearch />
                 </div>
                 <div className="count-movie">
                     {this.props.count > 0 && <p className="count">{this.props.count} Movies found</p>}
                 </div>
             </StyledHeader>
         );
-    };
-};
+    }
+}
 
 SearchHeader.propTypes = {
     count: PropTypes.number,
