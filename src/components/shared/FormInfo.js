@@ -1,8 +1,10 @@
-import React, { Fragment, useState, useEffect, useCallback, createRef } from 'react';
+import React, { Fragment, useEffect, useCallback } from 'react';
 import Select from 'react-select'
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import ButtonsFormGroup from './ButtonsFormGroup';
 import NamePage from './NamePage';
 import selectOptions from './SelectOptions';
@@ -14,73 +16,112 @@ const StyledGroup = styled.div`
         color: #F65261;
         text-transform: uppercase;
     }
+
+    .error {
+        color: green;
+    }
 `;
 
 const FormInfo = (props) => {
-    let elemInputs = [];
-    let saveInputs = [];
-
-    const dataForm = {
+    const initialValues = {
         id: '',
-        title: null,
-        release_date: null,
-        poster_path: null,
-        overview: null,
-        time: null
+        title: '',
+        date: '',
+        url: '',
+        genre: '',
+        overview: '',
+        runtime: ''
     };
 
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [controlForm] = useState({
-        id: createRef(),
-        title: createRef(),
-        date: createRef(),
-        url: createRef(),
-        select: createRef(),
-        overview: createRef(),
-        runtime: createRef()
+    const FormSchema = Yup.object({
+        id: Yup.number()
+            .integer('Invalid format'),
+        title: Yup.string()
+            .required('Required'),
+        date: Yup.date()
+            .required('Required'),
+        url: Yup.string()
+            .url('Invalid format')
+            .required('Required'),
+        genre: Yup.string()
+            .nullable()
+            .required('Required'),
+        overview: Yup.string()
+            .required('Required'),
+        runtime: Yup.number()
+            .integer('Invalid format')
+            .required('Required')
     });
 
-    const setDataForm = () => {
-        controlForm.id.value = props.filmEdit.id;
-        controlForm.title.value = props.filmEdit.title;
-        controlForm.date.value = props.filmEdit.release_date;
-        controlForm.url.value = props.filmEdit.poster_path;
-        controlForm.overview.value = props.filmEdit.overview;
-        controlForm.runtime.value = props.filmEdit.runtime;
-    }
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: FormSchema,
+        onSubmit: values => {
+            let newFilm = {
+                title: values.title,
+                genres: Array.from(values.genre, item => item['label']),
+                release_date: values.date,
+                poster_path: values.url,
+                overview: values.overview,
+                runtime: values.runtime,
+            };
 
-    const handleChange = useCallback(() => {
-        setSelectedOption()
+            if (props.nameButton === 'Submit') {
+                props.dispatch(addMovie(newFilm));
+                handleClose();
+
+            } else if (props.nameButton === 'Save') {
+                newFilm.id = values.id;
+                newFilm.vote_average = props.filmEdit.vote_average;
+
+                props.dispatch(updateMovie(newFilm));
+
+                let objMovies = Object.assign({}, props.data);
+
+                objMovies.data.forEach(item => {
+                    if(item.id === newFilm.id) {
+                        for(let key in item) {
+                            if(key !== 'id') {
+                              item[key] = newFilm[key]
+                            }
+                        }
+                    }
+                })
+
+                props.dispatch(setMoviesByGenre(objMovies));
+                props.dispatch(fetchMoviesSuccess(objMovies));
+            }
+        },
+    });
+
+    const handleChange = useCallback((values) => {
+        formik.setFieldValue('genre', values);
         }, []
     );
 
-    const getInputs = () => {
-        if (props.showEditPage) {
-            elemInputs = document.querySelectorAll('.Edit input');
-
-        } else if (props.showAddPage) {
-            elemInputs = document.querySelectorAll('.Add input');
-        }
-    };
-
     const handleReset = useCallback(() => {
-        getInputs();
-
-        if (elemInputs.length) {
-            elemInputs.forEach(input => {
-                saveInputs.push(input.value);
-                input.value = '';
-            });
+        formik.resetForm();
+        if (props.namePage === 'Edit movie') {
+            formik.setFieldValue('id', props.filmEdit.id);
         }
-
-        setSelectedOption(null);
     });
+
+    const setEditValues = () => {
+        formik.setValues({
+            id: props.filmEdit.id,
+            title: props.filmEdit.title || '',
+            date: props.filmEdit.release_date || '',
+            url: props.filmEdit.poster_path || '',
+            genre: props.filmEdit.genres.flatMap(item => new Object({ value: item.toLowerCase(), label: item })),
+            overview: props.filmEdit.overview || '',
+            runtime: props.filmEdit.runtime || ''
+        });
+    };
 
     const handleClose = useCallback(() => {
         switch (props.namePage) {
             case 'Edit movie':
-                setDataForm();
-                setSelectValue();
+                setEditValues();
                 props.dispatch(showEditPage(false));
                 break;
 
@@ -94,78 +135,13 @@ const FormInfo = (props) => {
         }
     });
 
-    const setSelectValue = () => {
-        if (props.filmEdit.genres.length) {
-            let selectedValue = [];
-            selectOptions.forEach(item => {
-                if (props.filmEdit.genres.includes(item.label)) {
-                  selectedValue.push(item);
-                }
-            });
-
-            if (selectedValue.length) {
-                setSelectedOption(selectedValue);
-            }
-        }
-    }
-
-    const handleSave = (e) => {
-        let genres = [];
-
-        if (controlForm.select.state.value && controlForm.select.state.value.length) {
-            controlForm.select.state.value.forEach(item => genres.push(item.label))
-        }
-
-        const newFilm = {
-            title: controlForm.title.value,
-            release_date: controlForm.date.value,
-            poster_path: controlForm.url.value,
-            overview: controlForm.overview.value,
-            runtime: Number(controlForm.runtime.value),
-        };
-
-        if (e.target.innerHTML === 'Submit') {
-            newFilm.genres = genres;
-
-            props.dispatch(addMovie(newFilm));
-            handleClose();
-
-        } else if (e.target.innerHTML === 'Save') {
-            let editFilm = {};
-
-            editFilm.genres = props.filmEdit.genres
-            editFilm.id = Number(controlForm.id.value);
-            editFilm.vote_average =  props.filmEdit.vote_average;
-
-            if (!selectedOption) {
-                editFilm.genres = genres;
-            }
-
-            const updateFilm = Object.assign(editFilm, newFilm);
-
-            props.dispatch(updateMovie(updateFilm));
-
-            let objMovies = Object.assign({}, props.data);
-
-            objMovies.data.forEach(item => {
-                if(item.id === editFilm.id) {
-                    for(let key in item) {
-                        if(key !== 'id') {
-                          item[key] = editFilm[key]
-                        }
-                    }
-                }
-            })
-
-            props.dispatch(setMoviesByGenre(objMovies));
-            props.dispatch(fetchMoviesSuccess(objMovies));
-        }
+    const handleMenuClose = () => {
+        formik.setTouched({ genre: true });
     }
 
     useEffect(() => {
         if (props.namePage === 'Edit movie' && props.filmEdit) {
-            setSelectValue();
-            setDataForm();
+            setEditValues()
         }
     }, [props.filmEdit]);
 
@@ -178,28 +154,38 @@ const FormInfo = (props) => {
                     {
                         (props.namePage === 'Edit movie') && <Fragment>
                                                                  <Form.Label>Movie id</Form.Label>
-                                                                 <Form.Control ref={value=> controlForm.id = value} type="number" placeholder="Id" defaultValue={dataForm.id} readOnly/>
+                                                                 <Form.Control type="number" value={formik.values.id} name="id" onChange={formik.handleChange} placeholder="Id" readOnly />
                                                              </Fragment>
                     }
+
                     <Form.Label>Title</Form.Label>
-                    <Form.Control ref={value=> controlForm.title = value} type="title" placeholder="Title" defaultValue={dataForm.title}/>
+                    <Form.Control type="title" placeholder="Title" value={formik.values.title} name="title" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    { formik.touched.title && formik.errors.title ? <div className="error">{formik.errors.title}</div> : null }
 
                     <Form.Label>Release date</Form.Label>
-                    <Form.Control ref={value=> controlForm.date = value} type="date" placeholder="Select Date" defaultValue={dataForm.release_date} />
+                    <Form.Control type="date" placeholder="Select Date" value={formik.values.date} name="date" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    { formik.touched.date && formik.errors.date ? <div className="error">{formik.errors.date}</div> : null }
+
 
                     <Form.Label>Movie URL</Form.Label>
-                    <Form.Control ref={value=> controlForm.url = value} type="url" placeholder="Movie URL here" defaultValue={dataForm.poster_path} />
+                    <Form.Control type="url" placeholder="Movie URL here" value={formik.values.url} name="url" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    { formik.touched.url && formik.errors.url ? <div className="error">{formik.errors.url}</div> : null }
 
                     <Form.Label>Example select</Form.Label>
-                    <Select ref={value=> controlForm.select = value} className="select" options={selectOptions} placeholder="Select Genre" isMulti="true" onChange={handleChange} value={selectedOption} />
+                    <Select className="select" options={selectOptions} placeholder="Select Genre" value={formik.values.genre} isMulti="true" onChange={handleChange} onMenuClose={handleMenuClose}/>
+                    { formik.touched.genre && formik.errors.genre ? <div className="error">{formik.errors.genre}</div> : null }
+
 
                     <Form.Label>Overview</Form.Label>
-                    <Form.Control ref={value=> controlForm.overview = value} type="text" placeholder="Overview here" defaultValue={dataForm.overview}/>
+                    <Form.Control type="text" placeholder="Overview here" value={formik.values.overview} name="overview" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    { formik.touched.overview && formik.errors.overview ? <div className="error">{formik.errors.overview}</div> : null }
+
 
                     <Form.Label>Runtime</Form.Label>
-                    <Form.Control ref={value=> controlForm.runtime = value} type="number" placeholder="Runtime here" defaultValue={dataForm.time}/>
+                    <Form.Control type="number" placeholder="Runtime here" value={formik.values.runtime} name="runtime" onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                    { formik.touched.runtime && formik.errors.runtime ? <div className="error">{formik.errors.runtime}</div> : null }
                 </Form.Group>
-                <ButtonsFormGroup nameButton={props.nameButton} handleReset={handleReset} handleSave={handleSave}></ButtonsFormGroup>
+                <ButtonsFormGroup nameButton={props.nameButton} handleReset={handleReset} handleSave={formik.submitForm} disabledSave={!(formik.dirty && formik.isValid)}></ButtonsFormGroup>
             </Form>
       </StyledGroup>
     );

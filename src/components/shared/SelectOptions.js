@@ -14,4 +14,5 @@ export default selectOptions = [
     { value: 'war', label: 'War' },
     { value: 'crime', label: 'Crime' },
     { value: 'history', label: 'History' },
+    { value: 'drama', label: 'Drama' },
 ];

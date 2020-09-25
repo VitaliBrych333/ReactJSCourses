@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -28,7 +27,7 @@ class ButtonsFormGroup extends Component {
                 <Button variant="primary" onClick={this.props.handleReset}>
                     Reset
                 </Button>
-                <Button variant="primary" onClick={this.props.handleSave}>
+                <Button variant="primary" onClick={this.props.handleSave} disabled={this.props.disabledSave}>
                     {this.props.nameButton}
                 </Button>
             </StyledDiv>
@@ -36,10 +35,4 @@ class ButtonsFormGroup extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        data: state.movieReducer.moviesByCriteria,
-    };
-}
-
-export default connect(mapStateToProps)(ButtonsFormGroup);
+export default ButtonsFormGroup;
