@@ -1,151 +1,162 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import { Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import ButtonsFormGroup from './ButtonsFormGroup';
-import NamePage from './NamePage';
-import { setEditFilm } from '../../redux/actions/moviesActions';
-import { showEditPage, showAddPage } from '../../redux/actions/windowActions';
+import React, { Fragment, useState, useEffect, useCallback } from "react";
+import { Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import ButtonsFormGroup from "./ButtonsFormGroup";
+import NamePage from "./NamePage";
+import { setEditFilm } from "../../redux/actions/moviesActions";
+import { showEditPage, showAddPage } from "../../redux/actions/windowActions";
 
 const StyledGroup = styled.div`
-    label {
-        color: #F65261;
-    }
+  label {
+    color: #f65261;
+  }
 `;
 
 const FormInfo = (props) => {
-    let elemInputs = [];
-    let saveInputs = [];
+  const initialState = {
+    title: "",
+    date: "",
+    url: "",
+    genre: "",
+    overview: "",
+    time: "",
+  };
 
-    const initialState = {
-        id: '',
-        title: null,
-        date: null,
-        url: null,
-        overview: null,
-        time: null
-    };
+  const genreState = ["Select Genre", "Horror", "Action", "Comedy"];
+  const [dataForm, setData] = useState(initialState);
 
-    const [genreState] = useState(['Select Genre', 'Horror', 'Action', 'Comedy']);
-    const [valueState, setValue] = useState(genreState[0]);
-    const [dataForm, setData] = useState(initialState);
+  const handleChange = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    setData({ ...dataForm, [field]: value });
+  };
 
-    const handleChange = useCallback((e) => {
-        setValue(e.target.value);
-        }, []
-    );
+  const handleReset = useCallback(() => {
+    setData(Object.assign({ ...dataForm }, initialState));
+  }, [dataForm]);
 
-    const getInputs = () => {
-        if (props.showEditPage) {
-            elemInputs = document.querySelectorAll('.Edit input');
+  const handleClose = useCallback(() => {
+    switch (props.namePage) {
+      case "Edit movie":
+        setData(props.filmEdit);
+        props.dispatch(showEditPage(false));
+        break;
 
-        } else if (props.showAddPage) {
-            elemInputs = document.querySelectorAll('.Add input');
-        }
-    };
+      case "Add movie":
+        handleReset();
+        props.dispatch(showAddPage(false));
+        break;
 
-    const handleReset = useCallback(() => {
-        getInputs();
+      default:
+        break;
+    }
+  }, [props.namePage, props.filmEdit]);
 
-        if (elemInputs.length) {
-            elemInputs.forEach(input => {
-                saveInputs.push(input.value);
-                input.value = '';
-            });
-        }
+  useEffect(() => {
+    setTimeout(() => {
+      const newDate = props.data;
+      if (newDate) {
+        setData(newDate);
+        props.dispatch(setEditFilm(newDate));
+      }
+    }, 0);
+  }, [props.data]);
 
-        setValue(genreState[0]);
-    });
+  return (
+    <StyledGroup>
+      <Form>
+        <NamePage
+          namePage={props.namePage}
+          handleClose={handleClose}
+        ></NamePage>
 
-    const handleClose = useCallback(() => {
-        switch (props.namePage) {
-            case 'Edit movie':
-                getInputs();
+        <Form.Group className={props.namePage}>
+          {dataForm.id && (
+            <Fragment>
+              <Form.Label>Movie id</Form.Label>
+              <Form.Control
+                type="title"
+                placeholder="Id"
+                name="id"
+                value={dataForm.id}
+                readOnly
+              />
+            </Fragment>
+          )}
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="title"
+            placeholder="Title"
+            name="title"
+            value={dataForm.title}
+            onChange={handleChange}
+          />
 
-                // need for mock data and recovery Reset function
-                elemInputs.forEach((input, index) => {
-                    input.value = props.filmEdit[index];
-                });
-                setValue(props.filmEdit[props.filmEdit.length - 1])
+          <Form.Label>Release date</Form.Label>
+          <Form.Control
+            type="date"
+            placeholder="Select Date"
+            name="date"
+            value={dataForm.date}
+            onChange={handleChange}
+          />
 
-                props.dispatch(showEditPage(false));
-                break;
+          <Form.Label>Movie URL</Form.Label>
+          <Form.Control
+            type="url"
+            placeholder="Movie URL here"
+            name="url"
+            value={dataForm.url}
+            onChange={handleChange}
+          />
 
-            case 'Add movie':
-                handleReset();
-                props.dispatch(showAddPage(false));
-                break;
+          <Form.Label>Example select</Form.Label>
+          <Form.Control
+            as="select"
+            placeholder="Select Genre"
+            name="genre"
+            value={dataForm.genre}
+            onChange={handleChange}
+          >
+            {genreState.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </Form.Control>
 
-            default:
-                break;
-        }
-    });
+          <Form.Label>Overview</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Overview here"
+            name="overview"
+            value={dataForm.overview}
+            onChange={handleChange}
+          />
 
-    useEffect(() => {
-        let isMounted = true;
-
-        setTimeout(() => {
-            const newDate = props.data;
-            if (isMounted && newDate) {
-                setValue(newDate.genre);
-                setData(newDate);
-
-                // need for mock data and recovery Reset function
-                elemInputs = document.querySelectorAll('.Edit input')
-                elemInputs.forEach(input => {
-                    saveInputs.push(input.value);
-                });
-                saveInputs.push(newDate.genre);
-
-                props.dispatch(setEditFilm(saveInputs));
-            }
-        }, 500);
-
-        return () => { isMounted = false };
-    }, []);
-
-    return (
-        <StyledGroup>
-            <Form>
-                <NamePage namePage={props.namePage} handleClose={handleClose}></NamePage>
-
-                <Form.Group className={props.namePage}>
-                    {
-                        dataForm.id && <Fragment>
-                                           <Form.Label>Movie id</Form.Label>
-                                           <Form.Control type="title" placeholder="Id" defaultValue={dataForm.id}/>
-                                       </Fragment>
-                    }
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="title" placeholder="Title" defaultValue={dataForm.title}/>
-
-                    <Form.Label>Release date</Form.Label>
-                    <Form.Control type="date" placeholder="Select Date" defaultValue={dataForm.date} />
-
-                    <Form.Label>Movie URL</Form.Label>
-                    <Form.Control type="url" placeholder="Movie URL here" defaultValue={dataForm.url} />
-
-                    <Form.Label>Example select</Form.Label>
-                    <Form.Control as="select" placeholder="Select Genre" value={valueState} onChange={handleChange}>
-                        {genreState.map((item, index) => <option key={index} value={item}>{item}</option> )}
-                    </Form.Control>
-
-                    <Form.Label>Overview</Form.Label>
-                    <Form.Control type="text" placeholder="Overview here" defaultValue={dataForm.overview}/>
-
-                    <Form.Label>Runtime</Form.Label>
-                    <Form.Control type="number" placeholder="Runtime here" defaultValue={dataForm.time}/>
-                </Form.Group>
-                <ButtonsFormGroup nameButton={props.nameButton} handleReset={handleReset}></ButtonsFormGroup>
-            </Form>
-      </StyledGroup>
-    );
+          <Form.Label>Runtime</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Runtime here"
+            name="time"
+            value={dataForm.time}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <ButtonsFormGroup
+          nameButton={props.nameButton}
+          handleReset={handleReset}
+        ></ButtonsFormGroup>
+      </Form>
+    </StyledGroup>
+  );
 };
 
-const mapStateToProps = state => ({
-    showEditPage: state.windowReducer.showEditPage,
-    showAddPage: state.windowReducer.showAddPage,
-    filmEdit: state.movieReducer.filmEdit
+const mapStateToProps = (state) => ({
+  showEditPage: state.windowReducer.showEditPage,
+  showAddPage: state.windowReducer.showAddPage,
+  filmEdit: state.movieReducer.filmEdit,
 });
 
 export default connect(mapStateToProps)(FormInfo);

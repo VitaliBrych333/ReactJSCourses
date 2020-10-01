@@ -1,49 +1,44 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import React from "react";
+import { Button } from "react-bootstrap";
+import styled from "styled-components";
 
 const StyledDiv = styled.div`
-    width: 173px;
-    margin-left: 170px;
-    display: flex;
-    justify-content: space-between;
+  width: 173px;
+  margin-left: 170px;
+  display: flex;
+  justify-content: space-between;
 
-    .btn-primary {
-        background-color: #232323;
-        border-color: #F65261;
-        color: #F65261;
-    }
+  .btn-primary {
+    background-color: #232323;
+    border-color: #f65261;
+    color: #f65261;
+  }
 
-    .btn-primary: hover {
-        background-color: #F65261;
-        color: #FFF;
-    }
+  .btn-primary: hover {
+    background-color: #f65261;
+    color: #fff;
+  }
+
+  button {
+    text-transform: uppercase;
+  }
 `;
 
-class ButtonsFormGroup extends Component {
-    handleClick = (e) => {
-        console.log('click', e.target);
-    }
+const ButtonsFormGroup = (props) => {
+  const handleClick = (e) => {
+    console.log("click", e.target);
+  };
 
-    render() {
-        return (
-            <StyledDiv>
-                <Button variant="primary" onClick={this.props.handleReset}>
-                    Reset
-                </Button>
-                <Button variant="primary" onClick={this.handleClick}>
-                    {this.props.nameButton}
-                </Button>
-            </StyledDiv>
-        );
-    };
+  return (
+    <StyledDiv>
+      <Button variant="primary" onClick={props.handleReset}>
+        Reset
+      </Button>
+      <Button variant="primary" onClick={handleClick}>
+        {props.nameButton}
+      </Button>
+    </StyledDiv>
+  );
 };
 
-function mapStateToProps(state) {
-    return {
-        data: state.movieReducer.movies,
-    };
-};
-
-export default connect(mapStateToProps)(ButtonsFormGroup);
+export default ButtonsFormGroup;

@@ -1,46 +1,44 @@
-import React, { useState, useCallback } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { useState, useCallback } from "react";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import styled from "styled-components";
 
 const StyledGroup = styled(Dropdown)`
-    display: inline-block;
+  display: inline-block;
 
-    button: hover {
-        background-color: #F65261;
-    }
+  button: hover {
+    background-color: #f65261;
+  }
 `;
 
-const DropdownCustom = (props) => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const toggle = () => setDropdownOpen(prevState => !prevState);
+const DropdownCustom = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = useCallback(() => {
+    setDropdownOpen((prevState) => !prevState);
+  }, [dropdownOpen]);
 
-    const [dropdownValue, setValue] = useState(props.propsValue.buttonNames.left);
-    const handleClick = useCallback((e) => {
-        setValue(() => e.target.textContent);
-        }, []
-    );
+  const [dropdownValue, setValue] = useState("Release date");
 
-    return (
-        <StyledGroup>
-            <Dropdown className="drop" isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle caret>
-                    {dropdownValue}
-                </DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem onClick={handleClick}>{props.propsValue.buttonNames.left}</DropdownItem>
-                    <DropdownItem onClick={handleClick}>Earlier than 2020</DropdownItem>
-                    <DropdownItem onClick={handleClick}>Earlier than 2019</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-        </StyledGroup>
-    );
-};
+  const handleClick = (e) => {
+    setValue(() => e.target.textContent);
+  };
 
-DropdownCustom.propTypes = {
-    propValue: PropTypes.shape({
-        buttonNames: PropTypes.string,
-    })
+  return (
+    <StyledGroup>
+      <Dropdown className="drop" isOpen={dropdownOpen} toggle={toggle}>
+        <DropdownToggle caret>{dropdownValue}</DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem onClick={handleClick}>Release date</DropdownItem>
+          <DropdownItem onClick={handleClick}>Earlier than 2020</DropdownItem>
+          <DropdownItem onClick={handleClick}>Earlier than 2019</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </StyledGroup>
+  );
 };
 
 export default DropdownCustom;

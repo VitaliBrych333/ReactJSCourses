@@ -1,36 +1,57 @@
-import React, { Component } from 'react';
-import { Nav } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Nav } from "react-bootstrap";
 
-class NavCustom extends Component {
-    handleClick = (e) => {
-        e.target.parentElement.parentElement.childNodes.forEach(item => {
-            item.childNodes[0].style.borderBottom = 'none';
-        })
-        e.target.style.borderBottom = '2px solid red'
-    }
+const NavCustom = () => {
+  const [active, setActive] = useState("All");
 
-    render() {
-        return (
-            <Nav activeKey="/home"
-                onClick={this.handleClick}>
-                <Nav.Item>
-                    <Nav.Link eventKey="All" style={{borderBottom: "2px solid red"}}>All</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Documentary">Documentary</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Comedy">Comedy</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Horror">Horror</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Crime">Crime</Nav.Link>
-                </Nav.Item>
-            </Nav>
-        );
-    };
+  const handleSelect = (selectedKey) => {
+    setActive(selectedKey);
+  };
+
+  return (
+    <Nav activeKey="/home" onSelect={handleSelect}>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="All"
+          className={active === "All" ? "active" : ""}
+        >
+          All
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Documentary"
+          className={active === "Documentary" ? "active" : ""}
+        >
+          Documentary
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Comedy"
+          className={active === "Comedy" ? "active" : ""}
+        >
+          Comedy
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Horror"
+          className={active === "Horror" ? "active" : ""}
+        >
+          Horror
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Crime"
+          className={active === "Crime" ? "active" : ""}
+        >
+          Crime
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
 };
 
 export default NavCustom;

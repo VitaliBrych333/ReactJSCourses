@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM, { render, unmountComponentAtNode } from 'react-dom';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow } from 'enzyme';
-import NotFound from './IncorrectPath';
-import { act } from 'react-dom/test-utils';
+import React from "react";
+import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme, { shallow } from "enzyme";
+import NotFound from "./IncorrectPath";
+import { act } from "react-dom/test-utils";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('<IncorrectPath/>', () => {
+describe("<IncorrectPath/>", () => {
   let container = null;
 
   beforeEach(() => {
-    container = document.createElement('div');
+    container = document.createElement("div");
     document.body.appendChild(container);
   });
 
@@ -21,16 +21,16 @@ describe('<IncorrectPath/>', () => {
     container = null;
   });
 
-  it('renders with string 404 incorrect path', () => {
+  it("renders with string 404 incorrect path", () => {
     act(() => {
       render(<NotFound />, container);
     });
-    expect(container.textContent).toBe('404 incorrect path');
+    expect(container.textContent).toBe("404 incorrect path");
   });
 
-  it('should render the component', () => {
-    const wrapper = shallow(<NotFound/>).dive();
+  it("should render the component", () => {
+    const wrapper = shallow(<NotFound />).dive();
     ReactDOM.render(<NotFound />, container);
     ReactDOM.unmountComponentAtNode(container);
   });
-})
+});
