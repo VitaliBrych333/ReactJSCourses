@@ -1,52 +1,81 @@
-import React, { Component } from 'react';
-import { Nav } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { setGenre } from '../../redux/actions/criteriaActions';
-import { filterByGenre, setMoviesByGenre } from '../../redux/actions/moviesActions';
+import React, { useState, useEffect } from "react";
+import { Nav } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setGenre } from "../../redux/actions/criteriaActions";
+import {
+  filterByGenre,
+  setMoviesByGenre,
+} from "../../redux/actions/moviesActions";
+import { sortRating, sortRelease } from "../../redux/actions/moviesActions";
 
-class NavCustom extends Component {
-    handleClick = (e) => {
-        e.target.parentElement.parentElement.childNodes.forEach(item => {
-            item.childNodes[0].style.borderBottom = 'none';
-        })
-        e.target.style.borderBottom = '2px solid red';
+const NavCustom = (props) => {
+  const [active, setActive] = useState("All");
 
-        this.props.dispatch(setGenre(e.target.innerHTML));
-        this.props.dispatch(setMoviesByGenre(this.props.movies));
+  const handleSelect = (selectedKey) => {
+    props.dispatch(setGenre(selectedKey));
+    props.dispatch(setMoviesByGenre(props.movies));
 
-        if (e.target.innerHTML !== 'All') {
-            this.props.dispatch(filterByGenre(this.props.movies.data, e.target.innerHTML))
-        }
-    }
+    props.sort === "vote_average"
+      ? props.dispatch(sortRating(props.moviesByCriteria))
+      : props.dispatch(sortRelease(props.moviesByCriteria));
 
-    render() {
-        return (
-            <Nav activeKey="/home"
-                onClick={this.handleClick}>
-                <Nav.Item>
-                    <Nav.Link eventKey="All" style={{borderBottom: "2px solid red"}}>All</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Documentary">Documentary</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Comedy">Comedy</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Horror">Horror</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="Crime">Crime</Nav.Link>
-                </Nav.Item>
-            </Nav>
-        );
-    }
-}
+    selectedKey !== "All"
+      ? props.dispatch(filterByGenre(props.movies.data, selectedKey))
+      : undefined;
+  };
 
-const mapStateToProps = state => ({
-    moviesByCriteria: state.movieReducer.moviesByCriteria.data,
-    movies: state.movieReducer.movies,
+  useEffect(() => {
+    setActive(props.genre);
+  }, [props.genre]);
+
+  return (
+    <Nav activeKey="/home" onSelect={handleSelect}>
+      <Nav.Item>
+        <Nav.Link eventKey="All" className={active === "All" ? "active" : ""}>
+          All
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Documentary"
+          className={active === "Documentary" ? "active" : ""}
+        >
+          Documentary
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Comedy"
+          className={active === "Comedy" ? "active" : ""}
+        >
+          Comedy
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Horror"
+          className={active === "Horror" ? "active" : ""}
+        >
+          Horror
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link
+          eventKey="Crime"
+          className={active === "Crime" ? "active" : ""}
+        >
+          Crime
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  moviesByCriteria: state.movieReducer.moviesByCriteria.data,
+  movies: state.movieReducer.movies,
+  sort: state.criteriaReducer.sort,
+  genre: state.criteriaReducer.genre,
 });
 
 export default connect(mapStateToProps)(NavCustom);
-

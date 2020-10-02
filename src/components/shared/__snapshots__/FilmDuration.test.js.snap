@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Duration/> should equals to snapshot of Duration 1`] = `
+<div
+  className="sc-bdVaJa dSanoj"
+>
+  <p>
+    <span>
+      2019
+    </span>
+     year
+  </p>
+  <p>
+    <span>
+      12
+    </span>
+     min
+  </p>
+</div>
+`;
