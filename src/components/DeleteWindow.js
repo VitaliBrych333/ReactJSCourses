@@ -1,90 +1,91 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import NamePage from './shared/NamePage';
-import { showDeletePage } from '../redux/actions/windowActions';
-import { deleteMovie, setMoviesByGenre, fetchMoviesSuccess } from '../redux/actions/moviesActions.js';
+import React, { useCallback } from "react";
+import { Button } from "react-bootstrap";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import NamePage from "./shared/NamePage";
+import { showDeletePage } from "../redux/actions/windowActions";
+import {
+  deleteMovie,
+  setMoviesByGenre,
+  fetchMoviesSuccess,
+} from "../redux/actions/moviesActions";
 
 const StyledSection = styled.section`
-    .modal {
-        background: rgba(0, 0, 0, 0.6);
-    }
+  .modal {
+    background: rgba(0, 0, 0, 0.6);
+    display: block;
+  }
 
-    .modal-main {
-        position:fixed;
-        width: 400px;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
-        padding: 25px;
-        margin: 50px auto;
-        border: 3px solid black;
-        background-color: #424242;
-    }
+  .modal-main {
+    position: fixed;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    margin: 50px auto;
+    border: 3px solid black;
+    background-color: #424242;
+  }
 
-    .display-block {
-        display: block;
-    }
+  p {
+    color: #fff;
+  }
 
-    .display-none {
-        display: none;
-    }
+  .btn-primary {
+    background-color: #232323;
+    border-color: #f65261;
+    color: #f65261;
+    text-transform: uppercase;
+    margin-left: 250px;
+  }
 
-    p {
-        color: #FFF;
-    }
-
-    .btn-primary {
-        background-color: #232323;
-        border-color: #F65261;
-        color: #F65261;
-        text-transform: uppercase;
-        margin-left: 250px;
-    }
-
-    .btn-primary: hover {
-        background-color: #F65261;
-        color: #FFF;
-    }
+  .btn-primary: hover {
+    background-color: #f65261;
+    color: #fff;
+  }
 `;
 
 const DeleteWindow = (props) => {
-    const showHideClassName = props.showDeletePage ? "modal display-block" : "modal display-none";
+  const handleClose = () => props.dispatch(showDeletePage(false));
 
-    const handleClose = () => props.dispatch(showDeletePage(false));
-    const handleClick = () => {
-        props.dispatch(deleteMovie(props.filmEdit.id));
+  const updateFilms = (films) => {
+    const newValueMovies = {
+      data: films.data.filter((item) => item.id !== props.filmEdit.id),
+      totalAmount: films.totalAmount - 1,
+    };
 
-        const newValueMovies = {
-            data: props.moviesByCriteria.data.filter(item => item.id !== props.filmEdit.id),
-            totalAmount: props.moviesByCriteria.totalAmount - 1
-        };
+    return newValueMovies;
+  };
 
-        props.dispatch(setMoviesByGenre(newValueMovies));
-        props.dispatch(fetchMoviesSuccess(newValueMovies))
+  const handleClick = useCallback(() => {
+    props.dispatch(deleteMovie(props.filmEdit.id));
 
-        handleClose();
-    }
+    props.dispatch(setMoviesByGenre(updateFilms(props.moviesByCriteria)));
+    props.dispatch(fetchMoviesSuccess(updateFilms(props.movies)));
 
-    return (
-        <StyledSection>
-            <div className={showHideClassName}>
-                <section className="modal-main">
-                    <NamePage namePage="Delete Movie" handleClose={handleClose} />
-                    <p>Are you sure you want to delete this movie?</p>
-                    <Button variant="primary" onClick={handleClick}>Confirm</Button>
-                </section>
-            </div>
-        </StyledSection>
-    );
+    handleClose();
+  }, [props.filmEdit]);
+
+  return (
+    <StyledSection>
+      <div className="modal">
+        <section className="modal-main">
+          <NamePage namePage="Delete Movie" handleClose={handleClose} />
+          <p>Are you sure you want to delete this movie?</p>
+          <Button variant="primary" onClick={handleClick}>
+            Confirm
+          </Button>
+        </section>
+      </div>
+    </StyledSection>
+  );
 };
 
-const mapStateToProps = state => ({
-    showDeletePage: state.windowReducer.showDeletePage,
-    filmEdit: state.movieReducer.filmEdit,
-    moviesByCriteria: state.movieReducer.moviesByCriteria,
+const mapStateToProps = (state) => ({
+  filmEdit: state.movieReducer.filmEdit,
+  moviesByCriteria: state.movieReducer.moviesByCriteria,
+  movies: state.movieReducer.movies,
 });
 
 export default connect(mapStateToProps)(DeleteWindow);
-

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignSearch/> should equals to snapshot of CriteriaSearch 1`] = `
+<span
+  className="sc-bdVaJa eqohrh"
+>
+  <a
+    href="/search/Search20Query"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-search fa-1x pr-3"
+      data-test="fa"
+    />
+  </a>
+</span>
+`;

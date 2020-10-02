@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Rating/> should equals to snapshot of Rating 1`] = `
+<div
+  className="sc-bdVaJa dMqIzU"
+>
+  <h3>
+    test
+     
+    <span>
+      test
+    </span>
+  </h3>
+  <div>
+    1
+  </div>
+</div>
+`;
