@@ -23,18 +23,19 @@ const StyledSection = styled.section`
 `;
 
 const DetailsPage = (props) => {
+  const data = props.data;
   let main;
   let { id } = useParams();
 
-  if (props.filmId.data) {
+  if (data !== null && data.length) {
     main = (
       <StyledSection>
-        {props.data.map((item) => (
+        {data.map((item) => (
           <CardFilm key={item.id} info={item} />
         ))}
       </StyledSection>
     );
-  } else {
+  } else if (data !== null && !data.length) {
     main = <NotFound />;
   }
 
@@ -50,14 +51,10 @@ const DetailsPage = (props) => {
 
 DetailsPage.propTypes = {
   data: PropTypes.array,
-  filmId: PropTypes.shape({
-    data: PropTypes.object,
-  }),
 };
 
 const mapStateToProps = (state) => ({
   data: state.movieReducer.moviesByCriteria.data,
-  filmId: state.movieReducer.filmId,
   showEditPage: state.windowReducer.showEditPage,
   showDeletePage: state.windowReducer.showDeletePage,
 });

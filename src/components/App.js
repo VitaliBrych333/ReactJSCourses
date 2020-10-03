@@ -2,6 +2,7 @@ import React from "react";
 import ErrorBoundary from "./shared/ErrorBoundary";
 import IncorrectPath from "./IncorrectPath";
 import StartPage from "./StartPage";
+import MoviesPage from "./MoviesPage";
 import DetailsPage from "./DetailsPage";
 import {
   BrowserRouter as Router,
@@ -22,6 +23,11 @@ const App = () => {
         <Route path="/movies/:id">
           <ErrorBoundary>
             <DetailsPage />
+          </ErrorBoundary>
+        </Route>
+        <Route path="/movies">
+          <ErrorBoundary>
+            <MoviesPage />
           </ErrorBoundary>
         </Route>
         <Route path="/search/Search20Query">

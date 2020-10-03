@@ -13,7 +13,7 @@ import {
 
 const initialState = {
   movies: { data: [], totalAmount: 0 },
-  moviesByCriteria: { data: [], totalAmount: 0 },
+  moviesByCriteria: { data: null, totalAmount: 0 },
   filmId: {},
   filmEdit: null,
   loading: false,

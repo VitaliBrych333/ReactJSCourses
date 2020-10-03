@@ -25,7 +25,7 @@ const StartPage = (props) => {
   const data = props.data;
   let main;
 
-  if (props.data.length) {
+  if (data !== null && data.length) {
     main = (
       <StyledSection>
         {data.map((item) => (
@@ -33,7 +33,7 @@ const StartPage = (props) => {
         ))}
       </StyledSection>
     );
-  } else {
+  } else if (data !== null && !data.length) {
     main = <NotFound />;
   }
 
@@ -41,7 +41,7 @@ const StartPage = (props) => {
     <Fragment>
       {props.showEditPage && <EditPage />}
       {props.showDeletePage && <DeleteWindow />}
-      <SearchHeader count={props.total} />
+      <SearchHeader />
       {main}
     </Fragment>
   );
@@ -54,7 +54,6 @@ StartPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   data: state.movieReducer.moviesByCriteria.data,
-  total: state.movieReducer.moviesByCriteria.totalAmount,
   showEditPage: state.windowReducer.showEditPage,
   showDeletePage: state.windowReducer.showDeletePage,
 });

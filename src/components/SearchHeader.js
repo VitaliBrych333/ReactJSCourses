@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import SearchFilm from "./shared/SearchFilm";
 import ButtonsCriteriaSearch from "./shared/ButtonsCriteriaSearch";
 import NavCustom from "./shared/NavCustom";
@@ -79,14 +80,18 @@ const SearchHeader = (props) => {
         <ButtonsCriteriaSearch />
       </div>
       <div className="count-movie">
-        {props.count > 0 && <p className="count">{props.count} Movies found</p>}
+        {props.total > 0 && <p className="count">{props.total} Movies found</p>}
       </div>
     </StyledHeader>
   );
 };
 
 SearchHeader.propTypes = {
-  count: PropTypes.number,
+  total: PropTypes.number,
 };
 
-export default SearchHeader;
+const mapStateToProps = (state) => ({
+  total: state.movieReducer.moviesByCriteria.totalAmount,
+});
+
+export default connect(mapStateToProps)(SearchHeader);
