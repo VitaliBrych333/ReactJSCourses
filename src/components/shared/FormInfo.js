@@ -1,146 +1,162 @@
-import React, { Component, Fragment } from 'react';
-import { Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import ButtonsFormGroup from './ButtonsFormGroup';
-import NamePage from './NamePage';
-import { showEditPage, showAddPage } from '../../redux/actions/windowActions';
+import React, { Fragment, useState, useEffect, useCallback } from "react";
+import { Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import ButtonsFormGroup from "./ButtonsFormGroup";
+import NamePage from "./NamePage";
+import { setEditFilm } from "../../redux/actions/moviesActions";
+import { showEditPage, showAddPage } from "../../redux/actions/windowActions";
 
 const StyledGroup = styled.div`
-    label {
-        color: #F65261;
-    }
+  label {
+    color: #f65261;
+  }
 `;
 
-class FormInfo extends Component {
-    constructor(props) {
-        super(props);
+const FormInfo = (props) => {
+  const initialState = {
+    title: "",
+    date: "",
+    url: "",
+    genre: "",
+    overview: "",
+    time: "",
+  };
 
-        this.initialState = {
-            id: '',
-            title: null,
-            date: null,
-            url: null,
-            overview: null,
-            time: null
-        };
+  const genreState = ["Select Genre", "Horror", "Action", "Comedy"];
+  const [dataForm, setData] = useState(initialState);
 
-        this.newState = null;
+  const handleChange = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    setData({ ...dataForm, [field]: value });
+  };
 
-        this.elemInputs = [];
-        this.saveInputs = [];
+  const handleReset = useCallback(() => {
+    setData(Object.assign({ ...dataForm }, initialState));
+  }, [dataForm]);
 
-        this.state = {
-            value: 'Select Genre',
-            genres: ['Select Genre', 'Horror', 'Action', 'Comedy'],
-            dataForm: Object.assign({}, this.initialState)
-        }
+  const handleClose = useCallback(() => {
+    switch (props.namePage) {
+      case "Edit movie":
+        setData(props.filmEdit);
+        props.dispatch(showEditPage(false));
+        break;
+
+      case "Add movie":
+        handleReset();
+        props.dispatch(showAddPage(false));
+        break;
+
+      default:
+        break;
     }
+  }, [props.namePage, props.filmEdit]);
 
-    handleChange = (e) => {
-        this.setState({ value: e.target.value })
-    }
+  useEffect(() => {
+    setTimeout(() => {
+      const newDate = props.data;
+      if (newDate) {
+        setData(newDate);
+        props.dispatch(setEditFilm(newDate));
+      }
+    }, 0);
+  }, [props.data]);
 
-    handleReset = () => {
-        if (this.props.showEditPage) {
-            this.elemInputs = document.querySelectorAll('.Edit input')
+  return (
+    <StyledGroup>
+      <Form>
+        <NamePage
+          namePage={props.namePage}
+          handleClose={handleClose}
+        ></NamePage>
 
-        } else if (this.props.showAddPage) {
-            this.elemInputs = document.querySelectorAll('.Add input')
-        }
+        <Form.Group className={props.namePage}>
+          {dataForm.id && (
+            <Fragment>
+              <Form.Label>Movie id</Form.Label>
+              <Form.Control
+                type="title"
+                placeholder="Id"
+                name="id"
+                value={dataForm.id}
+                readOnly
+              />
+            </Fragment>
+          )}
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="title"
+            placeholder="Title"
+            name="title"
+            value={dataForm.title}
+            onChange={handleChange}
+          />
 
-        if (this.elemInputs.length) {
-            this.elemInputs.forEach(input => {
-                this.saveInputs.push(input.value);
-                input.value = '';
-            });
-        }
+          <Form.Label>Release date</Form.Label>
+          <Form.Control
+            type="date"
+            placeholder="Select Date"
+            name="date"
+            value={dataForm.date}
+            onChange={handleChange}
+          />
 
-        this.setState({ value: 'Select Genre' });
-    }
+          <Form.Label>Movie URL</Form.Label>
+          <Form.Control
+            type="url"
+            placeholder="Movie URL here"
+            name="url"
+            value={dataForm.url}
+            onChange={handleChange}
+          />
 
-    handleClose = () => {
-        switch (this.props.namePage) {
-            case 'Edit movie':
-                this.setState({ value: this.newState.genre });
+          <Form.Label>Example select</Form.Label>
+          <Form.Control
+            as="select"
+            placeholder="Select Genre"
+            name="genre"
+            value={dataForm.genre}
+            onChange={handleChange}
+          >
+            {genreState.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </Form.Control>
 
-                this.elemInputs.forEach((input, index) => {
-                    input.value = this.saveInputs[index];
-                });
+          <Form.Label>Overview</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Overview here"
+            name="overview"
+            value={dataForm.overview}
+            onChange={handleChange}
+          />
 
-                this.props.dispatch(showEditPage(false));
-                break;
-
-            case 'Add movie':
-                this.handleReset();
-                this.props.dispatch(showAddPage(false));
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    componentWillUnmount() {
-        console.log('component was deleted');
-    }
-
-    componentDidMount() {
-        const newDate = this.props.data;
-        this.newState = Object.assign({}, newDate);
-
-        newDate ? this.setState({
-                      value: newDate.genre,
-                      dataForm: this.newState
-                  })
-                : null
-    }
-
-    render() {
-        const data = this.props.data;
-
-        return (
-            <StyledGroup>
-                <Form>
-                    <NamePage namePage={this.props.namePage} handleClose={this.handleClose}></NamePage>
-
-                    <Form.Group className={this.props.namePage}>
-                        {
-                            data && <Fragment>
-                                        <Form.Label>Movie id</Form.Label>
-                                        <Form.Control type="title" placeholder="Id" defaultValue={this.state.dataForm.id}/>
-                                    </Fragment>
-                        }
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control type="title" placeholder="Title" defaultValue={this.state.dataForm.title}/>
-
-                        <Form.Label>Release date</Form.Label>
-                        <Form.Control type="date" placeholder="Select Date" defaultValue={this.state.dataForm.date} />
-
-                        <Form.Label>Movie URL</Form.Label>
-                        <Form.Control type="url" placeholder="Movie URL here" defaultValue={this.state.dataForm.url} />
-
-                        <Form.Label>Example select</Form.Label>
-                        <Form.Control as="select" placeholder="Select Genre" value={this.state.value} onChange={this.handleChange}>
-                            {this.state.genres.map((item, index) => <option key={index} value={item}>{item}</option> )}
-                        </Form.Control>
-
-                        <Form.Label>Overview</Form.Label>
-                        <Form.Control type="text" placeholder="Overview here" defaultValue={this.state.dataForm.overview}/>
-
-                        <Form.Label>Runtime</Form.Label>
-                        <Form.Control type="number" placeholder="Runtime here" defaultValue={this.state.dataForm.time}/>
-                    </Form.Group>
-                    <ButtonsFormGroup nameButton={this.props.nameButton} handleReset={this.handleReset}></ButtonsFormGroup>
-                </Form>
-            </StyledGroup>
-        );
-    };
+          <Form.Label>Runtime</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Runtime here"
+            name="time"
+            value={dataForm.time}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <ButtonsFormGroup
+          nameButton={props.nameButton}
+          handleReset={handleReset}
+        ></ButtonsFormGroup>
+      </Form>
+    </StyledGroup>
+  );
 };
 
-const mapStateToProps = state => ({
-    showEditPage: state.windowReducer.showEditPage,
-    showAddPage: state.windowReducer.showAddPage,
+const mapStateToProps = (state) => ({
+  showEditPage: state.windowReducer.showEditPage,
+  showAddPage: state.windowReducer.showAddPage,
+  filmEdit: state.movieReducer.filmEdit,
 });
 
 export default connect(mapStateToProps)(FormInfo);

@@ -36,6 +36,15 @@ exports[`<CriteriaSearch/> should equals to snapshot of CriteriaSearch 1`] = `
           tabIndex="0"
           type="button"
         >
+          Release date
+        </button>
+        <button
+          className="dropdown-item"
+          onClick={[Function]}
+          role="menuitem"
+          tabIndex="0"
+          type="button"
+        >
           Earlier than 2020
         </button>
         <button

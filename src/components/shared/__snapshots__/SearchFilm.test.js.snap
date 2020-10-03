@@ -39,6 +39,7 @@ Array [
               <div
                 className="Add movie form-group"
               >
+                
                 <label
                   className="form-label"
                 >
@@ -169,6 +170,7 @@ Array [
   >
     <input
       className="form-control"
+      defaultValue=""
       onChange={[Function]}
       placeholder="Please write the film name"
     />

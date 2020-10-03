@@ -2,7 +2,7 @@
 
 exports[`<SignSearch/> should equals to snapshot of CriteriaSearch 1`] = `
 <span
-  className="sc-bdVaJa jPJxqs"
+  className="sc-bdVaJa eqohrh"
 >
   <a
     href="/search/Search20Query"

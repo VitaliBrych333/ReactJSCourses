@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM, { render, unmountComponentAtNode } from 'react-dom';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow } from 'enzyme';
-import NotFound from './NotFound';
-import { act } from 'react-dom/test-utils';
+import React from "react";
+import ReactDOM, { render, unmountComponentAtNode } from "react-dom";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme, { shallow } from "enzyme";
+import NotFound from "./NotFound";
+import { act } from "react-dom/test-utils";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('<NotFound/>', () => {
+describe("<NotFound/>", () => {
   let container = null;
   beforeEach(() => {
-    container = document.createElement('div');
+    container = document.createElement("div");
     document.body.appendChild(container);
   });
 
@@ -20,16 +20,16 @@ describe('<NotFound/>', () => {
     container = null;
   });
 
-  it('renders with string No films found', () => {
+  it("renders with string No films found", () => {
     act(() => {
       render(<NotFound />, container);
     });
-    expect(container.textContent).toBe('No films found');
+    expect(container.textContent).toBe("No films found");
   });
 
-  it('should render the component', () => {
-    const wrapper = shallow(<NotFound/>).dive();
+  it("should render the component", () => {
+    const wrapper = shallow(<NotFound />).dive();
     ReactDOM.render(<NotFound />, container);
     ReactDOM.unmountComponentAtNode(container);
   });
-})
+});
