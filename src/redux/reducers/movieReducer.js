@@ -9,7 +9,7 @@ import {
   SORT_RATING,
   SET_EDITFILM,
   SET_MOVIES_BY_GENRE,
-} from "../actions/moviesActions";
+} from '../actions/moviesActions';
 
 const initialState = {
   movies: { data: [], totalAmount: 0 },
@@ -70,23 +70,25 @@ export default function movieReducer(state = initialState, action) {
       const sortDataByRelease = state.moviesByCriteria.data
         .slice()
         .sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
-      return Object.assign({}, state, {
+      return {
+        ...state,
         moviesByCriteria: {
           data: sortDataByRelease,
           totalAmount: state.moviesByCriteria.totalAmount,
         },
-      });
+      };
 
     case SORT_RATING:
       const sortDataByRating = state.moviesByCriteria.data
         .slice()
         .sort((a, b) => b.vote_average - a.vote_average);
-      return Object.assign({}, state, {
+      return {
+        ...state,
         moviesByCriteria: {
           data: sortDataByRating,
           totalAmount: state.moviesByCriteria.totalAmount,
         },
-      });
+      };
 
     case SET_EDITFILM:
       return {

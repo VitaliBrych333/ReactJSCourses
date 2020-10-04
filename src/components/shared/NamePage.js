@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Styled = styled.div`
   h2,
@@ -12,7 +13,8 @@ const Styled = styled.div`
   }
 `;
 
-const NamePage = ({ namePage, handleClose }) => {
+const NamePage = (props) => {
+  const { namePage, handleClose } = props;
   return (
     <Styled>
       <button type="button" className="close" onClick={handleClose}>
@@ -21,6 +23,11 @@ const NamePage = ({ namePage, handleClose }) => {
       <h2>{namePage}</h2>
     </Styled>
   );
+};
+
+NamePage.propTypes = {
+  handleClose: PropTypes.func,
+  namePage: PropTypes.string,
 };
 
 export default NamePage;

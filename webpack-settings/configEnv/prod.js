@@ -1,24 +1,23 @@
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const { merge } = require("webpack-merge");
+/* eslint-disable no-console */
+/* eslint-disable global-require */
+const TerserPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge');
 
-module.exports = function (configDirs) {
+module.exports = (configDirs) => {
   let prodConfig = merge(
-    { mode: "production" },
-    require("../common")(configDirs)
+    { mode: 'production' },
+    require('../common')(configDirs)
   );
 
   prodConfig.plugins.push(
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        warnings: false,
-        ie8: false,
-        output: {
-          comments: false,
-        },
+    new TerserPlugin({
+      parallel: true,
+      terserOptions: {
+        ecma: 6,
       },
     })
   );
 
-  console.log("\x1b[36m%s\x1b[0m", "Building for production ...");
+  console.log('\x1b[36m%s\x1b[0m', 'Building for production ...');
   return prodConfig;
 };

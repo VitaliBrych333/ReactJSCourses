@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
   p {
@@ -15,24 +15,24 @@ const StyledDiv = styled.div`
   }
 `;
 
-const Duration = (props) => {
-  const filmId = props.filmId;
-  return (
-    <StyledDiv>
+const Duration = ({ filmId }) => (
+  <StyledDiv>
+    <p>
+      <span>{filmId.release_date.slice(0, 4)}</span> year
+    </p>
+    {filmId.runtime && (
       <p>
-        <span>{filmId.release_date.slice(0, 4)}</span> year
+        <span>{filmId.runtime}</span> min
       </p>
-      {filmId.runtime && (
-        <p>
-          <span>{filmId.runtime}</span> min
-        </p>
-      )}
-    </StyledDiv>
-  );
-};
+    )}
+  </StyledDiv>
+);
 
 Duration.propTypes = {
-  filmId: PropTypes.object,
+  filmId: PropTypes.shape({
+    release_date: PropTypes.string,
+    runtime: PropTypes.number,
+  }),
 };
 
 const mapStateToProps = (state) => ({

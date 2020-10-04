@@ -1,7 +1,7 @@
-import React from "react";
-import { MDBIcon } from "mdbreact";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { MDBIcon } from 'mdbreact';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const StyledSpan = styled.span`
   display: flex;
@@ -21,14 +21,12 @@ const StyledSpan = styled.span`
   }
 `;
 
-const SignSearch = () => {
-  return (
-    <StyledSpan>
-      <Link to={{ pathname: "/search/Search20Query" }}>
-        <MDBIcon icon="search" size="1x" className="pr-3" />
-      </Link>
-    </StyledSpan>
-  );
-};
+const SignSearch = () => (
+  <StyledSpan>
+    <Link to={{ pathname: '/search/Search20Query' }}>
+      <MDBIcon icon="search" size="1x" className="pr-3" />
+    </Link>
+  </StyledSpan>
+);
 
 export default SignSearch;
