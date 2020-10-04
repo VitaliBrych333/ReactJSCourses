@@ -1,38 +1,25 @@
 import {
-  SHOW_MODAL,
   SHOW_EDITPAGE,
   SHOW_DELETEPAGE,
   SHOW_ADDPAGE,
-} from "../actions/windowActions";
+} from '../actions/windowActions';
 
 const initialState = {
-  showModal: false,
-  showEditPage: false,
-  showDeletePage: false,
-  showAddPage: false,
+  isShowEditPage: false,
+  isShowDeletePage: false,
+  isShowAddPage: false,
 };
 
 function windowReducer(state = initialState, action) {
   switch (action.type) {
-    case SHOW_MODAL:
-      return Object.assign({}, state, {
-        showModal: action.payload.showModal,
-      });
-
     case SHOW_EDITPAGE:
-      return Object.assign({}, state, {
-        showEditPage: action.payload.showEditPage,
-      });
+      return { ...state, isShowEditPage: action.payload.isShowEditPage };
 
     case SHOW_DELETEPAGE:
-      return Object.assign({}, state, {
-        showDeletePage: action.payload.showDeletePage,
-      });
+      return { ...state, isShowDeletePage: action.payload.isShowDeletePage };
 
     case SHOW_ADDPAGE:
-      return Object.assign({}, state, {
-        showAddPage: action.payload.showAddPage,
-      });
+      return { ...state, isShowAddPage: action.payload.isShowAddPage };
 
     default:
       return state;

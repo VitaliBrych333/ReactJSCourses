@@ -1,14 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-} from "reactstrap";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import { setSort } from "../../redux/actions/criteriaActions";
-import { sortRelease, sortRating } from "../../redux/actions/moviesActions";
+} from 'reactstrap';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { setSort } from '../../redux/actions/criteriaActions';
+import { sortRelease, sortRating } from '../../redux/actions/moviesActions';
 
 const StyledGroup = styled(Dropdown)`
   display: inline-block;
@@ -19,14 +20,15 @@ const StyledGroup = styled(Dropdown)`
 `;
 
 const DropdownCustom = (props) => {
+  const { sort, moviesByCriteria, dispatch } = props;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggle = useCallback(() => {
+  const toggle = () => {
     setDropdownOpen((prevState) => !prevState);
-  }, [dropdownOpen]);
+  };
 
   const [dropdownValue, setValue] = useState(
-    props.sort === "release_date" ? "Release date" : "Rating"
+    sort === 'release_date' ? 'Release date' : 'Rating'
   );
 
   const handleClick = useCallback(
@@ -34,19 +36,19 @@ const DropdownCustom = (props) => {
       setValue(() => e.target.textContent);
 
       switch (e.target.textContent) {
-        case "Release date":
-          props.dispatch(setSort("release_date"));
-          props.dispatch(sortRelease(props.moviesByCriteria));
+        case 'Release date':
+          dispatch(setSort('release_date'));
+          dispatch(sortRelease(moviesByCriteria));
           break;
-        case "Rating":
-          props.dispatch(setSort("vote_average"));
-          props.dispatch(sortRating(props.moviesByCriteria));
+        case 'Rating':
+          dispatch(setSort('vote_average'));
+          dispatch(sortRating(moviesByCriteria));
           break;
         default:
           break;
       }
     },
-    [props.moviesByCriteria]
+    [dispatch, moviesByCriteria]
   );
 
   return (
@@ -60,6 +62,12 @@ const DropdownCustom = (props) => {
       </Dropdown>
     </StyledGroup>
   );
+};
+
+DropdownCustom.propTypes = {
+  sort: PropTypes.string,
+  moviesByCriteria: PropTypes.arrayOf(PropTypes.object),
+  dispatch: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

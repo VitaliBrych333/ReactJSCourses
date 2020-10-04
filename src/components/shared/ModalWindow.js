@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledGroup = styled.div`
   .modal {
@@ -19,7 +20,7 @@ const StyledGroup = styled.div`
     border-radius: 5%;
     width: 50%;
     height: auto;
-    top: 10%;
+    top: 12%;
     left: 72%;
     background-color: rgb(161, 144, 144);
     transform: translate(-50%, -50%);
@@ -45,7 +46,9 @@ const StyledGroup = styled.div`
   }
 `;
 
-const ModalWindow = ({ handleClose, children }) => {
+const ModalWindow = (props) => {
+  const { handleClose, children } = props;
+
   return (
     <StyledGroup>
       <div className="modal">
@@ -63,6 +66,11 @@ const ModalWindow = ({ handleClose, children }) => {
       </div>
     </StyledGroup>
   );
+};
+
+ModalWindow.propTypes = {
+  handleClose: PropTypes.func,
+  children: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default ModalWindow;

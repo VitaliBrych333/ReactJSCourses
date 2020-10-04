@@ -1,14 +1,15 @@
-import React, { useCallback } from "react";
-import { Button } from "react-bootstrap";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import NamePage from "./shared/NamePage";
-import { showDeletePage } from "../redux/actions/windowActions";
+import React, { useCallback } from 'react';
+import { Button } from 'react-bootstrap';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import NamePage from './shared/NamePage';
+import { showDeletePage } from '../redux/actions/windowActions';
 import {
   deleteMovie,
   setMoviesByGenre,
   fetchMoviesSuccess,
-} from "../redux/actions/moviesActions";
+} from '../redux/actions/moviesActions';
 
 const StyledSection = styled.section`
   .modal {
@@ -47,25 +48,29 @@ const StyledSection = styled.section`
 `;
 
 const DeleteWindow = (props) => {
-  const handleClose = () => props.dispatch(showDeletePage(false));
+  const { dispatch, moviesByCriteria, movies, filmEdit } = props;
+  const handleClose = useCallback(() => dispatch(showDeletePage(false)), [
+    dispatch,
+  ]);
 
-  const updateFilms = (films) => {
-    const newValueMovies = {
-      data: films.data.filter((item) => item.id !== props.filmEdit.id),
-      totalAmount: films.totalAmount - 1,
-    };
+  const updateFilms = useCallback(
+    (films) => {
+      const newValueMovies = {
+        data: films.data.filter((item) => item.id !== filmEdit.id),
+        totalAmount: films.totalAmount - 1,
+      };
 
-    return newValueMovies;
-  };
+      return newValueMovies;
+    },
+    [filmEdit]
+  );
 
   const handleClick = useCallback(() => {
-    props.dispatch(deleteMovie(props.filmEdit.id));
-
-    props.dispatch(setMoviesByGenre(updateFilms(props.moviesByCriteria)));
-    props.dispatch(fetchMoviesSuccess(updateFilms(props.movies)));
-
+    dispatch(deleteMovie(filmEdit.id));
+    dispatch(setMoviesByGenre(updateFilms(moviesByCriteria)));
+    dispatch(fetchMoviesSuccess(updateFilms(movies)));
     handleClose();
-  }, [props.filmEdit]);
+  }, [dispatch, filmEdit, updateFilms, moviesByCriteria, movies, handleClose]);
 
   return (
     <StyledSection>
@@ -80,6 +85,19 @@ const DeleteWindow = (props) => {
       </div>
     </StyledSection>
   );
+};
+
+DeleteWindow.propTypes = {
+  dispatch: PropTypes.func,
+  filmEdit: PropTypes.shape({
+    id: PropTypes.number,
+  }),
+  moviesByCriteria: PropTypes.shape({
+    data: PropTypes.array,
+  }),
+  movies: PropTypes.shape({
+    data: PropTypes.array,
+  }),
 };
 
 const mapStateToProps = (state) => ({

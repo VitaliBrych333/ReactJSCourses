@@ -1,20 +1,22 @@
-import React, { Fragment, useEffect, useCallback } from "react";
-import { Form } from "react-bootstrap";
-import Select from "react-select";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import ButtonsFormGroup from "./ButtonsFormGroup";
-import NamePage from "./NamePage";
-import selectOptions from "./SelectOptions";
+/* eslint-disable no-use-before-define */
+import React, { useEffect, useCallback } from 'react';
+import { Form } from 'react-bootstrap';
+import Select from 'react-select';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import ButtonsFormGroup from './ButtonsFormGroup';
+import NamePage from './NamePage';
+import selectOptions from './SelectOptions';
 import {
   addMovie,
   updateMovie,
   setMoviesByGenre,
   fetchMoviesSuccess,
-} from "../../redux/actions/moviesActions";
-import { showEditPage, showAddPage } from "../../redux/actions/windowActions";
+} from '../../redux/actions/moviesActions';
+import { showEditPage, showAddPage } from '../../redux/actions/windowActions';
 
 const StyledGroup = styled.div`
   label {
@@ -24,47 +26,50 @@ const StyledGroup = styled.div`
 
   .error {
     color: green;
+    text-transform: uppercase;
   }
 `;
 
 const FormInfo = (props) => {
+  const {
+    dispatch,
+    namePage,
+    filmEdit,
+    movies,
+    moviesByCriteria,
+    nameButton,
+  } = props;
+
   const initialValues = {
-    id: "",
-    title: "",
-    date: "",
-    url: "",
-    genre: "",
-    overview: "",
-    runtime: "",
+    id: '',
+    title: '',
+    date: '',
+    url: '',
+    genre: '',
+    overview: '',
+    runtime: '',
   };
 
   const FormSchema = Yup.object({
-    id: Yup.number()
-      .integer("Invalid format"),
-    title: Yup.string()
-      .required("Required"),
-    date: Yup.date()
-      .required("Required"),
-    url: Yup.string()
-      .url("Invalid format")
-      .required("Required"),
-    genre: Yup.string()
-      .nullable()
-      .required("Required"),
-    overview: Yup.string()
-      .required("Required"),
+    id: Yup.number().integer('Invalid format'),
+    title: Yup.string().required('Required'),
+    date: Yup.date().required('Required'),
+    url: Yup.string().url('Invalid format').required('Required'),
+    genre: Yup.string().nullable().required('Required'),
+    overview: Yup.string().required('Required'),
     runtime: Yup.number()
-      .integer("Invalid format")
-      .required("Required"),
+      .integer('Invalid format')
+      .positive('Invalid format')
+      .required('Required'),
   });
 
   const updateFilms = (films, editFilm) => {
-    let objMovies = Object.assign({}, films);
+    let objMovies = { ...films };
 
     objMovies.data.forEach((item) => {
       if (item.id === editFilm.id) {
-        for (let key in item) {
-          if (key !== "id") {
+        for (const key in item) {
+          if (key !== 'id') {
             item[key] = editFilm[key];
           }
         }
@@ -75,101 +80,94 @@ const FormInfo = (props) => {
   };
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues,
     validationSchema: FormSchema,
 
     onSubmit: (values) => {
       let newFilm = {
         title: values.title,
-        genres: Array.from(values.genre, (item) => item["label"]),
+        genres: Array.from(values.genre, (item) => item.label),
         release_date: values.date,
         poster_path: values.url,
         overview: values.overview,
         runtime: values.runtime,
       };
 
-      if (props.nameButton === "Submit") {
-        props.dispatch(addMovie(newFilm));
+      if (nameButton === 'Submit') {
+        dispatch(addMovie(newFilm));
         handleClose();
-
-      } else if (props.nameButton === "Save") {
+      } else if (nameButton === 'Save') {
         newFilm.id = values.id;
-        newFilm.vote_average = props.filmEdit.vote_average;
+        newFilm.vote_average = filmEdit.vote_average;
 
-        props.dispatch(
-          updateMovie(newFilm)
-        );
-        props.dispatch(
-          setMoviesByGenre(updateFilms(props.moviesByCriteria, newFilm))
-        );
-        props.dispatch(fetchMoviesSuccess(updateFilms(props.movies, newFilm)));
+        dispatch(updateMovie(newFilm));
+        dispatch(setMoviesByGenre(updateFilms(moviesByCriteria, newFilm)));
+        dispatch(fetchMoviesSuccess(updateFilms(movies, newFilm)));
       }
     },
   });
 
   const handleChange = (values) => {
-    formik.setFieldValue("genre", values);
+    formik.setFieldValue('genre', values);
   };
 
   const handleReset = useCallback(() => {
     formik.resetForm();
 
-    if (props.namePage === "Edit movie") {
-      formik.setFieldValue("id", props.filmEdit.id);
+    if (namePage === 'Edit movie') {
+      formik.setFieldValue('id', filmEdit.id);
     }
-  }, [props.namePage, props.filmEdit]);
+  }, [formik, namePage, filmEdit]);
 
   const setEditValues = useCallback(() => {
     formik.setValues({
-      id: props.filmEdit.id,
-      title: props.filmEdit.title || "",
-      date: props.filmEdit.release_date || "",
-      url: props.filmEdit.poster_path || "",
-      genre: props.filmEdit.genres
-        .flatMap((item) => new Object({ value: item.toLowerCase(), label: item })),
-      overview: props.filmEdit.overview || "",
-      runtime: props.filmEdit.runtime || "",
+      id: filmEdit.id,
+      title: filmEdit.title || '',
+      date: filmEdit.release_date || '',
+      url: filmEdit.poster_path || '',
+      genre: filmEdit.genres.flatMap(
+        (item) => new Object({ value: item.toLowerCase(), label: item })
+      ),
+      overview: filmEdit.overview || '',
+      runtime: filmEdit.runtime || '',
     });
-  }, [props.filmEdit]);
+  }, [filmEdit, formik]);
 
   const handleClose = useCallback(() => {
-    switch (props.namePage) {
-      case "Edit movie":
+    switch (namePage) {
+      case 'Edit movie':
         setEditValues();
-        props.dispatch(showEditPage(false));
+        dispatch(showEditPage(false));
         break;
 
-      case "Add movie":
+      case 'Add movie':
         handleReset();
-        props.dispatch(showAddPage(false));
+        dispatch(showAddPage(false));
         break;
 
       default:
         break;
     }
-  }, [props.namePage]);
+  }, [dispatch, handleReset, namePage, setEditValues]);
 
   const handleMenuClose = () => {
     formik.setTouched({ genre: true });
   };
 
   useEffect(() => {
-    if (props.namePage === "Edit movie" && props.filmEdit) {
+    if (namePage === 'Edit movie' && filmEdit && !formik.values.id) {
       setEditValues();
     }
-  }, [props.namePage, props.filmEdit]);
+  }, [filmEdit, namePage, setEditValues, formik]);
 
   return (
     <StyledGroup>
       <Form>
-        <NamePage
-          namePage={props.namePage}
-          handleClose={handleClose}
-        ></NamePage>
+        <NamePage namePage={namePage} handleClose={handleClose} />
 
-        <Form.Group className={props.namePage}>
-          {props.namePage === "Edit movie" && (
-            <Fragment>
+        <Form.Group className={namePage}>
+          {namePage === 'Edit movie' && (
+            <>
               <Form.Label>Movie id</Form.Label>
               <Form.Control
                 type="number"
@@ -179,7 +177,7 @@ const FormInfo = (props) => {
                 placeholder="Id"
                 readOnly
               />
-            </Fragment>
+            </>
           )}
 
           <Form.Label>Title</Form.Label>
@@ -191,9 +189,9 @@ const FormInfo = (props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.title && formik.errors.title ?
-            (<div className="error">{formik.errors.title}</div>)
-            : null}
+          {formik.touched.title && formik.errors.title ? (
+            <div className="error">{formik.errors.title}</div>
+          ) : null}
 
           <Form.Label>Release date</Form.Label>
           <Form.Control
@@ -204,9 +202,9 @@ const FormInfo = (props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.date && formik.errors.date ?
-            (<div className="error">{formik.errors.date}</div>)
-            : null}
+          {formik.touched.date && formik.errors.date ? (
+            <div className="error">{formik.errors.date}</div>
+          ) : null}
 
           <Form.Label>Movie URL</Form.Label>
           <Form.Control
@@ -217,9 +215,9 @@ const FormInfo = (props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.url && formik.errors.url ?
-            (<div className="error">{formik.errors.url}</div>)
-            : null}
+          {formik.touched.url && formik.errors.url ? (
+            <div className="error">{formik.errors.url}</div>
+          ) : null}
 
           <Form.Label>Example select</Form.Label>
           <Select
@@ -231,9 +229,9 @@ const FormInfo = (props) => {
             onChange={handleChange}
             onMenuClose={handleMenuClose}
           />
-          {formik.touched.genre && formik.errors.genre ?
-            (<div className="error">{formik.errors.genre}</div>)
-            : null}
+          {formik.touched.genre && formik.errors.genre ? (
+            <div className="error">{formik.errors.genre}</div>
+          ) : null}
 
           <Form.Label>Overview</Form.Label>
           <Form.Control
@@ -244,9 +242,9 @@ const FormInfo = (props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.overview && formik.errors.overview ?
-            (<div className="error">{formik.errors.overview}</div>)
-            : null}
+          {formik.touched.overview && formik.errors.overview ? (
+            <div className="error">{formik.errors.overview}</div>
+          ) : null}
 
           <Form.Label>Runtime</Form.Label>
           <Form.Control
@@ -257,19 +255,41 @@ const FormInfo = (props) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.runtime && formik.errors.runtime ?
-            (<div className="error">{formik.errors.runtime}</div>)
-            : null}
+          {formik.touched.runtime && formik.errors.runtime ? (
+            <div className="error">{formik.errors.runtime}</div>
+          ) : null}
         </Form.Group>
         <ButtonsFormGroup
-          nameButton={props.nameButton}
+          nameButton={nameButton}
           handleReset={handleReset}
           handleSave={formik.submitForm}
           disabledSave={!(formik.dirty && formik.isValid)}
-        ></ButtonsFormGroup>
+        />
       </Form>
     </StyledGroup>
   );
+};
+
+FormInfo.propTypes = {
+  dispatch: PropTypes.func,
+  filmEdit: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    release_date: PropTypes.string,
+    poster_path: PropTypes.string,
+    vote_average: PropTypes.number,
+    genres: PropTypes.array,
+    overview: PropTypes.string,
+    runtime: PropTypes.number,
+  }),
+  namePage: PropTypes.string,
+  nameButton: PropTypes.string,
+  moviesByCriteria: PropTypes.shape({
+    data: PropTypes.array,
+  }),
+  movies: PropTypes.shape({
+    data: PropTypes.array,
+  }),
 };
 
 const mapStateToProps = (state) => ({

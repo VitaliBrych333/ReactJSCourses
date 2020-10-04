@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+/* eslint-disable no-console */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       hasError: false,
       textError: null,
@@ -11,22 +12,23 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    console.log("error", error);
-    console.log("info", info);
+    console.log('error', error);
+    console.log('info', info);
     this.setState({ hasError: true, textError: error.toString() });
   }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError, textError } = this.state;
+    const { children } = this.props;
+    if (hasError) {
       return (
         <div>
           <p>Error!!!</p>
-          <p>{this.state.textError}</p>
+          <p>{textError}</p>
         </div>
       );
-    } else {
-      return this.props.children;
     }
+    return children;
   }
 }
 

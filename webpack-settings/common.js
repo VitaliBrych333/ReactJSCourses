@@ -1,44 +1,44 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function buildConfig(configDirs) {
   return {
-    entry: configDirs.APP_DIR + "/src/index.js",
+    entry: `${configDirs.APP_DIR}/src/index.js`,
     output: {
       path: configDirs.BUILD_DIR,
-      filename: "bundle.js",
-      publicPath: "/",
+      filename: 'bundle.js',
+      publicPath: '/',
     },
     resolve: {
-      extensions: [".js", ".jsx"],
+      extensions: ['.js', '.jsx'],
     },
     module: {
       rules: [
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: ["babel-loader"],
+          use: ['babel-loader'],
         },
         {
           test: /\.html$/,
           use: {
-            loader: "html-loader",
+            loader: 'html-loader',
           },
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"],
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: [
             {
-              loader: "file-loader",
+              loader: 'file-loader',
             },
           ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: ["file-loader"],
+          use: ['file-loader'],
         },
       ],
     },
@@ -51,7 +51,7 @@ function buildConfig(configDirs) {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: configDirs.APP_DIR + "/index.html",
+        template: `${configDirs.APP_DIR}/index.html`,
       }),
     ],
   };

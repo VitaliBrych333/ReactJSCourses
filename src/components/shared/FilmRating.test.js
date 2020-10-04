@@ -1,12 +1,12 @@
-import React from "react";
-import Rating from "./FilmRating";
-import renderer from "react-test-renderer";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Rating from './FilmRating';
 
-describe("<Rating/>", () => {
-  it("should equals to snapshot of Rating", () => {
+describe('<Rating/>', () => {
+  it('should equals to snapshot of Rating', () => {
     const mockPropValue = {
-      title: "test",
-      tagline: "test",
+      title: 'test',
+      tagline: 'test',
       vote_average: 1,
     };
     const renderedValue = renderer

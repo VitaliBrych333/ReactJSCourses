@@ -1,20 +1,20 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Adapter from "enzyme-adapter-react-16";
-import Enzyme, { mount, shallow } from "enzyme";
-import SearchFilm from "./SearchFilm";
-import renderer from "react-test-renderer";
-import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
-import { FormControl } from "react-bootstrap";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { mount, shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { FormControl } from 'react-bootstrap';
+import SearchFilm from './SearchFilm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("<SearchFilm/>", () => {
+describe('<SearchFilm/>', () => {
   const initialState = {
     criteriaReducer: {
-      search: "search",
-      sort: "sort",
+      search: 'search',
+      sort: 'sort',
     },
     movieReducer: {
       movies: [{ id: 1 }],
@@ -27,10 +27,11 @@ describe("<SearchFilm/>", () => {
     },
   };
   const mockStore = configureStore();
-  let store, wrapper;
+  let store;
+  let wrapper;
 
   beforeEach(() => {
-    container = document.createElement("div");
+    container = document.createElement('div');
     document.body.appendChild(container);
     store = mockStore(initialState);
     wrapper = shallow(
@@ -45,11 +46,11 @@ describe("<SearchFilm/>", () => {
     container = null;
   });
 
-  it("render component", () => {
+  it('render component', () => {
     expect(wrapper.find(SearchFilm).length).toEqual(1);
   });
 
-  it("should equals to snapshot of CriteriaSearch", () => {
+  it('should equals to snapshot of CriteriaSearch', () => {
     const renderedValue = renderer
       .create(
         <Router>
@@ -62,7 +63,7 @@ describe("<SearchFilm/>", () => {
     expect(renderedValue).toMatchSnapshot();
   });
 
-  it("should not call onChange", () => {
+  it('should not call onChange', () => {
     const onChange = jest.fn();
     const wrap = mount(
       <Router>
@@ -71,7 +72,7 @@ describe("<SearchFilm/>", () => {
         </Provider>
       </Router>
     );
-    wrap.find(FormControl).at(0).simulate("change");
+    wrap.find(FormControl).at(0).simulate('change');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 });

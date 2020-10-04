@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Styledh3 = styled.h3`
   height: calc(100vh - 546px);
@@ -7,8 +7,6 @@ const Styledh3 = styled.h3`
   width: 200px;
 `;
 
-const NotFound = () => {
-  return <Styledh3>No films found</Styledh3>;
-};
+const NotFound = () => <Styledh3>No films found</Styledh3>;
 
 export default NotFound;
