@@ -8,6 +8,7 @@
     "test": "jest --no-colors --config ./jest-settings/jest.configReportPortal.js",
     "start": "webpack-dev-server --config ./webpack.config.js --env=dev",
     "test:coverage": "jest --coverage --config ./jest-settings/jest.configHtmlReporter.js",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "build": "webpack --env=prod"
   },
   "repository": {

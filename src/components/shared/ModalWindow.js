@@ -48,6 +48,7 @@ const StyledGroup = styled.div`
 
 const ModalWindow = (props) => {
   const { handleClose, children } = props;
+
   return (
     <StyledGroup>
       <div className="modal">

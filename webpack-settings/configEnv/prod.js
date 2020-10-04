@@ -18,6 +18,6 @@ module.exports = (configDirs) => {
     })
   );
 
-  console.log('\x1b[36m%s\x1b[0m', 'Building for production ...');
+  console.log('\x1b[36m%s\x1b[0m", "Building for production ...');
   return prodConfig;
 };

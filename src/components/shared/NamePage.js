@@ -15,6 +15,7 @@ const Styled = styled.div`
 
 const NamePage = (props) => {
   const { namePage, handleClose } = props;
+
   return (
     <Styled>
       <button type="button" className="close" onClick={handleClose}>

@@ -73,6 +73,7 @@ export const setMoviesByGenre = (data) => ({
 
 export function fetchMovies(sortBy, value) {
   const request = `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&search=${value}&searchBy=title`;
+
   return (dispatch) => {
     dispatch(fetchMoviesBegin());
     return fetch(request)
