@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import SearchFilm from "./shared/SearchFilm";
-import ButtonsCriteriaSearch from "./shared/ButtonsCriteriaSearch";
-import NavCustom from "./shared/NavCustom";
+import React from 'react';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import SearchFilm from './shared/SearchFilm';
+import ButtonsCriteriaSearch from './shared/ButtonsCriteriaSearch';
+import NavCustom from './shared/NavCustom';
 
 const StyledHeader = styled.header`
   height: 333px;
@@ -71,20 +71,18 @@ const StyledHeader = styled.header`
   }
 `;
 
-const SearchHeader = (props) => {
-  return (
-    <StyledHeader>
-      <SearchFilm />
-      <div className="types">
-        <NavCustom />
-        <ButtonsCriteriaSearch />
-      </div>
-      <div className="count-movie">
-        {props.total > 0 && <p className="count">{props.total} Movies found</p>}
-      </div>
-    </StyledHeader>
-  );
-};
+const SearchHeader = ({ total }) => (
+  <StyledHeader>
+    <SearchFilm />
+    <div className="types">
+      <NavCustom />
+      <ButtonsCriteriaSearch />
+    </div>
+    <div className="count-movie">
+      {total > 0 && <p className="count">{total} Movies found</p>}
+    </div>
+  </StyledHeader>
+);
 
 SearchHeader.propTypes = {
   total: PropTypes.number,

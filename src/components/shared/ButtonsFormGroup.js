@@ -1,6 +1,7 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import styled from "styled-components";
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledDiv = styled.div`
   width: 173px;
@@ -25,20 +26,25 @@ const StyledDiv = styled.div`
 `;
 
 const ButtonsFormGroup = (props) => {
+  const { handleReset, handleSave, nameButton, disabledSave } = props;
+
   return (
     <StyledDiv>
-      <Button variant="primary" onClick={props.handleReset}>
+      <Button variant="primary" onClick={handleReset}>
         Reset
       </Button>
-      <Button
-        variant="primary"
-        onClick={props.handleSave}
-        disabled={props.disabledSave}
-      >
-        {props.nameButton}
+      <Button variant="primary" onClick={handleSave} disabled={disabledSave}>
+        {nameButton}
       </Button>
     </StyledDiv>
   );
+};
+
+ButtonsFormGroup.propTypes = {
+  handleReset: PropTypes.func,
+  handleSave: PropTypes.func,
+  nameButton: PropTypes.string,
+  disabledSave: PropTypes.bool,
 };
 
 export default ButtonsFormGroup;

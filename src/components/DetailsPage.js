@@ -1,13 +1,12 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import { useParams } from "react-router";
-import CardFilm from "./CardFilm";
-import FilmDetails from "./FilmDetails";
-import EditPage from "./EditPage";
-import DeleteWindow from "./DeleteWindow";
-import NotFound from "./NotFound";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import CardFilm from './CardFilm';
+import FilmDetails from './FilmDetails';
+import EditPage from './EditPage';
+import DeleteWindow from './DeleteWindow';
+import NotFound from './NotFound';
 
 const StyledSection = styled.section`
   padding: 25px;
@@ -23,9 +22,8 @@ const StyledSection = styled.section`
 `;
 
 const DetailsPage = (props) => {
-  const data = props.data;
+  const { isShowEditPage, isShowDeletePage, data } = props;
   let main;
-  let { id } = useParams();
 
   if (data !== null && data.length) {
     main = (
@@ -40,23 +38,25 @@ const DetailsPage = (props) => {
   }
 
   return (
-    <Fragment>
-      {props.showEditPage && <EditPage />}
-      {props.showDeletePage && <DeleteWindow />}
-      <FilmDetails propsId={{ id }} />
+    <>
+      {isShowEditPage && <EditPage />}
+      {isShowDeletePage && <DeleteWindow />}
+      <FilmDetails />
       {main}
-    </Fragment>
+    </>
   );
 };
 
 DetailsPage.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.arrayOf(PropTypes.object),
+  isShowEditPage: PropTypes.bool,
+  isShowDeletePage: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   data: state.movieReducer.moviesByCriteria.data,
-  showEditPage: state.windowReducer.showEditPage,
-  showDeletePage: state.windowReducer.showDeletePage,
+  isShowEditPage: state.windowReducer.isShowEditPage,
+  isShowDeletePage: state.windowReducer.isShowDeletePage,
 });
 
 export default connect(mapStateToProps)(DetailsPage);

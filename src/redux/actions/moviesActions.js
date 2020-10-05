@@ -1,19 +1,19 @@
-import { showAddPage, showEditPage } from "./windowActions";
+import { showAddPage, showEditPage } from './windowActions';
 
-export const FETCH_MOVIES_BEGIN = "FETCH_MOVIES_BEGIN";
-export const FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS";
-export const FETCH_MOVIES_FAILURE = "FETCH_MOVIES_FAILURE";
+export const FETCH_MOVIES_BEGIN = 'FETCH_MOVIES_BEGIN';
+export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
+export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';
 
-export const FETCH_FILMID_BEGIN = "FETCH_FILMID_BEGIN";
-export const FETCH_FILMID_SUCCESS = "FETCH_FILMID_SUCCESS";
-export const FETCH_FILMID_FAILURE = "FETCH_FILMID_FAILURE";
+export const FETCH_FILMID_BEGIN = 'FETCH_FILMID_BEGIN';
+export const FETCH_FILMID_SUCCESS = 'FETCH_FILMID_SUCCESS';
+export const FETCH_FILMID_FAILURE = 'FETCH_FILMID_FAILURE';
 
-export const SORT_RELEASE = "SORT_RELEASE";
-export const SORT_RATING = "SORT_RATING";
-export const SORT_GENRE = "SORT_GENRE";
+export const SORT_RELEASE = 'SORT_RELEASE';
+export const SORT_RATING = 'SORT_RATING';
+export const SORT_GENRE = 'SORT_GENRE';
 
-export const SET_EDITFILM = "SET_EDITFILM";
-export const SET_MOVIES_BY_GENRE = "SET_MOVIES_BY_GENRE";
+export const SET_EDITFILM = 'SET_EDITFILM';
+export const SET_MOVIES_BY_GENRE = 'SET_MOVIES_BY_GENRE';
 
 export const fetchMoviesBegin = () => ({
   type: FETCH_MOVIES_BEGIN,
@@ -46,21 +46,21 @@ export const fetchFilmIdFailure = (error) => ({
 export const sortRelease = (data) => ({
   type: SORT_RELEASE,
   payload: {
-    data: data,
+    data,
   },
 });
 
 export const sortRating = (data) => ({
   type: SORT_RATING,
   payload: {
-    data: data,
+    data,
   },
 });
 
 export const setEditFilm = (filmEdit) => ({
   type: SET_EDITFILM,
   payload: {
-    filmEdit: filmEdit,
+    filmEdit,
   },
 });
 
@@ -73,6 +73,7 @@ export const setMoviesByGenre = (data) => ({
 
 export function fetchMovies(sortBy, value) {
   const request = `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&search=${value}&searchBy=title`;
+
   return (dispatch) => {
     dispatch(fetchMoviesBegin());
     return fetch(request)
@@ -88,21 +89,18 @@ export function fetchMovies(sortBy, value) {
 
 export function deleteMovie(id) {
   const request = `http://localhost:4000/movies/${id}`;
-  return () => {
-    return fetch(request, { method: "DELETE" })
-      .then((res) => {
-        return res.json();
-      })
+  return () =>
+    fetch(request, { method: 'DELETE' })
+      .then((res) => res.json())
       .catch((error) => error);
-  };
 }
 
 export function addMovie(movie) {
-  const request = `http://localhost:4000/movies`;
-  return (dispatch) => {
-    return fetch(request, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+  const request = 'http://localhost:4000/movies';
+  return (dispatch) =>
+    fetch(request, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(movie),
     })
       .then((res) => {
@@ -114,15 +112,14 @@ export function addMovie(movie) {
         }
       })
       .catch((error) => error);
-  };
 }
 
 export function updateMovie(movie) {
-  const request = `http://localhost:4000/movies`;
-  return (dispatch) => {
-    return fetch(request, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
+  const request = 'http://localhost:4000/movies';
+  return (dispatch) =>
+    fetch(request, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(movie),
     })
       .then((res) => {
@@ -134,12 +131,11 @@ export function updateMovie(movie) {
         }
       })
       .catch((error) => error);
-  };
 }
 
 export function fetchMoviesByGenre(sortBy, value) {
-  if (typeof value === "object") {
-    value = value.join("%2C%20");
+  if (typeof value === 'object') {
+    value = value.join('%2C%20');
   }
 
   const request = `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&searchBy=genres&filter=${value}`;
@@ -163,9 +159,7 @@ export function fetchMovieId(id) {
   return (dispatch) => {
     dispatch(fetchFilmIdBegin());
     return fetch(request)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((json) => {
         dispatch(fetchFilmIdSuccess(json));
         return json;

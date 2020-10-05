@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { connect } from "react-redux";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -30,20 +30,21 @@ const StyledDiv = styled.div`
   }
 `;
 
-const Rating = (props) => {
-  const filmId = props.filmId;
-  return (
-    <StyledDiv>
-      <h3>
-        {filmId.title} <span>{filmId.tagline}</span>
-      </h3>
-      <div>{filmId.vote_average}</div>
-    </StyledDiv>
-  );
-};
+const Rating = ({ filmId }) => (
+  <StyledDiv>
+    <h3>
+      {filmId.title} <span>{filmId.tagline}</span>
+    </h3>
+    <div>{filmId.vote_average}</div>
+  </StyledDiv>
+);
 
 Rating.propTypes = {
-  filmId: PropTypes.object,
+  filmId: PropTypes.shape({
+    vote_average: PropTypes.number,
+    title: PropTypes.string,
+    tagline: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({

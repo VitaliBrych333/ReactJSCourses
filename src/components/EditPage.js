@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import FormInfo from "./shared/FormInfo";
+import React from 'react';
+import styled from 'styled-components';
+import FormInfo from './shared/FormInfo';
 
 const StyledSection = styled.section`
   .modal {
@@ -25,16 +25,14 @@ const StyledSection = styled.section`
   }
 `;
 
-const EditPage = () => {
-  return (
-    <StyledSection>
-      <div className="modal">
-        <section className="modal-main">
-          <FormInfo namePage="Edit movie" nameButton="Save"></FormInfo>
-        </section>
-      </div>
-    </StyledSection>
-  );
-};
+const EditPage = () => (
+  <StyledSection>
+    <div className="modal">
+      <section className="modal-main">
+        <FormInfo namePage="Edit movie" nameButton="Save" />
+      </section>
+    </div>
+  </StyledSection>
+);
 
 export default EditPage;

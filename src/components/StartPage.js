@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import CardFilm from "./CardFilm";
-import EditPage from "./EditPage";
-import DeleteWindow from "./DeleteWindow";
-import SearchHeader from "./SearchHeader";
-import NotFound from "./NotFound";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import CardFilm from './CardFilm';
+import EditPage from './EditPage';
+import DeleteWindow from './DeleteWindow';
+import SearchHeader from './SearchHeader';
+import NotFound from './NotFound';
 
 const StyledSection = styled.section`
   padding: 25px;
@@ -22,7 +22,7 @@ const StyledSection = styled.section`
 `;
 
 const StartPage = (props) => {
-  const data = props.data;
+  const { data, isShowEditPage, isShowDeletePage } = props;
   let main;
 
   if (data !== null && data.length) {
@@ -38,24 +38,25 @@ const StartPage = (props) => {
   }
 
   return (
-    <Fragment>
-      {props.showEditPage && <EditPage />}
-      {props.showDeletePage && <DeleteWindow />}
+    <>
+      {isShowEditPage && <EditPage />}
+      {isShowDeletePage && <DeleteWindow />}
       <SearchHeader />
       {main}
-    </Fragment>
+    </>
   );
 };
 
 StartPage.propTypes = {
-  data: PropTypes.array,
-  total: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.object),
+  isShowEditPage: PropTypes.bool,
+  isShowDeletePage: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   data: state.movieReducer.moviesByCriteria.data,
-  showEditPage: state.windowReducer.showEditPage,
-  showDeletePage: state.windowReducer.showDeletePage,
+  isShowEditPage: state.windowReducer.isShowEditPage,
+  isShowDeletePage: state.windowReducer.isShowDeletePage,
 });
 
 export default connect(mapStateToProps)(StartPage);

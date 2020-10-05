@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Button } from "react-bootstrap";
+import React from 'react';
+import styled from 'styled-components';
+import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const Styledh3 = styled.h3`
@@ -49,7 +49,9 @@ const NotFound = () => {
     <Styledh3>
       <p>Page not found</p>
       <span>404</span>
-      <Button variant="primary" onClick={handleClick}>Go back to home</Button>
+      <Button variant="primary" onClick={handleClick}>
+        Go back to home
+      </Button>
     </Styledh3>
   );
 };
