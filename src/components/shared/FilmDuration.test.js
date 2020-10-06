@@ -1,11 +1,11 @@
-import React from "react";
-import Duration from "./FilmDuration";
-import renderer from "react-test-renderer";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Duration from './FilmDuration';
 
-describe("<Duration/>", () => {
-  it("should equals to snapshot of Duration", () => {
+describe('<Duration/>', () => {
+  it('should equals to snapshot of Duration', () => {
     const mockPropValue = {
-      release_date: "2019-12-12",
+      release_date: '2019-12-12',
       runtime: 12,
     };
     const renderedValue = renderer

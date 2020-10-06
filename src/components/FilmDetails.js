@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import Duration from "./shared/FilmDuration";
-import Rating from "./shared/FilmRating";
-import SignSearch from "./shared/SignSearch";
-import NavCustom from "./shared/NavCustom";
-import ButtonsCriteriaSearch from "./shared/ButtonsCriteriaSearch";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import Duration from './shared/FilmDuration';
+import Rating from './shared/FilmRating';
+import SignSearch from './shared/SignSearch';
+import NavCustom from './shared/NavCustom';
+import ButtonsCriteriaSearch from './shared/ButtonsCriteriaSearch';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -101,23 +101,19 @@ const StyledHeader = styled.header`
 `;
 
 const Details = (props) => {
-  const value = props.filmId.data;
+  const { filmId, total } = props;
+  const value = filmId.data;
 
   return (
-    <Fragment>
+    <>
       <SignSearch />
       {value && (
         <StyledHeader>
           <StyledWrapper>
-            <img
-              src={value.poster_path}
-              width="200"
-              height="200"
-              alt="Picture film"
-            />
+            <img src={value.poster_path} width="200" height="200" alt="Film" />
             <div className="describe">
-              <Rating propValue={value} />
-              <Duration propValue={value} />
+              <Rating />
+              <Duration />
               <p>{value.overview}</p>
             </div>
           </StyledWrapper>
@@ -127,13 +123,11 @@ const Details = (props) => {
             <ButtonsCriteriaSearch />
           </div>
           <div className="count-movie">
-            {props.total > 0 && (
-              <p className="count">{props.total} Movies found</p>
-            )}
+            {total > 0 && <p className="count">{total} Movies found</p>}
           </div>
         </StyledHeader>
       )}
-    </Fragment>
+    </>
   );
 };
 
@@ -145,12 +139,13 @@ Details.propTypes = {
       genres: PropTypes.array,
     }),
   }),
+  total: PropTypes.number,
 };
 
 const mapStateToProps = (state) => ({
-  data: state.movieReducer.movies.data,
+  data: state.movieReducer.moviesByCriteria.data,
   filmId: state.movieReducer.filmId,
-  total: state.movieReducer.movies.total,
+  total: state.movieReducer.moviesByCriteria.totalAmount,
 });
 
 export default connect(mapStateToProps)(Details);

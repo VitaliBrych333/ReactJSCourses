@@ -1,7 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { connect } from "react-redux";
-import FormInfo from "./shared/FormInfo";
+import React from 'react';
+import styled from 'styled-components';
+import FormInfo from './shared/FormInfo';
 
 const StyledSection = styled.section`
   .modal-main {
@@ -20,22 +19,20 @@ const StyledSection = styled.section`
     display: block;
     background: rgba(0, 0, 0, 0.6);
   }
+
+  .select div {
+    text-transform: none;
+  }
 `;
 
-const AddPage = () => {
-  return (
-    <StyledSection>
-      <div className="modal">
-        <section className="modal-main">
-          <FormInfo namePage="Add movie" nameButton="Submit"></FormInfo>
-        </section>
-      </div>
-    </StyledSection>
-  );
-};
+const AddPage = () => (
+  <StyledSection>
+    <div className="modal">
+      <section className="modal-main">
+        <FormInfo namePage="Add movie" nameButton="Submit" />
+      </section>
+    </div>
+  </StyledSection>
+);
 
-const mapStateToProps = (state) => ({
-  showAddPage: state.windowReducer.showAddPage,
-});
-
-export default connect(mapStateToProps)(AddPage);
+export default AddPage;

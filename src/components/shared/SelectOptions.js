@@ -1,0 +1,18 @@
+export default selectOptions = [
+  { value: 'adventure', label: 'Adventure' },
+  { value: 'action', label: 'Action' },
+  { value: 'animation', label: 'Animation' },
+  { value: 'comedy', label: 'Comedy' },
+  { value: 'crime', label: 'Crime' },
+  { value: 'drama', label: 'Drama' },
+  { value: 'horror', label: 'Horror' },
+  { value: 'history', label: 'History' },
+  { value: 'fantasy', label: 'Fantasy' },
+  { value: 'family', label: 'Family' },
+  { value: 'mystery', label: 'Mystery' },
+  { value: 'music', label: 'Music' },
+  { value: 'romance', label: 'Romance' },
+  { value: 'science fiction', label: 'Science Fiction' },
+  { value: 'thriller', label: 'Thriller' },
+  { value: 'war', label: 'War' },
+];

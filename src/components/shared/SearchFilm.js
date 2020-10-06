@@ -1,12 +1,13 @@
-import React, { Fragment, useCallback, useState, createRef } from "react";
-import { InputGroup, FormControl, Button } from "react-bootstrap";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import AddPage from "../AddPage";
-import useLocalStorageState from "./useLocalStorageState";
-import { fetchMovies } from "../../redux/actions/moviesActions";
-import { showAddPage } from "../../redux/actions/windowActions";
+import React, { useState, createRef } from 'react';
+import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import AddPage from '../AddPage';
+import useLocalStorageState from './useLocalStorageState';
+import { fetchMovies } from '../../redux/actions/moviesActions';
+import { showAddPage } from '../../redux/actions/windowActions';
+import { setGenre } from '../../redux/actions/criteriaActions';
 
 const StyledGroup = styled(InputGroup)`
   padding: 0 50px;
@@ -32,35 +33,36 @@ const StyleDiv = styled.div`
   }
 `;
 const SearchFilm = (props) => {
+  const { dispatch, sort, isShowAddPage } = props;
+
   const [controlValue, setValue] = useState({
     disabled: true,
     myRef: createRef(),
   });
 
   const [defaultValue, setState] = useLocalStorageState(
-    "my-app-defaultValueSearch",
-    ""
+    'my-app-defaultValueSearch',
+    ''
   );
 
-  const handleClick = useCallback(() => {
-    props.dispatch(
-      fetchMovies(props.sort, props.search, controlValue.myRef.value)
-    );
-  }, [props.sort, props.search, controlValue.myRef]);
+  const handleClick = () => {
+    dispatch(setGenre('All'));
+    dispatch(fetchMovies(sort, controlValue.myRef.value));
+  };
 
-  const handleChange = useCallback(() => {
+  const handleChange = () => {
     setValue({ disabled: !controlValue.myRef.value });
     setState(controlValue.myRef.value);
-  }, [controlValue.myRef]);
+  };
 
   const handleAdd = () => {
-    props.dispatch(showAddPage(true));
+    dispatch(showAddPage(true));
   };
 
   return (
-    <Fragment>
+    <>
       <StyleDiv>
-        {props.showAddPage && <AddPage />}
+        {isShowAddPage && <AddPage />}
         <Button
           className="add-movie"
           variant="outline-danger"
@@ -87,20 +89,19 @@ const SearchFilm = (props) => {
           </Button>
         </InputGroup.Append>
       </StyledGroup>
-    </Fragment>
+    </>
   );
 };
 
 SearchFilm.propTypes = {
+  dispatch: PropTypes.func,
   sort: PropTypes.string,
-  search: PropTypes.string,
-  myInput: PropTypes.object,
+  isShowAddPage: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  search: state.criteriaReducer.search,
   sort: state.criteriaReducer.sort,
-  showAddPage: state.windowReducer.showAddPage,
+  isShowAddPage: state.windowReducer.isShowAddPage,
 });
 
 export default connect(mapStateToProps)(SearchFilm);

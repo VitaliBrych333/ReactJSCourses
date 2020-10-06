@@ -1,9 +1,23 @@
 {
-  "extends": "airbnb/base",
-  "plugins": ["react-hooks"],
+  "extends": ["airbnb", "prettier", "airbnb/hooks"],
+  "plugins": ["react-hooks", "prettier"],
   "parser": "babel-eslint",
   "rules": {
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/require-default-props": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "linebreak-style": ["error", "windows"],
+    "prettier/prettier": ["error", { "singleQuote": true, "endOfLine": "auto" }],
+    "no-undef": "off",
+    "prefer-const": "off",
+    "no-restricted-syntax": "off",
+    "no-param-reassign": "off",
+    "object-curly-newline": "off",
+    "no-unused-expressions": "off",
+    "no-return-assign": "off",
+    "no-case-declarations": "off"
   }
 }

@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const StyledDiv = styled.div`
   p {
@@ -14,26 +15,28 @@ const StyledDiv = styled.div`
   }
 `;
 
-const Duration = (props) => {
-  return (
-    <StyledDiv>
+const Duration = ({ filmId }) => (
+  <StyledDiv>
+    <p>
+      <span>{filmId.release_date.slice(0, 4)}</span> year
+    </p>
+    {filmId.runtime && (
       <p>
-        <span>{props.propValue.release_date.slice(0, 4)}</span> year
+        <span>{filmId.runtime}</span> min
       </p>
-      {props.propValue.runtime && (
-        <p>
-          <span>{props.propValue.runtime}</span> min
-        </p>
-      )}
-    </StyledDiv>
-  );
-};
+    )}
+  </StyledDiv>
+);
 
 Duration.propTypes = {
-  propValue: PropTypes.shape({
+  filmId: PropTypes.shape({
     release_date: PropTypes.string,
     runtime: PropTypes.number,
   }),
 };
 
-export default Duration;
+const mapStateToProps = (state) => ({
+  filmId: state.movieReducer.filmId.data,
+});
+
+export default connect(mapStateToProps)(Duration);

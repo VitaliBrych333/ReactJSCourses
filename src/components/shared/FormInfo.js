@@ -1,79 +1,172 @@
-import React, { Fragment, useState, useEffect, useCallback } from "react";
-import { Form } from "react-bootstrap";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import ButtonsFormGroup from "./ButtonsFormGroup";
-import NamePage from "./NamePage";
-import { setEditFilm } from "../../redux/actions/moviesActions";
-import { showEditPage, showAddPage } from "../../redux/actions/windowActions";
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Form } from 'react-bootstrap';
+import Select from 'react-select';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import ButtonsFormGroup from './ButtonsFormGroup';
+import NamePage from './NamePage';
+import selectOptions from './SelectOptions';
+import {
+  addMovie,
+  updateMovie,
+  setMoviesByGenre,
+  fetchMoviesSuccess,
+} from '../../redux/actions/moviesActions';
+import { showEditPage, showAddPage } from '../../redux/actions/windowActions';
 
 const StyledGroup = styled.div`
   label {
     color: #f65261;
+    text-transform: uppercase;
   }
 `;
 
 const FormInfo = (props) => {
-  const initialState = {
-    title: "",
-    date: "",
-    url: "",
-    genre: "",
-    overview: "",
-    time: "",
-  };
+  const {
+    dispatch,
+    namePage,
+    filmEdit,
+    movies,
+    moviesByCriteria,
+    nameButton,
+  } = props;
 
-  const genreState = ["Select Genre", "Horror", "Action", "Comedy"];
+  const initialState = useMemo(
+    () => ({
+      title: '',
+      release_date: '',
+      poster_path: '',
+      genres: '',
+      overview: '',
+      runtime: '',
+    }),
+    []
+  );
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const setSelectValue = useCallback(() => {
+    const { genres } = filmEdit;
+
+    if (genres.length) {
+      let selectedValue = [];
+      selectOptions.forEach((item) => {
+        if (genres.includes(item.label)) {
+          selectedValue.push(item);
+        }
+      });
+
+      if (selectedValue.length) {
+        setSelectedOption(selectedValue);
+      }
+    }
+  }, [filmEdit]);
+
   const [dataForm, setData] = useState(initialState);
 
   const handleChange = (e) => {
-    const field = e.target.name;
-    const value = e.target.value;
-    setData({ ...dataForm, [field]: value });
+    const { name, value } = e.target;
+    setData({ ...dataForm, [name]: value });
   };
 
   const handleReset = useCallback(() => {
-    setData(Object.assign({ ...dataForm }, initialState));
-  }, [dataForm]);
+    setData({ ...dataForm, ...initialState });
+    setSelectedOption(null);
+  }, [dataForm, initialState]);
 
   const handleClose = useCallback(() => {
-    switch (props.namePage) {
-      case "Edit movie":
-        setData(props.filmEdit);
-        props.dispatch(showEditPage(false));
+    switch (namePage) {
+      case 'Edit movie':
+        setData(filmEdit);
+        setSelectValue();
+        dispatch(showEditPage(false));
         break;
 
-      case "Add movie":
+      case 'Add movie':
         handleReset();
-        props.dispatch(showAddPage(false));
+        dispatch(showAddPage(false));
         break;
 
       default:
         break;
     }
-  }, [props.namePage, props.filmEdit]);
+  }, [namePage, filmEdit, setSelectValue, dispatch, handleReset]);
+
+  const updateFilms = (films, editFilm) => {
+    let objMovies = { ...films };
+
+    objMovies.data.forEach((item) => {
+      if (item.id === editFilm.id) {
+        for (const key in item) {
+          if (key !== 'id') {
+            item[key] = editFilm[key];
+          }
+        }
+      }
+    });
+
+    return objMovies;
+  };
+
+  const handleSave = useCallback(
+    (e) => {
+      let genres = [];
+
+      if (selectedOption && selectedOption.length) {
+        selectedOption.forEach((item) => genres.push(item.label));
+      }
+
+      const newFilm = {
+        title: dataForm.title,
+        release_date: dataForm.release_date,
+        poster_path: dataForm.poster_path,
+        genres,
+        overview: dataForm.overview,
+        runtime: Number(dataForm.runtime),
+      };
+
+      if (e.target.innerHTML === 'Submit') {
+        dispatch(addMovie(newFilm));
+        handleClose();
+      } else if (e.target.innerHTML === 'Save') {
+        let editFilm = {};
+        editFilm.id = Number(dataForm.id);
+        editFilm.vote_average = filmEdit.vote_average;
+
+        const updateFilm = Object.assign(editFilm, newFilm);
+
+        dispatch(updateMovie(updateFilm));
+        dispatch(setMoviesByGenre(updateFilms(moviesByCriteria, editFilm)));
+        dispatch(fetchMoviesSuccess(updateFilms(movies, editFilm)));
+      }
+    },
+    [
+      selectedOption,
+      dataForm,
+      handleClose,
+      filmEdit,
+      dispatch,
+      moviesByCriteria,
+      movies,
+    ]
+  );
 
   useEffect(() => {
-    setTimeout(() => {
-      const newDate = props.data;
-      if (newDate) {
-        setData(newDate);
-        props.dispatch(setEditFilm(newDate));
-      }
-    }, 0);
-  }, [props.data]);
+    if (namePage === 'Edit movie' && filmEdit) {
+      setSelectValue();
+      setData(filmEdit);
+    }
+  }, [namePage, filmEdit, setData, setSelectValue]);
 
   return (
     <StyledGroup>
       <Form>
-        <NamePage
-          namePage={props.namePage}
-          handleClose={handleClose}
-        ></NamePage>
+        <NamePage namePage={namePage} handleClose={handleClose} />
 
-        <Form.Group className={props.namePage}>
+        <Form.Group className={namePage}>
           {dataForm.id && (
-            <Fragment>
+            <>
               <Form.Label>Movie id</Form.Label>
               <Form.Control
                 type="title"
@@ -82,14 +175,14 @@ const FormInfo = (props) => {
                 value={dataForm.id}
                 readOnly
               />
-            </Fragment>
+            </>
           )}
           <Form.Label>Title</Form.Label>
           <Form.Control
             type="title"
             placeholder="Title"
             name="title"
-            value={dataForm.title}
+            value={dataForm.title || ''}
             onChange={handleChange}
           />
 
@@ -97,8 +190,8 @@ const FormInfo = (props) => {
           <Form.Control
             type="date"
             placeholder="Select Date"
-            name="date"
-            value={dataForm.date}
+            name="release_date"
+            value={dataForm.release_date || ''}
             onChange={handleChange}
           />
 
@@ -106,32 +199,27 @@ const FormInfo = (props) => {
           <Form.Control
             type="url"
             placeholder="Movie URL here"
-            name="url"
-            value={dataForm.url}
+            name="poster_path"
+            value={dataForm.poster_path || ''}
             onChange={handleChange}
           />
 
           <Form.Label>Example select</Form.Label>
-          <Form.Control
-            as="select"
+          <Select
+            className="select"
+            options={selectOptions}
             placeholder="Select Genre"
-            name="genre"
-            value={dataForm.genre}
-            onChange={handleChange}
-          >
-            {genreState.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
-          </Form.Control>
+            isMulti="true"
+            value={selectedOption}
+            onChange={setSelectedOption}
+          />
 
           <Form.Label>Overview</Form.Label>
           <Form.Control
             type="text"
             placeholder="Overview here"
             name="overview"
-            value={dataForm.overview}
+            value={dataForm.overview || ''}
             onChange={handleChange}
           />
 
@@ -139,24 +227,41 @@ const FormInfo = (props) => {
           <Form.Control
             type="number"
             placeholder="Runtime here"
-            name="time"
-            value={dataForm.time}
+            name="runtime"
+            value={dataForm.runtime || ''}
             onChange={handleChange}
           />
         </Form.Group>
         <ButtonsFormGroup
-          nameButton={props.nameButton}
+          nameButton={nameButton}
           handleReset={handleReset}
-        ></ButtonsFormGroup>
+          handleSave={handleSave}
+        />
       </Form>
     </StyledGroup>
   );
 };
 
+FormInfo.propTypes = {
+  dispatch: PropTypes.func,
+  filmEdit: PropTypes.shape({
+    vote_average: PropTypes.number,
+    genres: PropTypes.array,
+  }),
+  namePage: PropTypes.string,
+  nameButton: PropTypes.string,
+  moviesByCriteria: PropTypes.shape({
+    data: PropTypes.array,
+  }),
+  movies: PropTypes.shape({
+    data: PropTypes.array,
+  }),
+};
+
 const mapStateToProps = (state) => ({
-  showEditPage: state.windowReducer.showEditPage,
-  showAddPage: state.windowReducer.showAddPage,
   filmEdit: state.movieReducer.filmEdit,
+  moviesByCriteria: state.movieReducer.moviesByCriteria,
+  movies: state.movieReducer.movies,
 });
 
 export default connect(mapStateToProps)(FormInfo);

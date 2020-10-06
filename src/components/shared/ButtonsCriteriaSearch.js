@@ -1,13 +1,11 @@
-import React from "react";
-import DropdownCustom from "./DropdownCustom";
+import React from 'react';
+import DropdownCustom from './DropdownCustom';
 
-const CriteriaSearch = () => {
-  return (
-    <div>
-      <p>Sort by</p>
-      <DropdownCustom></DropdownCustom>
-    </div>
-  );
-};
+const CriteriaSearch = () => (
+  <div>
+    <p>Sort by</p>
+    <DropdownCustom />
+  </div>
+);
 
 export default CriteriaSearch;

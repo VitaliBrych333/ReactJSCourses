@@ -1,16 +1,18 @@
-import React, { useState, useCallback } from "react";
-import { Badge, Card } from "react-bootstrap";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import React, { useState, useCallback } from 'react';
+import { Badge, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import uuid from 'react-uuid';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
   fetchMoviesByGenre,
   fetchMovieId,
-} from "../redux/actions/moviesActions";
-import { showEditPage, showDeletePage } from "../redux/actions/windowActions";
-import ModalWindow from "./shared/ModalWindow";
+  setEditFilm,
+} from '../redux/actions/moviesActions';
+import { showEditPage, showDeletePage } from '../redux/actions/windowActions';
+import ModalWindow from './shared/ModalWindow';
 
 const StyledCartTitle = styled(Card.Title)`
   display: flex;
@@ -84,24 +86,23 @@ const StyledCard = styled(Card)`
 `;
 
 const Item = (props) => {
+  const { dispatch, sort, info } = props;
+
   const [value, setValue] = useState({
     dotsIsVisible: false,
     showModalWindow: false,
   });
 
-  const handleClick = useCallback((e) => {
-      props.dispatch(fetchMoviesByGenre(props.sort, e.target.value));
-    }, [props.sort]);
+  const handleClick = useCallback(
+    (e) => {
+      dispatch(fetchMoviesByGenre(sort, e.target.value));
+    },
+    [dispatch, sort]
+  );
 
-  const handleRequests = useCallback(() => {
-    props.dispatch(fetchMovieId(props.info.id));
-
-    const genres = props.info.genres;
-
-    if (genres.length) {
-      props.dispatch(fetchMoviesByGenre(props.sort, genres));
-    }
-  }, [props.info.id, props.sort]);
+  const handleRequests = () => {
+    dispatch(fetchMovieId(info.id));
+  };
 
   const showDots = () => {
     setValue({ dotsIsVisible: true });
@@ -125,11 +126,13 @@ const Item = (props) => {
     hideModal();
 
     switch (e.target.innerHTML) {
-      case "Edit":
-        props.dispatch(showEditPage(true));
+      case 'Edit':
+        dispatch(setEditFilm(info));
+        dispatch(showEditPage(true));
         break;
-      case "Delete":
-        props.dispatch(showDeletePage(true));
+      case 'Delete':
+        dispatch(setEditFilm(info));
+        dispatch(showDeletePage(true));
         break;
       default:
         break;
@@ -147,13 +150,17 @@ const Item = (props) => {
       )}
       {value.showModalWindow && (
         <ModalWindow handleClose={hideModal} onMouseOut={hideModal}>
-          <p onClick={handleClickTag}>Edit</p>
-          <p onClick={handleClickTag}>Delete</p>
+          <p onClick={handleClickTag} onKeyDown={handleClickTag}>
+            Edit
+          </p>
+          <p onClick={handleClickTag} onKeyDown={handleClickTag}>
+            Delete
+          </p>
         </ModalWindow>
       )}
       <Card.Img
         variant="top"
-        src={props.info.poster_path}
+        src={info.poster_path}
         onMouseEnter={showDots}
         onMouseLeave={hideDots}
       />
@@ -161,22 +168,23 @@ const Item = (props) => {
       <Card.Body>
         <StyledCartTitle>
           <Link
-            to={{ pathname: `/movies/${props.info.id}` }}
+            to={{ pathname: `/movies/${info.id}` }}
             onClick={handleRequests}
           >
-            {props.info.title}
+            {info.title}
           </Link>
           <Badge variant="secondary">
-            {props.info.release_date.trim().slice(0, 4)}
+            {info.release_date.trim().slice(0, 4)}
           </Badge>
         </StyledCartTitle>
         <Card.Text>
-          {props.info.genres.map((item, index) => (
+          {info.genres.map((item) => (
             <button
+              type="submit"
               onClick={handleClick}
               value={item}
               href="#"
-              key={index}
+              key={uuid()}
               info={item}
               variant="secondary"
             >
@@ -190,19 +198,15 @@ const Item = (props) => {
 };
 
 Item.propTypes = {
+  dispatch: PropTypes.func,
   sort: PropTypes.string,
   info: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
     genres: PropTypes.array,
     release_date: PropTypes.string,
+    poster_path: PropTypes.string,
   }),
 };
 
-const mapStateToProps = (state) => ({
-  data: state.movieReducer.movies.data,
-  sort: state.criteriaReducer.sort,
-  showEditPage: state.windowReducer.showEditPage,
-});
-
-export default connect(mapStateToProps)(Item);
+export default connect()(Item);

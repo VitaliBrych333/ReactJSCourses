@@ -8,12 +8,14 @@ import {
   SORT_RELEASE,
   SORT_RATING,
   SET_EDITFILM,
-} from "../actions/moviesActions";
+  SET_MOVIES_BY_GENRE,
+} from '../actions/moviesActions';
 
 const initialState = {
-  movies: { data: [], total: 0 },
+  movies: { data: [], totalAmount: 0 },
+  moviesByCriteria: { data: [], totalAmount: 0 },
   filmId: {},
-  filmEdit: {},
+  filmEdit: null,
   loading: false,
   error: null,
 };
@@ -65,31 +67,39 @@ export default function movieReducer(state = initialState, action) {
       };
 
     case SORT_RELEASE:
-      let sortDataByRelease = state.movies.data
+      const sortDataByRelease = state.moviesByCriteria.data
         .slice()
         .sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
-      return Object.assign({}, state, {
-        movies: {
+      return {
+        ...state,
+        moviesByCriteria: {
           data: sortDataByRelease,
-          total: state.movies.total,
+          totalAmount: state.moviesByCriteria.totalAmount,
         },
-      });
+      };
 
     case SORT_RATING:
-      let sortDataByRating = state.movies.data
+      const sortDataByRating = state.moviesByCriteria.data
         .slice()
         .sort((a, b) => b.vote_average - a.vote_average);
-      return Object.assign({}, state, {
-        movies: {
+      return {
+        ...state,
+        moviesByCriteria: {
           data: sortDataByRating,
-          total: state.movies.total,
+          totalAmount: state.moviesByCriteria.totalAmount,
         },
-      });
+      };
 
     case SET_EDITFILM:
       return {
         ...state,
         filmEdit: action.payload.filmEdit,
+      };
+
+    case SET_MOVIES_BY_GENRE:
+      return {
+        ...state,
+        moviesByCriteria: action.payload.moviesByCriteria,
       };
 
     default:
