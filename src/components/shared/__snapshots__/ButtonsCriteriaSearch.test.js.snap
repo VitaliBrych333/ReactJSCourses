@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CriteriaSearch/> should equals to snapshot of CriteriaSearch 1`] = `
+exports[`<ButtonsCriteriaSearch/> should equals to snapshot of ButtonsCriteriaSearch 1`] = `
 <div>
   <p>
     Sort by
   </p>
   <div
-    className="sc-bdVaJa fAiLlc dropdown"
+    className="sc-bdVaJa iAmyqe dropdown"
     onKeyDown={[Function]}
   >
     <div
@@ -21,7 +21,7 @@ exports[`<CriteriaSearch/> should equals to snapshot of CriteriaSearch 1`] = `
         onClick={[Function]}
         type="button"
       >
-        Release date
+        Rating
       </button>
       <div
         aria-hidden={true}
@@ -45,16 +45,7 @@ exports[`<CriteriaSearch/> should equals to snapshot of CriteriaSearch 1`] = `
           tabIndex="0"
           type="button"
         >
-          Earlier than 2020
-        </button>
-        <button
-          className="dropdown-item"
-          onClick={[Function]}
-          role="menuitem"
-          tabIndex="0"
-          type="button"
-        >
-          Earlier than 2019
+          Rating
         </button>
       </div>
     </div>

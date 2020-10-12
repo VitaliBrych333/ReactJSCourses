@@ -5,22 +5,22 @@ import * as actions from '../actions/criteriaActions';
 describe('criteriaReducer', () => {
   it('should return the initial state', () => {
     expect(criteriaReducer(undefined, {})).toEqual({
-      search: 'title',
+      genre: 'All',
       sort: 'release_date',
     });
   });
 
-  it('should set up the value for search', () => {
+  it('should set up the value for genre', () => {
     const successAction = {
-      type: actions.SET_SEARCH,
+      type: actions.SET_GENRE,
       payload: {
-        search: 'genre',
+        genre: 'comedy',
       },
     };
 
     expect(criteriaReducer(undefined, successAction)).toEqual({
-      search: 'genre',
       sort: 'release_date',
+      genre: 'comedy',
     });
   });
 
@@ -33,20 +33,20 @@ describe('criteriaReducer', () => {
     };
 
     expect(criteriaReducer(undefined, successAction)).toEqual({
-      search: 'title',
       sort: 'rating',
+      genre: 'All',
     });
   });
 
-  it('should handle SET_SEARCH', () => {
+  it('should handle SET_GENRE', () => {
     const expectedAction = {
-      type: actions.SET_SEARCH,
+      type: actions.SET_GENRE,
       payload: {
-        search: 'genre',
+        genre: 'All',
       },
     };
 
-    expect(actions.setSearch('genre')).toEqual(expectedAction);
+    expect(actions.setGenre('All')).toEqual(expectedAction);
   });
 
   it('should handle SET_SORT', () => {

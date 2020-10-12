@@ -1,348 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StartPage/> should equals to snapshot of CriteriaSearch 1`] = `
+exports[`<StartPage/> should equals to snapshot of StartPage 1`] = `
 Array [
-  <section
-    className="sc-bZQynM icRRLG"
-  >
-    <div
-      className="modal display-none"
-    >
-      <section
-        className="modal-main"
-      >
-        <div
-          className="sc-EHOje KynSq"
-        >
-          <form
-            className=""
-          >
-            <div
-              className="sc-ifAKCX cRcysQ"
-            >
-              <button
-                className="close"
-                onClick={[Function]}
-                type="button"
-              >
-                <span>
-                  ×
-                </span>
-              </button>
-              <h2>
-                Edit movie
-              </h2>
-            </div>
-            <div
-              className="Edit movie form-group"
-            >
-              
-              <label
-                className="form-label"
-              >
-                Title
-              </label>
-              <input
-                className="form-control"
-                defaultValue={null}
-                placeholder="Title"
-                type="title"
-              />
-              <label
-                className="form-label"
-              >
-                Release date
-              </label>
-              <input
-                className="form-control"
-                defaultValue={null}
-                placeholder="Select Date"
-                type="date"
-              />
-              <label
-                className="form-label"
-              >
-                Movie URL
-              </label>
-              <input
-                className="form-control"
-                defaultValue={null}
-                placeholder="Movie URL here"
-                type="url"
-              />
-              <label
-                className="form-label"
-              >
-                Example select
-              </label>
-              <select
-                className="form-control"
-                onChange={[Function]}
-                placeholder="Select Genre"
-                value="Select Genre"
-              >
-                <option
-                  value="Select Genre"
-                >
-                  Select Genre
-                </option>
-                <option
-                  value="Horror"
-                >
-                  Horror
-                </option>
-                <option
-                  value="Action"
-                >
-                  Action
-                </option>
-                <option
-                  value="Comedy"
-                >
-                  Comedy
-                </option>
-              </select>
-              <label
-                className="form-label"
-              >
-                Overview
-              </label>
-              <input
-                className="form-control"
-                defaultValue={null}
-                placeholder="Overview here"
-                type="text"
-              />
-              <label
-                className="form-label"
-              >
-                Runtime
-              </label>
-              <input
-                className="form-control"
-                defaultValue={null}
-                placeholder="Runtime here"
-                type="number"
-              />
-            </div>
-            <div
-              className="sc-bxivhb ghcqzK"
-            >
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                Reset
-              </button>
-              <button
-                className="btn btn-primary"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-    </div>
-  </section>,
-  <section
-    className="sc-gzVnrw gtLTOr"
-  >
-    <div
-      className="modal display-none"
-    >
-      <section
-        className="modal-main"
-      >
-        <div
-          className="sc-ifAKCX cRcysQ"
-        >
-          <button
-            className="close"
-            onClick={[Function]}
-            type="button"
-          >
-            <span>
-              ×
-            </span>
-          </button>
-          <h2>
-            Delete Movie
-          </h2>
-        </div>
-        <p>
-          Are you sure you want to delete this movie?
-        </p>
-        <button
-          className="btn btn-primary"
-          disabled={false}
-          onClick={[Function]}
-          type="button"
-        >
-          Confirm
-        </button>
-      </section>
-    </div>
-  </section>,
   <header
-    className="sc-gqjmRU kNvDes"
+    className="sc-gqjmRU bLsPVA"
   >
     <div
-      className="sc-iwsKbI ILVHg"
+      className="sc-iwsKbI hgHcqO"
     >
-      <section
-        className="sc-htoDjs hkUjat"
-      >
-        <div
-          className="modal display-none"
-        >
-          <section
-            className="modal-main"
-          >
-            <div
-              className="sc-EHOje KynSq"
-            >
-              <form
-                className=""
-              >
-                <div
-                  className="sc-ifAKCX cRcysQ"
-                >
-                  <button
-                    className="close"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    <span>
-                      ×
-                    </span>
-                  </button>
-                  <h2>
-                    Add movie
-                  </h2>
-                </div>
-                <div
-                  className="Add movie form-group"
-                >
-                  
-                  <label
-                    className="form-label"
-                  >
-                    Title
-                  </label>
-                  <input
-                    className="form-control"
-                    defaultValue={null}
-                    placeholder="Title"
-                    type="title"
-                  />
-                  <label
-                    className="form-label"
-                  >
-                    Release date
-                  </label>
-                  <input
-                    className="form-control"
-                    defaultValue={null}
-                    placeholder="Select Date"
-                    type="date"
-                  />
-                  <label
-                    className="form-label"
-                  >
-                    Movie URL
-                  </label>
-                  <input
-                    className="form-control"
-                    defaultValue={null}
-                    placeholder="Movie URL here"
-                    type="url"
-                  />
-                  <label
-                    className="form-label"
-                  >
-                    Example select
-                  </label>
-                  <select
-                    className="form-control"
-                    onChange={[Function]}
-                    placeholder="Select Genre"
-                    value="Select Genre"
-                  >
-                    <option
-                      value="Select Genre"
-                    >
-                      Select Genre
-                    </option>
-                    <option
-                      value="Horror"
-                    >
-                      Horror
-                    </option>
-                    <option
-                      value="Action"
-                    >
-                      Action
-                    </option>
-                    <option
-                      value="Comedy"
-                    >
-                      Comedy
-                    </option>
-                  </select>
-                  <label
-                    className="form-label"
-                  >
-                    Overview
-                  </label>
-                  <input
-                    className="form-control"
-                    defaultValue={null}
-                    placeholder="Overview here"
-                    type="text"
-                  />
-                  <label
-                    className="form-label"
-                  >
-                    Runtime
-                  </label>
-                  <input
-                    className="form-control"
-                    defaultValue={null}
-                    placeholder="Runtime here"
-                    type="number"
-                  />
-                </div>
-                <div
-                  className="sc-bxivhb ghcqzK"
-                >
-                  <button
-                    className="btn btn-primary"
-                    disabled={false}
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    Reset
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    disabled={false}
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </section>
-        </div>
-      </section>
       <button
         className="add-movie btn btn-outline-danger"
         disabled={false}
@@ -356,7 +21,7 @@ Array [
       </h1>
     </div>
     <div
-      className="sc-dnqmqq hIUbHj mb-3 input-group"
+      className="sc-dnqmqq jjsafO mb-3 input-group"
     >
       <input
         className="form-control"
@@ -382,24 +47,18 @@ Array [
     >
       <div
         className="nav"
-        onClick={[Function]}
         onKeyDown={[Function]}
       >
         <div
           className="nav-item"
         >
           <a
-            className="nav-link"
+            className="active nav-link"
             data-rb-event-key="All"
             href="#"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
-            style={
-              Object {
-                "borderBottom": "2px solid red",
-              }
-            }
           >
             All
           </a>
@@ -466,7 +125,7 @@ Array [
           Sort by
         </p>
         <div
-          className="sc-gZMcBi foEyzH dropdown"
+          className="sc-gZMcBi hWBHcG dropdown"
           onKeyDown={[Function]}
         >
           <div
@@ -481,7 +140,7 @@ Array [
               onClick={[Function]}
               type="button"
             >
-              Release date
+              Rating
             </button>
             <div
               aria-hidden={true}
@@ -505,16 +164,7 @@ Array [
                 tabIndex="0"
                 type="button"
               >
-                Earlier than 2020
-              </button>
-              <button
-                className="dropdown-item"
-                onClick={[Function]}
-                role="menuitem"
-                tabIndex="0"
-                type="button"
-              >
-                Earlier than 2019
+                Rating
               </button>
             </div>
           </div>
@@ -526,9 +176,9 @@ Array [
     />
   </header>,
   <h3
-    className="sc-VigVT iTjKJW"
+    className="sc-VigVT hBdmWj"
   >
-    No films found
+    No movie found
   </h3>,
 ]
 `;

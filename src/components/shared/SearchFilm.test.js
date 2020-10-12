@@ -13,17 +13,10 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('<SearchFilm/>', () => {
   const initialState = {
     criteriaReducer: {
-      search: 'search',
       sort: 'sort',
     },
-    movieReducer: {
-      movies: [{ id: 1 }],
-    },
     windowReducer: {
-      showModal: false,
-      showEditPage: false,
-      showDeletePage: false,
-      showAddPage: false,
+      isShowAddPage: false,
     },
   };
   const mockStore = configureStore();
@@ -50,7 +43,7 @@ describe('<SearchFilm/>', () => {
     expect(wrapper.find(SearchFilm).length).toEqual(1);
   });
 
-  it('should equals to snapshot of CriteriaSearch', () => {
+  it('should equals to snapshot of SearchFilm', () => {
     const renderedValue = renderer
       .create(
         <Router>

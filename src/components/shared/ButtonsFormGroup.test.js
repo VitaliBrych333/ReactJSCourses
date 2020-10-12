@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import ReactDOM, { render, unmountComponentAtNode } from 'react-dom';
+import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow } from 'enzyme';
-import { act } from 'react-dom/test-utils';
-import NotFound from './NotFound';
+import ButtonsFormGroup from './ButtonsFormGroup';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('<NotFound/>', () => {
+describe('<ButtonsFormGroup/>', () => {
   let container = null;
+
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
@@ -21,16 +21,9 @@ describe('<NotFound/>', () => {
     container = null;
   });
 
-  it('renders with string No movie found', () => {
-    act(() => {
-      render(<NotFound />, container);
-    });
-    expect(container.textContent).toBe('No movie found');
-  });
-
   it('should render the component', () => {
-    const wrapper = shallow(<NotFound />).dive();
-    ReactDOM.render(<NotFound />, container);
+    const wrapper = shallow(<ButtonsFormGroup />).dive();
+    ReactDOM.render(<ButtonsFormGroup />, container);
     ReactDOM.unmountComponentAtNode(container);
   });
 });

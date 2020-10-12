@@ -2,7 +2,7 @@
 
 exports[`<Rating/> should equals to snapshot of Rating 1`] = `
 <div
-  className="sc-bdVaJa dMqIzU"
+  className="sc-bdVaJa jGiXbe"
 >
   <h3>
     test

@@ -31,6 +31,8 @@
     "@babel/preset-react": "^7.7.4",
     "@jest/reporters": "25.1.0",
     "@reportportal/reportportal-agent-jest": "^1.0.7",
+    "@testing-library/dom": "^7.24.5",
+    "@testing-library/user-event": "^12.1.7",
     "@types/jest": "^24.9.0",
     "@types/jest-cli": "^24.3.0",
     "add": "^2.0.6",

@@ -2,7 +2,7 @@
 
 exports[`<Duration/> should equals to snapshot of Duration 1`] = `
 <div
-  className="sc-bdVaJa dSanoj"
+  className="sc-bdVaJa crOkkA"
 >
   <p>
     <span>
@@ -12,7 +12,7 @@ exports[`<Duration/> should equals to snapshot of Duration 1`] = `
   </p>
   <p>
     <span>
-      12
+      1
     </span>
      min
   </p>
