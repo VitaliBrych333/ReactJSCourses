@@ -1,10 +1,12 @@
 import {
+  SET_EDITFILM,
   SHOW_EDITPAGE,
   SHOW_DELETEPAGE,
   SHOW_ADDPAGE,
 } from '../actions/windowActions';
 
 const initialState = {
+  filmEdit: null,
   isShowEditPage: false,
   isShowDeletePage: false,
   isShowAddPage: false,
@@ -12,6 +14,15 @@ const initialState = {
 
 function windowReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_EDITFILM:
+      const showWindowEdit = action.payload.actionType === 'Edit';
+      return {
+        ...state,
+        filmEdit: action.payload.filmEdit,
+        isShowEditPage: showWindowEdit,
+        isShowDeletePage: !showWindowEdit,
+      };
+
     case SHOW_EDITPAGE:
       return { ...state, isShowEditPage: action.payload.isShowEditPage };
 
