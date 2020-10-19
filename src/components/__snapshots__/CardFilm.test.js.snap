@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CardFilm/> should equals to snapshot of CardFilm 1`] = `
+<div
+  className="sc-htpNat hUfMet card"
+>
+  <img
+    className="card-img-top"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    src="test"
+  />
+  <div
+    className="card-body"
+  >
+    <div
+      className="sc-bwzfXH bdtHmX card-title h5"
+    >
+      <a
+        href="/movies/1"
+        onClick={[Function]}
+      >
+        test
+      </a>
+      <span
+        className="badge badge-secondary"
+      >
+        test
+      </span>
+    </div>
+    <p
+      className="card-text"
+    >
+      <button
+        href="#"
+        info="Comedy"
+        onClick={[Function]}
+        type="submit"
+        value="Comedy"
+        variant="secondary"
+      >
+        Comedy
+      </button>
+    </p>
+  </div>
+</div>
+`;

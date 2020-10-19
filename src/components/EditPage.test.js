@@ -1,29 +1,56 @@
 /* eslint-disable no-unused-vars */
-// import React from 'react';
-// import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-// import Adapter from 'enzyme-adapter-react-16';
-// import Enzyme, { shallow } from 'enzyme';
-// import EditPage from './EditPage';
+import React from 'react';
+import ReactDOM, { unmountComponentAtNode } from 'react-dom';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import EditPage from './EditPage';
 
-// Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
-// describe('<NamePage/>', () => {
-//   let container = null;
+describe('<NamePage/>', () => {
+  let store;
+  let container = null;
+  const initialState = {
+    movieReducer: {
+      filmId: {
+        data: {
+          vote_average: 1,
+          title: 'test',
+          tagline: 'test',
+        },
+      },
+    },
+    windowReducer: {
+      filmEdit: {
+        genres: ['Comedy'],
+      },
+    },
+  };
 
-//   beforeEach(() => {
-//     container = document.createElement('div');
-//     document.body.appendChild(container);
-//   });
+  const mockStore = configureStore();
 
-//   afterEach(() => {
-//     unmountComponentAtNode(container);
-//     container.remove();
-//     container = null;
-//   });
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    store = mockStore(initialState);
+  });
 
-//   it('should render the component', () => {
-//     const wrapper = shallow(<EditPage />).dive();
-//     ReactDOM.render(<EditPage />, container);
-//     ReactDOM.unmountComponentAtNode(container);
-//   });
-// });
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+
+  it('should render the component', () => {
+    const wrapper = shallow(<EditPage />).dive();
+    ReactDOM.render(
+      <Provider store={store}>
+        <EditPage />
+      </Provider>,
+      container
+    );
+    ReactDOM.unmountComponentAtNode(container);
+  });
+});

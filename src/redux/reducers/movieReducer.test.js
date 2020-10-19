@@ -18,7 +18,8 @@ describe('movieReducer', () => {
       movies: { data: [], totalAmount: 0 },
       moviesByCriteria: { data: null, totalAmount: 0 },
       filmId: {},
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: false,
       error: null,
     });
@@ -33,7 +34,8 @@ describe('movieReducer', () => {
       movies: { data: [], totalAmount: 0 },
       moviesByCriteria: { data: null, totalAmount: 0 },
       filmId: {},
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: true,
       error: null,
     };
@@ -45,15 +47,17 @@ describe('movieReducer', () => {
     const successAction = {
       type: actions.FETCH_MOVIES_SUCCESS,
       payload: {
-        data: { data: [1, 2], totalAmount: 2 },
+        movies: [],
+        moviesByCriteria: [],
       },
     };
 
     const expectState = {
-      movies: { data: [1, 2], totalAmount: 2 },
-      moviesByCriteria: { data: null, totalAmount: 0 },
+      movies: [],
+      moviesByCriteria: [],
       filmId: {},
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: false,
       error: null,
     };
@@ -73,7 +77,8 @@ describe('movieReducer', () => {
       movies: { data: [], totalAmount: 0 },
       moviesByCriteria: { data: null, totalAmount: 0 },
       filmId: {},
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: false,
       error: 'error',
     };
@@ -90,7 +95,8 @@ describe('movieReducer', () => {
       movies: { data: [], totalAmount: 0 },
       moviesByCriteria: { data: null, totalAmount: 0 },
       filmId: {},
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: true,
       error: null,
     };
@@ -108,7 +114,8 @@ describe('movieReducer', () => {
       movies: { data: [], totalAmount: 0 },
       moviesByCriteria: { data: null, totalAmount: 0 },
       filmId: { id: 'test' },
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: false,
       error: null,
     };
@@ -128,56 +135,13 @@ describe('movieReducer', () => {
       movies: { data: [], totalAmount: 0 },
       moviesByCriteria: { data: null, totalAmount: 0 },
       filmId: {},
-      filmEdit: null,
+      sort: 'release_date',
+      genre: 'All',
       loading: false,
       error: 'error',
     };
 
     expect(movieReducer(undefined, successAction)).toEqual(expectState);
-  });
-
-  it('should sort by date release desc ', () => {
-    const initialState = {
-      moviesByCriteria: {
-        data: [{ release_date: 2017 }, { release_date: 2019 }],
-        totalAmount: 2,
-      },
-    };
-
-    const successAction = {
-      type: actions.SORT_RELEASE,
-    };
-
-    const expectState = {
-      moviesByCriteria: {
-        data: [{ release_date: 2019 }, { release_date: 2017 }],
-        totalAmount: 2,
-      },
-    };
-
-    expect(movieReducer(initialState, successAction)).toEqual(expectState);
-  });
-
-  it('should sort by rating desc ', () => {
-    const initialState = {
-      moviesByCriteria: {
-        data: [{ vote_average: 7.6 }, { vote_average: 9.0 }],
-        totalAmount: 2,
-      },
-    };
-
-    const successAction = {
-      type: actions.SORT_RATING,
-    };
-
-    const expectState = {
-      moviesByCriteria: {
-        data: [{ vote_average: 9.0 }, { vote_average: 7.6 }],
-        totalAmount: 2,
-      },
-    };
-
-    expect(movieReducer(initialState, successAction)).toEqual(expectState);
   });
 
   it('should handle FETCH_MOVIES_BEGIN', () => {
@@ -188,15 +152,139 @@ describe('movieReducer', () => {
     expect(actions.fetchMoviesBegin()).toEqual(expectedAction);
   });
 
-  it('should handle FETCH_MOVIES_SUCCESS', () => {
-    const expectedAction = {
-      type: actions.FETCH_MOVIES_SUCCESS,
+  it('should return new state with movies is empty', () => {
+    const successAction = {
+      type: actions.SORT,
       payload: {
-        data: 'test',
+        value: 'vote_average',
       },
     };
 
-    expect(actions.fetchMoviesSuccess('test')).toEqual(expectedAction);
+    const expectState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: { data: null, totalAmount: 0 },
+      filmId: {},
+      sort: 'vote_average',
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    expect(movieReducer(undefined, successAction)).toEqual(expectState);
+  });
+
+  it('should return new state with movies were sorted by vote_average', () => {
+    const successAction = {
+      type: actions.SORT,
+      payload: {
+        value: 'vote_average',
+      },
+    };
+
+    const expectState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: {
+        data: [{ vote_average: 8 }, { vote_average: 7 }],
+        totalAmount: 0,
+      },
+      filmId: {},
+      sort: 'vote_average',
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    const initialState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: {
+        data: [{ vote_average: 7 }, { vote_average: 8 }],
+        totalAmount: 0,
+      },
+      filmId: {},
+      sort: 'vote_average',
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    expect(movieReducer(initialState, successAction)).toEqual(expectState);
+  });
+
+  it('should return new state with movies were filtered by genre', () => {
+    const successAction = {
+      type: actions.SET_GENRE,
+      payload: {
+        genre: 'Comedy',
+      },
+    };
+
+    const initialState = {
+      movies: {
+        data: [
+          { release_date: '2012-01-01', genres: ['Comedy'] },
+          { release_date: '2013-01-01', genres: ['Action'] },
+        ],
+        totalAmount: 0,
+      },
+      moviesByCriteria: { data: [], totalAmount: 0 },
+      filmId: {},
+      sort: 'release_date',
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    const expectState = {
+      movies: {
+        data: [
+          { release_date: '2012-01-01', genres: ['Comedy'] },
+          { release_date: '2013-01-01', genres: ['Action'] },
+        ],
+        totalAmount: 0,
+      },
+      moviesByCriteria: {
+        data: [{ genres: ['Comedy'], release_date: '2012-01-01' }],
+        totalAmount: 1,
+      },
+      filmId: {},
+      sort: 'release_date',
+      genre: 'Comedy',
+      loading: false,
+      error: null,
+    };
+
+    expect(movieReducer(initialState, successAction)).toEqual(expectState);
+  });
+
+  it('should return new state with moviesByCriteria.data is undefined when sort is null', () => {
+    const successAction = {
+      type: actions.SET_GENRE,
+      payload: {
+        genre: 'All',
+      },
+    };
+
+    const initialState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: { data: [], totalAmount: 0 },
+      filmId: {},
+      sort: null,
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    const expectState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: { data: undefined, totalAmount: 0 },
+      filmId: {},
+      sort: null,
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    expect(movieReducer(initialState, successAction)).toEqual(expectState);
   });
 
   it('should handle FETCH_MOVIES_FAILURE', () => {
@@ -240,88 +328,15 @@ describe('movieReducer', () => {
     expect(actions.fetchFilmIdFailure('testError')).toEqual(expectedAction);
   });
 
-  it('should handle SORT_RELEASE', () => {
+  it('should handle SORT', () => {
     const expectedAction = {
-      type: actions.SORT_RELEASE,
+      type: actions.SORT,
       payload: {
-        data: 'release',
+        value: 'raiting',
       },
     };
 
-    expect(actions.sortRelease('release')).toEqual(expectedAction);
-  });
-
-  it('should handle SORT_RATING', () => {
-    const expectedAction = {
-      type: actions.SORT_RATING,
-      payload: {
-        data: 'rating',
-      },
-    };
-
-    expect(actions.sortRating('rating')).toEqual(expectedAction);
-  });
-
-  it('should handle SET_EDITFILM', () => {
-    const expectedAction = {
-      type: actions.SET_EDITFILM,
-      payload: {
-        filmEdit: 'testFilm',
-      },
-    };
-
-    expect(actions.setEditFilm('testFilm')).toEqual(expectedAction);
-  });
-
-  it('should set up data for SET_EDITFILM', () => {
-    const successAction = {
-      type: actions.SET_EDITFILM,
-      payload: {
-        filmEdit: 'testFilm',
-      },
-    };
-
-    const expectState = {
-      movies: { data: [], totalAmount: 0 },
-      moviesByCriteria: { data: null, totalAmount: 0 },
-      filmId: {},
-      filmEdit: 'testFilm',
-      loading: false,
-      error: null,
-    };
-
-    expect(movieReducer(undefined, successAction)).toEqual(expectState);
-  });
-
-  it('should handle SET_MOVIES_BY_GENRE', () => {
-    const expectedAction = {
-      type: actions.SET_MOVIES_BY_GENRE,
-      payload: {
-        moviesByCriteria: 'test',
-      },
-    };
-
-    expect(actions.setMoviesByGenre('test')).toEqual(expectedAction);
-  });
-
-  it('should set up data for SET_MOVIES_BY_GENRE', () => {
-    const successAction = {
-      type: actions.SET_MOVIES_BY_GENRE,
-      payload: {
-        moviesByCriteria: { data: 'test', totalAmount: 1 },
-      },
-    };
-
-    const expectState = {
-      movies: { data: [], totalAmount: 0 },
-      moviesByCriteria: { data: 'test', totalAmount: 1 },
-      filmId: {},
-      filmEdit: null,
-      loading: false,
-      error: null,
-    };
-
-    expect(movieReducer(undefined, successAction)).toEqual(expectState);
+    expect(actions.sort('raiting')).toEqual(expectedAction);
   });
 
   it('should return a promise and call catch', () => {
@@ -333,10 +348,18 @@ describe('movieReducer', () => {
     );
   });
 
-  it('should return a promise', () => {
+  it('should return a promise when directLink is false', () => {
     const dispatch = jest.fn();
 
     expect(actions.fetchMovies('rating', 'test')(dispatch)).toEqual(
+      Promise.resolve()
+    );
+  });
+
+  it('should return a promise when directLink is true', () => {
+    const dispatch = jest.fn();
+
+    expect(actions.fetchMovies('rating', 'test', true)(dispatch)).toEqual(
       Promise.resolve()
     );
   });
@@ -377,6 +400,13 @@ describe('movieReducer', () => {
     expect(actions.deleteMovie('123')(dispatch)).toEqual(Promise.resolve());
   });
 
+  it('should return a promise and not throw Error', () => {
+    const dispatch = jest.fn();
+    fetch.mockImplementationOnce(() => Promise.resolve({ ok: true }));
+
+    expect(actions.deleteMovie('123')(dispatch)).toEqual(Promise.resolve());
+  });
+
   it('should return a promise and call catch', () => {
     const dispatch = jest.fn();
     fetch.mockImplementationOnce(() => Promise.reject());
@@ -422,13 +452,5 @@ describe('movieReducer', () => {
     fetch.mockImplementationOnce(() => Promise.reject());
 
     expect(actions.updateMovie('123')(dispatch)).toEqual(Promise.resolve());
-  });
-
-  it('should return undefined', () => {
-    const dispatch = jest.fn();
-
-    expect(
-      actions.filterByGenre([{ genres: 'test' }], 'test')(dispatch)
-    ).toEqual(undefined);
   });
 });

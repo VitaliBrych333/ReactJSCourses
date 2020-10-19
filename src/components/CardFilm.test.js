@@ -1,141 +1,119 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import Adapter from 'enzyme-adapter-react-16';
-// import Enzyme, { shallow } from 'enzyme';
-// import renderer from 'react-test-renderer';
-// import { Provider } from 'react-redux';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// import configureStore from 'redux-mock-store';
-// import { act } from 'react-dom/test-utils';
-// import CardFilm from './CardFilm';
+/* eslint-disable no-shadow */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import { act } from 'react-dom/test-utils';
+import CardFilm from './CardFilm';
 
-// Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
-// describe('<CardFilm/>', () => {
-//   const initialState = {
-//     movieReducer: {
-//       movies: {
-//         data: [],
-//         total: 0,
-//       },
-//     },
-//     criteriaReducer: {
-//       search: 'search',
-//       sort: 'sort',
-//     },
-//     windowReducer: {
-//       showModal: false,
-//       showEditPage: false,
-//       showDeletePage: false,
-//       showAddPage: false,
-//     },
-//   };
+describe('<CardFilm/>', () => {
+  const initialState = {
+    movieReducer: {
+      movies: {
+        data: [],
+        total: 0,
+      },
+      sort: 'vote_average',
+    },
+  };
 
-//   const info = {
-//     poster_path: 'test',
-//     release_date: 'test',
-//     genres: [],
-//     title: 'test',
-//     id: 1,
-//   };
+  const info = {
+    poster_path: 'test',
+    release_date: 'test',
+    genres: ['Comedy'],
+    title: 'test',
+    id: 1,
+  };
 
-//   const props = {
-//     info,
-//   };
+  const props = {
+    info,
+  };
 
-//   const mockStore = configureStore();
-//   let store; let
-//     wrapper;
+  const mockStore = configureStore();
 
-//   beforeEach(() => {
-//     container = document.createElement('div');
-//     document.body.appendChild(container);
-//     store = mockStore(initialState);
-//     store.dispatch = jest.fn();
-//     wrapper = shallow(
-//       <Provider store={store}>
-//         <Router>
-//           <CardFilm {...props} />
-//         </Router>
-//       </Provider>,
-//     );
-//   });
+  let store;
+  let wrapper;
 
-//   afterEach(() => {
-//     document.body.removeChild(container);
-//     container = null;
-//   });
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    store = mockStore(initialState);
+    store.dispatch = jest.fn();
 
-//   it('render component', () => {
-//     expect(wrapper.find(CardFilm).length).toEqual(1);
-//   });
+    wrapper = shallow(
+      <Provider store={store}>
+        <Router>
+          <CardFilm {...props} />
+        </Router>
+      </Provider>
+    );
+  });
 
-//   it('should equals to snapshot of CardFilm', () => {
-//     const renderedValue = renderer
-//       .create(
-//         <Provider store={store}>
-//           <Router>
-//             <CardFilm {...props} />
-//           </Router>
-//         </Provider>,
-//       )
-//       .toJSON();
-//     expect(renderedValue).toMatchSnapshot();
-//   });
+  afterEach(() => {
+    jest.clearAllMocks();
+    document.body.removeChild(container);
+    container = null;
+  });
 
-//   it('should call dispatch once', () => {
-//     const dispath = store.dispatch;
+  it('render component', () => {
+    expect(wrapper.find(CardFilm).length).toEqual(1);
+  });
 
-//     act(() => {
-//       ReactDOM.render(
-//         <Provider store={store}>
-//           <Router>
-//             <CardFilm {...props} />
-//           </Router>
-//         </Provider>,
-//         container,
-//       );
-//     });
+  it('should equals to snapshot of CardFilm', () => {
+    const renderedValue = renderer
+      .create(
+        <Provider store={store}>
+          <Router>
+            <CardFilm {...props} />
+          </Router>
+        </Provider>
+      )
+      .toJSON();
+    expect(renderedValue).toMatchSnapshot();
+  });
 
-//     const link = container.querySelector('a');
-//     act(() => {
-//       link.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-//     });
-//     expect(dispath).toHaveBeenCalledTimes(1);
-//   });
+  it('should call dispatch thrice', () => {
+    const dispath = store.dispatch;
 
-//   it('should call dispatch thrice', () => {
-//     const dispath = store.dispatch;
-//     const info = {
-//       poster_path: 'test',
-//       release_date: 'test',
-//       genres: [1],
-//       title: 'test',
-//       id: 1,
-//     };
+    act(() => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <Router>
+            <CardFilm {...props} />
+          </Router>
+        </Provider>,
+        container
+      );
+    });
 
-//     const props = {
-//       info,
-//     };
+    const link = container.querySelector('a');
+    const button = container.querySelector('button');
+    const img = container.querySelector('img');
 
-//     act(() => {
-//       ReactDOM.render(
-//         <Provider store={store}>
-//           <Router>
-//             <CardFilm {...props} />
-//           </Router>
-//         </Provider>,
-//         container,
-//       );
-//     });
+    act(() => {
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      img.dispatchEvent(new Event('mouseover', { bubbles: true }));
+    });
 
-//     const link = container.querySelector('a');
-//     const button = container.querySelector('button');
+    const svg = container.querySelector('svg');
 
-//     act(() => {
-//       link.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-//       button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-//     });
-//     expect(dispath).toHaveBeenCalledTimes(2);
-//   });
-// });
+    act(() => {
+      svg.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    const p = container.querySelector('p');
+
+    act(() => {
+      p.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    });
+
+    expect(dispath).toHaveBeenCalledTimes(3);
+  });
+});

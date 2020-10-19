@@ -2,6 +2,1395 @@
 
 exports[`<StartPage/> should equals to snapshot of StartPage 1`] = `
 Array [
+  <section
+    className="sc-bZQynM jXrBaw"
+  >
+    <div
+      className="modal"
+    >
+      <section
+        className="modal-main"
+      >
+        <div
+          className="sc-EHOje hYgIFK"
+        >
+          <form
+            className=""
+          >
+            <div
+              className="sc-ifAKCX drmYPe"
+            >
+              <button
+                className="close"
+                onClick={[Function]}
+                type="button"
+              >
+                <span>
+                  ×
+                </span>
+              </button>
+              <h2>
+                Edit movie
+              </h2>
+            </div>
+            <div
+              className="Edit movie form-group"
+              data-testid="form"
+            >
+              <label
+                className="form-label"
+              >
+                Movie id
+              </label>
+              <input
+                className="form-control"
+                name="id"
+                onChange={[Function]}
+                placeholder="Id"
+                readOnly={true}
+                type="number"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Title
+              </label>
+              <input
+                className="form-control"
+                name="title"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Title"
+                type="text"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Release date
+              </label>
+              <input
+                className="form-control"
+                name="date"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Select Date"
+                type="date"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Movie URL
+              </label>
+              <input
+                className="form-control"
+                name="url"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Movie URL here"
+                type="url"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Example select
+              </label>
+              <div
+                className="select css-2b097c-container"
+                onKeyDown={[Function]}
+              >
+                <div
+                  className=" css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className=" css-g1d714-ValueContainer"
+                  >
+                    <div
+                      className=" css-1wa3eu0-placeholder"
+                    >
+                      Select Genre
+                    </div>
+                    <div
+                      className="css-b8ldur-Input"
+                    >
+                      <div
+                        className=""
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "boxSizing": "content-box",
+                              "color": "inherit",
+                              "fontSize": "inherit",
+                              "label": "input",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "1px",
+                            }
+                          }
+                          tabIndex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      className=" css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className=" css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="css-6q0nyr-Svg"
+                        focusable="false"
+                        height={20}
+                        viewBox="0 0 20 20"
+                        width={20}
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    name="select"
+                    type="hidden"
+                  />
+                </div>
+              </div>
+              <label
+                className="form-label"
+              >
+                Overview
+              </label>
+              <input
+                className="form-control"
+                name="overview"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Overview here"
+                type="text"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Runtime
+              </label>
+              <input
+                className="form-control"
+                name="runtime"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Runtime here"
+                type="number"
+                value=""
+              />
+            </div>
+            <div
+              className="sc-bxivhb iodYpz"
+            >
+              <button
+                className="btn btn-primary"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                Reset
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={true}
+                onClick={[Function]}
+                type="button"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </section>,
+  <section
+    className="sc-gzVnrw kUQjQA"
+  >
+    <div
+      className="modal"
+    >
+      <section
+        className="modal-main"
+      >
+        <div
+          className="sc-ifAKCX drmYPe"
+        >
+          <button
+            className="close"
+            onClick={[Function]}
+            type="button"
+          >
+            <span>
+              ×
+            </span>
+          </button>
+          <h2>
+            Delete Movie
+          </h2>
+        </div>
+        <p>
+          Are you sure you want to delete this movie?
+        </p>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Confirm
+        </button>
+      </section>
+    </div>
+  </section>,
+  <header
+    className="sc-gqjmRU bLsPVA"
+  >
+    <div
+      className="sc-iwsKbI hgHcqO"
+    >
+      <button
+        className="add-movie btn btn-outline-danger"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        + Add movie
+      </button>
+      <h1>
+        Find your movie
+      </h1>
+    </div>
+    <div
+      className="sc-dnqmqq jjsafO mb-3 input-group"
+    >
+      <input
+        className="form-control"
+        defaultValue=""
+        onChange={[Function]}
+        placeholder="Please write the film name"
+      />
+      <div
+        className="input-group-append"
+      >
+        <button
+          className="btn btn-outline-danger"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+    <div
+      className="types"
+    >
+      <div
+        className="nav"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="nav-item"
+        >
+          <a
+            className="active nav-link"
+            data-rb-event-key="All"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            All
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Documentary"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Documentary
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Comedy"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Comedy
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Horror"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Horror
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Crime"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Crime
+          </a>
+        </div>
+      </div>
+      <div>
+        <p>
+          Sort by
+        </p>
+        <div
+          className="sc-gZMcBi hWBHcG dropdown"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="drop dropdown"
+            onKeyDown={[Function]}
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label={null}
+              className="dropdown-toggle btn btn-secondary"
+              onClick={[Function]}
+              type="button"
+            >
+              Rating
+            </button>
+            <div
+              aria-hidden={true}
+              className="dropdown-menu"
+              role="menu"
+              tabIndex="-1"
+            >
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Release date
+              </button>
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Rating
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="count-movie"
+    >
+      <p
+        className="count"
+      >
+        1
+         Movies found
+      </p>
+    </div>
+  </header>,
+  <h3
+    className="sc-VigVT hBdmWj"
+  >
+    No movie found
+  </h3>,
+]
+`;
+
+exports[`<StartPage/> should equals to snapshot of StartPage when data is not empty 1`] = `
+Array [
+  <section
+    className="sc-bZQynM jXrBaw"
+  >
+    <div
+      className="modal"
+    >
+      <section
+        className="modal-main"
+      >
+        <div
+          className="sc-EHOje hYgIFK"
+        >
+          <form
+            className=""
+          >
+            <div
+              className="sc-ifAKCX drmYPe"
+            >
+              <button
+                className="close"
+                onClick={[Function]}
+                type="button"
+              >
+                <span>
+                  ×
+                </span>
+              </button>
+              <h2>
+                Edit movie
+              </h2>
+            </div>
+            <div
+              className="Edit movie form-group"
+              data-testid="form"
+            >
+              <label
+                className="form-label"
+              >
+                Movie id
+              </label>
+              <input
+                className="form-control"
+                name="id"
+                onChange={[Function]}
+                placeholder="Id"
+                readOnly={true}
+                type="number"
+                value={1}
+              />
+              <label
+                className="form-label"
+              >
+                Title
+              </label>
+              <input
+                className="form-control"
+                name="title"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Title"
+                type="text"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Release date
+              </label>
+              <input
+                className="form-control"
+                name="date"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Select Date"
+                type="date"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Movie URL
+              </label>
+              <input
+                className="form-control"
+                name="url"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Movie URL here"
+                type="url"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Example select
+              </label>
+              <div
+                className="select css-2b097c-container"
+                onKeyDown={[Function]}
+              >
+                <div
+                  className=" css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className=" css-g1d714-ValueContainer"
+                  >
+                    <div
+                      className="css-1rhbuit-multiValue"
+                    >
+                      <div
+                        className="css-12jo7m5"
+                      >
+                        Comedy
+                      </div>
+                      <div
+                        className="css-xb97g8"
+                        onClick={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-6q0nyr-Svg"
+                          focusable="false"
+                          height={14}
+                          viewBox="0 0 20 20"
+                          width={14}
+                        >
+                          <path
+                            d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div
+                      className="css-1rhbuit-multiValue"
+                    >
+                      <div
+                        className="css-12jo7m5"
+                      >
+                        Action
+                      </div>
+                      <div
+                        className="css-xb97g8"
+                        onClick={[Function]}
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="css-6q0nyr-Svg"
+                          focusable="false"
+                          height={14}
+                          viewBox="0 0 20 20"
+                          width={14}
+                        >
+                          <path
+                            d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div
+                      className="css-b8ldur-Input"
+                    >
+                      <div
+                        className=""
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          disabled={false}
+                          id="react-select-3-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "boxSizing": "content-box",
+                              "color": "inherit",
+                              "fontSize": "inherit",
+                              "label": "input",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "1px",
+                            }
+                          }
+                          tabIndex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <div
+                      aria-hidden="true"
+                      className=" css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="css-6q0nyr-Svg"
+                        focusable="false"
+                        height={20}
+                        viewBox="0 0 20 20"
+                        width={20}
+                      >
+                        <path
+                          d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                        />
+                      </svg>
+                    </div>
+                    <span
+                      className=" css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className=" css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="css-6q0nyr-Svg"
+                        focusable="false"
+                        height={20}
+                        viewBox="0 0 20 20"
+                        width={20}
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    name="select"
+                    type="hidden"
+                    value="comedy"
+                  />
+                  <input
+                    name="select"
+                    type="hidden"
+                    value="action"
+                  />
+                </div>
+              </div>
+              <label
+                className="form-label"
+              >
+                Overview
+              </label>
+              <input
+                className="form-control"
+                name="overview"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Overview here"
+                type="text"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Runtime
+              </label>
+              <input
+                className="form-control"
+                name="runtime"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Runtime here"
+                type="number"
+                value=""
+              />
+            </div>
+            <div
+              className="sc-bxivhb iodYpz"
+            >
+              <button
+                className="btn btn-primary"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                Reset
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </section>,
+  <section
+    className="sc-gzVnrw kUQjQA"
+  >
+    <div
+      className="modal"
+    >
+      <section
+        className="modal-main"
+      >
+        <div
+          className="sc-ifAKCX drmYPe"
+        >
+          <button
+            className="close"
+            onClick={[Function]}
+            type="button"
+          >
+            <span>
+              ×
+            </span>
+          </button>
+          <h2>
+            Delete Movie
+          </h2>
+        </div>
+        <p>
+          Are you sure you want to delete this movie?
+        </p>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Confirm
+        </button>
+      </section>
+    </div>
+  </section>,
+  <header
+    className="sc-gqjmRU bLsPVA"
+  >
+    <div
+      className="sc-iwsKbI hgHcqO"
+    >
+      <button
+        className="add-movie btn btn-outline-danger"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        + Add movie
+      </button>
+      <h1>
+        Find your movie
+      </h1>
+    </div>
+    <div
+      className="sc-dnqmqq jjsafO mb-3 input-group"
+    >
+      <input
+        className="form-control"
+        defaultValue=""
+        onChange={[Function]}
+        placeholder="Please write the film name"
+      />
+      <div
+        className="input-group-append"
+      >
+        <button
+          className="btn btn-outline-danger"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+    <div
+      className="types"
+    >
+      <div
+        className="nav"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="All"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            All
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Documentary"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Documentary
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Comedy"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Comedy
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Horror"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Horror
+          </a>
+        </div>
+        <div
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="Crime"
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Crime
+          </a>
+        </div>
+      </div>
+      <div>
+        <p>
+          Sort by
+        </p>
+        <div
+          className="sc-gZMcBi hWBHcG dropdown"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="drop dropdown"
+            onKeyDown={[Function]}
+          >
+            <button
+              aria-expanded={false}
+              aria-haspopup={true}
+              aria-label={null}
+              className="dropdown-toggle btn btn-secondary"
+              onClick={[Function]}
+              type="button"
+            >
+              Rating
+            </button>
+            <div
+              aria-hidden={true}
+              className="dropdown-menu"
+              role="menu"
+              tabIndex="-1"
+            >
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Release date
+              </button>
+              <button
+                className="dropdown-item"
+                onClick={[Function]}
+                role="menuitem"
+                tabIndex="0"
+                type="button"
+              >
+                Rating
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="count-movie"
+    >
+      <p
+        className="count"
+      >
+        1
+         Movies found
+      </p>
+    </div>
+  </header>,
+  <section
+    className="sc-jTzLTM eHaMNc"
+  >
+    <div
+      className="sc-htpNat hUfMet card"
+    >
+      <img
+        className="card-img-top"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      />
+      <div
+        className="card-body"
+      >
+        <div
+          className="sc-bwzfXH bdtHmX card-title h5"
+        >
+          <a
+            href="/movies/undefined"
+            onClick={[Function]}
+          />
+          <span
+            className="badge badge-secondary"
+          >
+            test
+          </span>
+        </div>
+        <p
+          className="card-text"
+        >
+          <button
+            href="#"
+            info="Comedy"
+            onClick={[Function]}
+            type="submit"
+            value="Comedy"
+            variant="secondary"
+          >
+            Comedy
+          </button>
+        </p>
+      </div>
+    </div>
+  </section>,
+]
+`;
+
+exports[`<StartPage/> should equals to snapshot of StartPage when data is null 1`] = `
+Array [
+  <section
+    className="sc-bZQynM jXrBaw"
+  >
+    <div
+      className="modal"
+    >
+      <section
+        className="modal-main"
+      >
+        <div
+          className="sc-EHOje hYgIFK"
+        >
+          <form
+            className=""
+          >
+            <div
+              className="sc-ifAKCX drmYPe"
+            >
+              <button
+                className="close"
+                onClick={[Function]}
+                type="button"
+              >
+                <span>
+                  ×
+                </span>
+              </button>
+              <h2>
+                Edit movie
+              </h2>
+            </div>
+            <div
+              className="Edit movie form-group"
+              data-testid="form"
+            >
+              <label
+                className="form-label"
+              >
+                Movie id
+              </label>
+              <input
+                className="form-control"
+                name="id"
+                onChange={[Function]}
+                placeholder="Id"
+                readOnly={true}
+                type="number"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Title
+              </label>
+              <input
+                className="form-control"
+                name="title"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Title"
+                type="text"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Release date
+              </label>
+              <input
+                className="form-control"
+                name="date"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Select Date"
+                type="date"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Movie URL
+              </label>
+              <input
+                className="form-control"
+                name="url"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Movie URL here"
+                type="url"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Example select
+              </label>
+              <div
+                className="select css-2b097c-container"
+                onKeyDown={[Function]}
+              >
+                <div
+                  className=" css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className=" css-g1d714-ValueContainer"
+                  >
+                    <div
+                      className=" css-1wa3eu0-placeholder"
+                    >
+                      Select Genre
+                    </div>
+                    <div
+                      className="css-b8ldur-Input"
+                    >
+                      <div
+                        className=""
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          disabled={false}
+                          id="react-select-4-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "boxSizing": "content-box",
+                              "color": "inherit",
+                              "fontSize": "inherit",
+                              "label": "input",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "1px",
+                            }
+                          }
+                          tabIndex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      className=" css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className=" css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="css-6q0nyr-Svg"
+                        focusable="false"
+                        height={20}
+                        viewBox="0 0 20 20"
+                        width={20}
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    name="select"
+                    type="hidden"
+                  />
+                </div>
+              </div>
+              <label
+                className="form-label"
+              >
+                Overview
+              </label>
+              <input
+                className="form-control"
+                name="overview"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Overview here"
+                type="text"
+                value=""
+              />
+              <label
+                className="form-label"
+              >
+                Runtime
+              </label>
+              <input
+                className="form-control"
+                name="runtime"
+                onBlur={[Function]}
+                onChange={[Function]}
+                placeholder="Runtime here"
+                type="number"
+                value=""
+              />
+            </div>
+            <div
+              className="sc-bxivhb iodYpz"
+            >
+              <button
+                className="btn btn-primary"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                Reset
+              </button>
+              <button
+                className="btn btn-primary"
+                disabled={true}
+                onClick={[Function]}
+                type="button"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </section>,
+  <section
+    className="sc-gzVnrw kUQjQA"
+  >
+    <div
+      className="modal"
+    >
+      <section
+        className="modal-main"
+      >
+        <div
+          className="sc-ifAKCX drmYPe"
+        >
+          <button
+            className="close"
+            onClick={[Function]}
+            type="button"
+          >
+            <span>
+              ×
+            </span>
+          </button>
+          <h2>
+            Delete Movie
+          </h2>
+        </div>
+        <p>
+          Are you sure you want to delete this movie?
+        </p>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Confirm
+        </button>
+      </section>
+    </div>
+  </section>,
   <header
     className="sc-gqjmRU bLsPVA"
   >
@@ -175,10 +1564,5 @@ Array [
       className="count-movie"
     />
   </header>,
-  <h3
-    className="sc-VigVT hBdmWj"
-  >
-    No movie found
-  </h3>,
 ]
 `;

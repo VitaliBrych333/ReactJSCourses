@@ -5,6 +5,7 @@ import * as actions from '../actions/windowActions';
 describe('windowReducer', () => {
   it('should return the initial state', () => {
     expect(windowReducer(undefined, {})).toEqual({
+      filmEdit: null,
       isShowEditPage: false,
       isShowDeletePage: false,
       isShowAddPage: false,
@@ -20,6 +21,7 @@ describe('windowReducer', () => {
     };
 
     expect(windowReducer(undefined, successAction)).toEqual({
+      filmEdit: null,
       isShowEditPage: true,
       isShowDeletePage: false,
       isShowAddPage: false,
@@ -35,6 +37,7 @@ describe('windowReducer', () => {
     };
 
     expect(windowReducer(undefined, successAction)).toEqual({
+      filmEdit: null,
       isShowEditPage: false,
       isShowDeletePage: true,
       isShowAddPage: false,
@@ -50,9 +53,40 @@ describe('windowReducer', () => {
     };
 
     expect(windowReducer(undefined, successAction)).toEqual({
+      filmEdit: null,
       isShowEditPage: false,
       isShowDeletePage: false,
       isShowAddPage: true,
     });
+  });
+
+  it('should handle SET_EDITFILM', () => {
+    const expectedAction = {
+      type: actions.SET_EDITFILM,
+      payload: {
+        filmEdit: 'testFilm',
+      },
+    };
+
+    expect(actions.setEditFilm('testFilm')).toEqual(expectedAction);
+  });
+
+  it('should set up data for SET_EDITFILM', () => {
+    const successAction = {
+      type: actions.SET_EDITFILM,
+      payload: {
+        actionType: 'Edit',
+        filmEdit: 'testFilm',
+      },
+    };
+
+    const expectState = {
+      filmEdit: 'testFilm',
+      isShowEditPage: true,
+      isShowDeletePage: false,
+      isShowAddPage: false,
+    };
+
+    expect(windowReducer(undefined, successAction)).toEqual(expectState);
   });
 });

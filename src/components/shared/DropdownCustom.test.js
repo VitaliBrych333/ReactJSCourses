@@ -5,23 +5,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DropdownCustom from './DropdownCustom';
 
-global.document.createRange = () => ({
-  setStart: () => {},
-  setEnd: () => {},
-  commonAncestorContainer: {
-    nodeName: 'BODY',
-    ownerDocument: document,
-  },
-});
-
 describe('<DropdownCustom/>', () => {
   const initialState = {
     movieReducer: {
       moviesByCriteria: {
         data: [],
       },
-    },
-    criteriaReducer: {
       sort: 'release_date',
     },
   };

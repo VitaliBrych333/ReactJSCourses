@@ -14,6 +14,7 @@ describe('<StartPage/>', () => {
     movieReducer: {
       moviesByCriteria: {
         data: [],
+        totalAmount: 1,
       },
     },
     criteriaReducer: {
@@ -21,8 +22,12 @@ describe('<StartPage/>', () => {
       sort: 'sort',
     },
     windowReducer: {
-      isShowEditPage: false,
-      isShowDeletePage: false,
+      filmEdit: {
+        id: 1,
+        genres: ['Comedy', 'Action'],
+      },
+      isShowEditPage: true,
+      isShowDeletePage: true,
     },
   };
   const mockStore = configureStore();
@@ -50,6 +55,83 @@ describe('<StartPage/>', () => {
   });
 
   it('should equals to snapshot of StartPage', () => {
+    const renderedValue = renderer
+      .create(
+        <Router>
+          <Provider store={store}>
+            <StartPage />
+          </Provider>
+        </Router>
+      )
+      .toJSON();
+    expect(renderedValue).toMatchSnapshot();
+  });
+
+  it('should equals to snapshot of StartPage when data is not empty', () => {
+    const newInitialState = {
+      movieReducer: {
+        moviesByCriteria: {
+          data: [
+            {
+              release_date: 'test',
+              genres: ['Comedy'],
+            },
+          ],
+          totalAmount: 1,
+        },
+      },
+      criteriaReducer: {
+        search: 'search',
+        sort: 'sort',
+      },
+      windowReducer: {
+        filmEdit: {
+          id: 1,
+          genres: ['Comedy', 'Action'],
+        },
+        isShowEditPage: true,
+        isShowDeletePage: true,
+      },
+    };
+
+    store = mockStore(newInitialState);
+
+    const renderedValue = renderer
+      .create(
+        <Router>
+          <Provider store={store}>
+            <StartPage />
+          </Provider>
+        </Router>
+      )
+      .toJSON();
+    expect(renderedValue).toMatchSnapshot();
+  });
+
+  it('should equals to snapshot of StartPage when data is null', () => {
+    const newInitialState = {
+      movieReducer: {
+        moviesByCriteria: {
+          data: null,
+          totalAmount: 0,
+        },
+      },
+      criteriaReducer: {
+        search: 'search',
+        sort: 'sort',
+      },
+      windowReducer: {
+        filmEdit: {
+          id: 1,
+          genres: ['Comedy', 'Action'],
+        },
+        isShowEditPage: true,
+        isShowDeletePage: true,
+      },
+    };
+
+    store = mockStore(newInitialState);
+
     const renderedValue = renderer
       .create(
         <Router>

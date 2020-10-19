@@ -5,11 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import NamePage from './shared/NamePage';
 import { showDeletePage } from '../redux/actions/windowActions';
-import {
-  deleteMovie,
-  setMoviesByGenre,
-  fetchMoviesSuccess,
-} from '../redux/actions/moviesActions';
+import { deleteMovie } from '../redux/actions/moviesActions';
 
 const StyledSection = styled.section`
   .modal {
@@ -47,30 +43,24 @@ const StyledSection = styled.section`
   }
 `;
 
+const updateFilms = (films, id) => {
+  const newValueMovies = {
+    data: films.data.filter((item) => item.id !== id),
+    totalAmount: films.totalAmount - 1,
+  };
+
+  return newValueMovies;
+};
+
 const DeleteWindow = (props) => {
-  const { dispatch, moviesByCriteria, movies, filmEdit } = props;
-  const handleClose = useCallback(() => dispatch(showDeletePage(false)), [
-    dispatch,
-  ]);
-
-  const updateFilms = useCallback(
-    (films) => {
-      const newValueMovies = {
-        data: films.data.filter((item) => item.id !== filmEdit.id),
-        totalAmount: films.totalAmount - 1,
-      };
-
-      return newValueMovies;
-    },
-    [filmEdit]
-  );
+  const { moviesByCriteria, movies, filmEdit, deleteFilm, showDelete } = props;
+  const handleClose = useCallback(() => showDelete(false), [showDelete]);
 
   const handleClick = useCallback(() => {
-    dispatch(deleteMovie(filmEdit.id));
-    dispatch(setMoviesByGenre(updateFilms(moviesByCriteria)));
-    dispatch(fetchMoviesSuccess(updateFilms(movies)));
-    handleClose();
-  }, [dispatch, filmEdit, updateFilms, moviesByCriteria, movies, handleClose]);
+    const newMoviesByCriteria = updateFilms(moviesByCriteria, filmEdit.id);
+    const newMovies = updateFilms(movies, filmEdit.id);
+    deleteFilm(filmEdit.id, newMoviesByCriteria, newMovies);
+  }, [moviesByCriteria, filmEdit.id, movies, deleteFilm]);
 
   return (
     <StyledSection>
@@ -88,7 +78,8 @@ const DeleteWindow = (props) => {
 };
 
 DeleteWindow.propTypes = {
-  dispatch: PropTypes.func,
+  showDelete: PropTypes.func,
+  deleteFilm: PropTypes.func,
   filmEdit: PropTypes.shape({
     id: PropTypes.number,
   }),
@@ -101,9 +92,17 @@ DeleteWindow.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filmEdit: state.movieReducer.filmEdit,
+  filmEdit: state.windowReducer.filmEdit,
   moviesByCriteria: state.movieReducer.moviesByCriteria,
   movies: state.movieReducer.movies,
 });
 
-export default connect(mapStateToProps)(DeleteWindow);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteFilm: (id, newMoviesByCriteria, newMovies) =>
+      dispatch(deleteMovie(id, newMoviesByCriteria, newMovies)),
+    showDelete: (value) => dispatch(showDeletePage(value)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteWindow);
