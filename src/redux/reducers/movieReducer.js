@@ -99,15 +99,22 @@ export default function movieReducer(state = initialState, action) {
           break;
       }
 
-      const data = state.moviesByCriteria.data.slice();
-      const sortData = sortBy(typeSort, data);
+      const { data } = state.moviesByCriteria;
 
+      if (data && data.length) {
+        const sortData = sortBy(typeSort, data.slice());
+
+        return {
+          ...state,
+          moviesByCriteria: {
+            data: sortData,
+            totalAmount: state.moviesByCriteria.totalAmount,
+          },
+          sort: typeSort,
+        };
+      }
       return {
         ...state,
-        moviesByCriteria: {
-          data: sortData,
-          totalAmount: state.moviesByCriteria.totalAmount,
-        },
         sort: typeSort,
       };
 
