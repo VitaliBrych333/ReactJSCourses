@@ -57,20 +57,4 @@ describe('<DropdownCustom/>', () => {
 
     expect(countValue.textContent).toBe('Release date');
   });
-
-  it('should not set Release date or Rating', () => {
-    render(
-      <Provider store={store}>
-        <DropdownCustom />
-      </Provider>
-    );
-
-    const countValue = screen.queryByRole('button', {
-      class: 'dropdown-item',
-    });
-    screen.queryAllByText('Release date')[1].textContent = 'test';
-    userEvent.click(screen.getByText('test'));
-
-    expect(countValue.textContent).toBe('test');
-  });
 });

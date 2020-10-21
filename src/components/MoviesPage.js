@@ -7,33 +7,25 @@ import StartPage from './StartPage';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
-const MoviesPage = ({ getMovies }) => {
+const MoviesPage = ({ fetchMovies }) => {
   const query = useQuery();
   const history = useHistory();
   const sortBy = query.get('sortBy');
   const search = query.get('search');
 
   useEffect(() => {
-    !sortBy || !search ? history.push('/') : getMovies(sortBy, search);
-  }, [sortBy, search, history, getMovies]);
+    !sortBy || !search ? history.push('/') : fetchMovies(sortBy, search, true);
+  }, [sortBy, search, history, fetchMovies]);
 
   return <StartPage />;
 };
 
 MoviesPage.propTypes = {
-  getMovies: PropTypes.func,
+  fetchMovies: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  sortType: state.movieReducer.sort,
-  isShowAddPage: state.windowReducer.isShowAddPage,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getMovies: (sortType, value) =>
-      dispatch(fetchMovies(sortType, value, true)),
-  };
+const mapDispatchToProps = {
+  fetchMovies,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesPage);
+export default connect(null, mapDispatchToProps)(MoviesPage);

@@ -152,32 +152,48 @@ describe('movieReducer', () => {
     expect(actions.fetchMoviesBegin()).toEqual(expectedAction);
   });
 
-  it('should return new state with movies is empty', () => {
+  it('should return new state with movies were sorted by release_date', () => {
     const successAction = {
       type: actions.SORT,
       payload: {
-        value: 'vote_average',
+        value: 'Release date',
       },
     };
 
     const expectState = {
       movies: { data: [], totalAmount: 0 },
-      moviesByCriteria: { data: null, totalAmount: 0 },
+      moviesByCriteria: {
+        data: [{ release_date: '2014-01-01' }, { release_date: '2012-01-01' }],
+        totalAmount: 0,
+      },
       filmId: {},
-      sort: 'vote_average',
+      sort: 'release_date',
       genre: 'All',
       loading: false,
       error: null,
     };
 
-    expect(movieReducer(undefined, successAction)).toEqual(expectState);
+    const initialState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: {
+        data: [{ release_date: '2012-01-01' }, { release_date: '2014-01-01' }],
+        totalAmount: 0,
+      },
+      filmId: {},
+      sort: 'release_date',
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    expect(movieReducer(initialState, successAction)).toEqual(expectState);
   });
 
   it('should return new state with movies were sorted by vote_average', () => {
     const successAction = {
       type: actions.SORT,
       payload: {
-        value: 'vote_average',
+        value: 'Rating',
       },
     };
 
@@ -208,6 +224,27 @@ describe('movieReducer', () => {
     };
 
     expect(movieReducer(initialState, successAction)).toEqual(expectState);
+  });
+
+  it('should return new state with sort is undefined', () => {
+    const successAction = {
+      type: actions.SORT,
+      payload: {
+        value: 'test',
+      },
+    };
+
+    const expectState = {
+      movies: { data: [], totalAmount: 0 },
+      moviesByCriteria: { data: null, totalAmount: 0 },
+      filmId: {},
+      sort: undefined,
+      genre: 'All',
+      loading: false,
+      error: null,
+    };
+
+    expect(movieReducer(undefined, successAction)).toEqual(expectState);
   });
 
   it('should return new state with movies were filtered by genre', () => {

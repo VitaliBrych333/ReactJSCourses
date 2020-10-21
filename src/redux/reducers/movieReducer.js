@@ -86,22 +86,35 @@ export default function movieReducer(state = initialState, action) {
       };
 
     case SORT:
-      const typeSort = action.payload.value;
-      let data;
-      let sortData;
-      if (state.moviesByCriteria.data && state.moviesByCriteria.data.length) {
-        data = state.moviesByCriteria.data.slice();
-        sortData = sortBy(typeSort, data);
-      } else {
-        sortData = null;
+      let typeSort;
+
+      switch (action.payload.value) {
+        case 'Release date':
+          typeSort = 'release_date';
+          break;
+        case 'Rating':
+          typeSort = 'vote_average';
+          break;
+        default:
+          break;
       }
 
+      const { data } = state.moviesByCriteria;
+
+      if (data && data.length) {
+        const sortData = sortBy(typeSort, data.slice());
+
+        return {
+          ...state,
+          moviesByCriteria: {
+            data: sortData,
+            totalAmount: state.moviesByCriteria.totalAmount,
+          },
+          sort: typeSort,
+        };
+      }
       return {
         ...state,
-        moviesByCriteria: {
-          data: sortData,
-          totalAmount: state.moviesByCriteria.totalAmount,
-        },
         sort: typeSort,
       };
 

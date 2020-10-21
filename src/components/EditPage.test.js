@@ -15,6 +15,7 @@ describe('<NamePage/>', () => {
   const initialState = {
     movieReducer: {
       filmId: {
+        id: 1,
         data: {
           vote_average: 1,
           title: 'test',
@@ -24,7 +25,8 @@ describe('<NamePage/>', () => {
     },
     windowReducer: {
       filmEdit: {
-        genres: ['Comedy'],
+        id: 1,
+        genres: ['Comedy', 'Action'],
       },
     },
   };

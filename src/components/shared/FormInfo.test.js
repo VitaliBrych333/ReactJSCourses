@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { render, screen, fireEvent } from '@testing-library/react';
 import selectEvent from 'react-select-event';
+import { act } from 'react-dom/test-utils';
 import FormInfo from './FormInfo';
 
 describe('<FormInfo/>', () => {
@@ -47,8 +48,10 @@ describe('<FormInfo/>', () => {
     const close = screen.queryAllByRole('button');
     const h2 = screen.getByText('Edit movie');
 
-    fireEvent.click(reset);
-    fireEvent.click(close[0]);
+    act(() => {
+      fireEvent.click(reset);
+      fireEvent.click(close[0]);
+    });
 
     expect(h2.textContent).toBe('Edit movie');
   });
@@ -63,8 +66,10 @@ describe('<FormInfo/>', () => {
     const reset = screen.getByText('Reset');
     const close = screen.queryAllByRole('button');
 
-    fireEvent.click(reset);
-    fireEvent.click(close[0]);
+    act(() => {
+      fireEvent.click(reset);
+      fireEvent.click(close[0]);
+    });
 
     expect(reset.textContent).toBe('Reset');
   });
@@ -81,8 +86,10 @@ describe('<FormInfo/>', () => {
 
     const h2 = screen.getByText('Add movie');
 
-    fireEvent.click(reset);
-    fireEvent.click(close[0]);
+    act(() => {
+      fireEvent.click(reset);
+      fireEvent.click(close[0]);
+    });
 
     expect(h2.textContent).toBe('Add movie');
   });
@@ -97,7 +104,10 @@ describe('<FormInfo/>', () => {
     const genre = document.querySelector('.select');
 
     await selectEvent.select(genre, ['Comedy']);
-    fireEvent.blur(title);
+
+    act(() => {
+      fireEvent.blur(title);
+    });
 
     expect(title.nextSibling.innerHTML).toBe('Required');
   });
@@ -112,7 +122,10 @@ describe('<FormInfo/>', () => {
     const genre = document.querySelector('.select');
 
     await selectEvent.select(genre, ['Comedy']);
-    fireEvent.blur(url);
+
+    act(() => {
+      fireEvent.blur(url);
+    });
 
     expect(url.nextSibling.innerHTML).toBe('Required');
   });
@@ -127,7 +140,10 @@ describe('<FormInfo/>', () => {
     const genre = document.querySelector('.select');
 
     await selectEvent.select(genre, ['Comedy']);
-    fireEvent.blur(date);
+
+    act(() => {
+      fireEvent.blur(date);
+    });
 
     expect(date.nextSibling.innerHTML).toBe('Required');
   });
@@ -142,7 +158,10 @@ describe('<FormInfo/>', () => {
     const genre = document.querySelector('.select');
 
     await selectEvent.select(genre, ['Comedy']);
-    fireEvent.blur(overview);
+
+    act(() => {
+      fireEvent.blur(overview);
+    });
 
     expect(overview.nextSibling.innerHTML).toBe('Required');
   });
@@ -157,7 +176,10 @@ describe('<FormInfo/>', () => {
     const genre = document.querySelector('.select');
 
     await selectEvent.select(genre, ['Comedy']);
-    fireEvent.blur(runtime);
+
+    act(() => {
+      fireEvent.blur(runtime);
+    });
 
     expect(runtime.nextSibling.innerHTML).toBe('Required');
   });

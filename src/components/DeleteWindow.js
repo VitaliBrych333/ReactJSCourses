@@ -53,14 +53,23 @@ const updateFilms = (films, id) => {
 };
 
 const DeleteWindow = (props) => {
-  const { moviesByCriteria, movies, filmEdit, deleteFilm, showDelete } = props;
-  const handleClose = useCallback(() => showDelete(false), [showDelete]);
+  const {
+    moviesByCriteria,
+    movies,
+    filmEdit,
+    deleteMovie,
+    showDeletePage,
+  } = props;
+
+  const handleClose = useCallback(() => showDeletePage(false), [
+    showDeletePage,
+  ]);
 
   const handleClick = useCallback(() => {
     const newMoviesByCriteria = updateFilms(moviesByCriteria, filmEdit.id);
     const newMovies = updateFilms(movies, filmEdit.id);
-    deleteFilm(filmEdit.id, newMoviesByCriteria, newMovies);
-  }, [moviesByCriteria, filmEdit.id, movies, deleteFilm]);
+    deleteMovie(filmEdit.id, newMoviesByCriteria, newMovies);
+  }, [moviesByCriteria, filmEdit.id, movies, deleteMovie]);
 
   return (
     <StyledSection>
@@ -78,8 +87,8 @@ const DeleteWindow = (props) => {
 };
 
 DeleteWindow.propTypes = {
-  showDelete: PropTypes.func,
-  deleteFilm: PropTypes.func,
+  showDeletePage: PropTypes.func,
+  deleteMovie: PropTypes.func,
   filmEdit: PropTypes.shape({
     id: PropTypes.number,
   }),
@@ -97,12 +106,9 @@ const mapStateToProps = (state) => ({
   movies: state.movieReducer.movies,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteFilm: (id, newMoviesByCriteria, newMovies) =>
-      dispatch(deleteMovie(id, newMoviesByCriteria, newMovies)),
-    showDelete: (value) => dispatch(showDeletePage(value)),
-  };
+const mapDispatchToProps = {
+  deleteMovie,
+  showDeletePage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteWindow);

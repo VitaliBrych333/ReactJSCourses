@@ -38,7 +38,6 @@ Array [
               </div>
               <div
                 className="Add movie form-group"
-                data-testid="form"
               >
                 <label
                   className="form-label"
@@ -51,7 +50,7 @@ Array [
                   onBlur={[Function]}
                   onChange={[Function]}
                   placeholder="Title"
-                  type="text"
+                  type="title"
                   value=""
                 />
                 <label
@@ -188,12 +187,6 @@ Array [
                         </svg>
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <input
-                      name="select"
-                      type="hidden"
-                    />
                   </div>
                 </div>
                 <label
