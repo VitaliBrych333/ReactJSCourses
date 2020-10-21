@@ -14,7 +14,7 @@ const MoviesPage = ({ fetchMovies }) => {
   const search = query.get('search');
 
   useEffect(() => {
-    !sortBy || !search ? history.push('/') : fetchMovies(sortBy, search);
+    !sortBy || !search ? history.push('/') : fetchMovies(sortBy, search, true);
   }, [sortBy, search, history, fetchMovies]);
 
   return <StartPage />;
