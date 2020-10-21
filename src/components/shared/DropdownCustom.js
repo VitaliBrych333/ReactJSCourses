@@ -8,8 +8,7 @@ import {
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { setSort } from '../../redux/actions/criteriaActions';
-import { sortRelease, sortRating } from '../../redux/actions/moviesActions';
+import { sort } from '../../redux/actions/moviesActions';
 
 const StyledGroup = styled(Dropdown)`
   display: inline-block;
@@ -20,7 +19,7 @@ const StyledGroup = styled(Dropdown)`
 `;
 
 const DropdownCustom = (props) => {
-  const { sort, moviesByCriteria, dispatch } = props;
+  const { sortType, sort } = props;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => {
@@ -28,27 +27,15 @@ const DropdownCustom = (props) => {
   };
 
   const [dropdownValue, setValue] = useState(
-    sort === 'release_date' ? 'Release date' : 'Rating'
+    sortType === 'release_date' ? 'Release date' : 'Rating'
   );
 
   const handleClick = useCallback(
     (e) => {
       setValue(() => e.target.textContent);
-
-      switch (e.target.textContent) {
-        case 'Release date':
-          dispatch(setSort('release_date'));
-          dispatch(sortRelease(moviesByCriteria));
-          break;
-        case 'Rating':
-          dispatch(setSort('vote_average'));
-          dispatch(sortRating(moviesByCriteria));
-          break;
-        default:
-          break;
-      }
+      sort(e.target.textContent);
     },
-    [dispatch, moviesByCriteria]
+    [sort]
   );
 
   return (
@@ -65,14 +52,16 @@ const DropdownCustom = (props) => {
 };
 
 DropdownCustom.propTypes = {
-  sort: PropTypes.string,
-  moviesByCriteria: PropTypes.arrayOf(PropTypes.object),
-  dispatch: PropTypes.func,
+  sortType: PropTypes.string,
+  sort: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  sort: state.criteriaReducer.sort,
-  moviesByCriteria: state.movieReducer.moviesByCriteria.data,
+  sortType: state.movieReducer.sort,
 });
 
-export default connect(mapStateToProps)(DropdownCustom);
+const mapDispatchToProps = {
+  sort,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropdownCustom);

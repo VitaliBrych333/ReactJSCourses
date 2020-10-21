@@ -10,13 +10,37 @@ import * as Yup from 'yup';
 import ButtonsFormGroup from './ButtonsFormGroup';
 import NamePage from './NamePage';
 import selectOptions from './SelectOptions';
-import {
-  addMovie,
-  updateMovie,
-  setMoviesByGenre,
-  fetchMoviesSuccess,
-} from '../../redux/actions/moviesActions';
+import { addMovie, updateMovie } from '../../redux/actions/moviesActions';
 import { showEditPage, showAddPage } from '../../redux/actions/windowActions';
+
+const FormSchema = Yup.object({
+  id: Yup.number().integer('Invalid format'),
+  title: Yup.string().required('Required'),
+  date: Yup.date().required('Required'),
+  url: Yup.string().url('Invalid format').required('Required'),
+  genre: Yup.string().nullable().required('Required'),
+  overview: Yup.string().required('Required'),
+  runtime: Yup.number()
+    .integer('Invalid format')
+    .positive('Invalid format')
+    .required('Required'),
+});
+
+const updateFilms = (films, editFilm) => {
+  let objMovies = JSON.parse(JSON.stringify(films));
+
+  objMovies.data.forEach((item) => {
+    if (item.id === editFilm.id) {
+      for (const key in item) {
+        if (key !== 'id') {
+          item[key] = editFilm[key];
+        }
+      }
+    }
+  });
+
+  return objMovies;
+};
 
 const StyledGroup = styled.div`
   label {
@@ -32,12 +56,15 @@ const StyledGroup = styled.div`
 
 const FormInfo = (props) => {
   const {
-    dispatch,
     namePage,
     filmEdit,
     movies,
     moviesByCriteria,
     nameButton,
+    updateMovie,
+    addMovie,
+    showEditPage,
+    showAddPage,
   } = props;
 
   const initialValues = {
@@ -50,61 +77,44 @@ const FormInfo = (props) => {
     runtime: '',
   };
 
-  const FormSchema = Yup.object({
-    id: Yup.number().integer('Invalid format'),
-    title: Yup.string().required('Required'),
-    date: Yup.date().required('Required'),
-    url: Yup.string().url('Invalid format').required('Required'),
-    genre: Yup.string().nullable().required('Required'),
-    overview: Yup.string().required('Required'),
-    runtime: Yup.number()
-      .integer('Invalid format')
-      .positive('Invalid format')
-      .required('Required'),
-  });
-
-  const updateFilms = (films, editFilm) => {
-    let objMovies = { ...films };
-
-    objMovies.data.forEach((item) => {
-      if (item.id === editFilm.id) {
-        for (const key in item) {
-          if (key !== 'id') {
-            item[key] = editFilm[key];
-          }
-        }
-      }
-    });
-
-    return objMovies;
-  };
-
   const formik = useFormik({
     initialValues,
     validationSchema: FormSchema,
 
-    onSubmit: (values) => {
-      let newFilm = {
-        title: values.title,
-        genres: Array.from(values.genre, (item) => item.label),
-        release_date: values.date,
-        poster_path: values.url,
-        overview: values.overview,
-        runtime: values.runtime,
-      };
+    onSubmit: useCallback(
+      (values) => {
+        let newFilm = {
+          title: values.title,
+          genres: Array.from(values.genre, (item) => item.label),
+          release_date: values.date,
+          poster_path: values.url,
+          overview: values.overview,
+          runtime: values.runtime,
+        };
 
-      if (nameButton === 'Submit') {
-        dispatch(addMovie(newFilm));
-        handleClose();
-      } else if (nameButton === 'Save') {
-        newFilm.id = values.id;
-        newFilm.vote_average = filmEdit.vote_average;
+        if (nameButton === 'Submit') {
+          addMovie(newFilm);
+          handleClose();
+        } else if (nameButton === 'Save') {
+          newFilm.id = values.id;
+          newFilm.vote_average = filmEdit.vote_average;
 
-        dispatch(updateMovie(newFilm));
-        dispatch(setMoviesByGenre(updateFilms(moviesByCriteria, newFilm)));
-        dispatch(fetchMoviesSuccess(updateFilms(movies, newFilm)));
-      }
-    },
+          const newMoviesByCriteria = updateFilms(moviesByCriteria, newFilm);
+          const newMovies = updateFilms(movies, newFilm);
+
+          updateMovie(newFilm, newMoviesByCriteria, newMovies);
+        }
+      },
+      [
+        addMovie,
+        filmEdit,
+        handleClose,
+        movies,
+        moviesByCriteria,
+        nameButton,
+        updateMovie,
+      ]
+    ),
   });
 
   const handleChange = (values) => {
@@ -137,18 +147,18 @@ const FormInfo = (props) => {
     switch (namePage) {
       case 'Edit movie':
         setEditValues();
-        dispatch(showEditPage(false));
+        showEditPage(false);
         break;
 
       case 'Add movie':
         handleReset();
-        dispatch(showAddPage(false));
+        showAddPage(false);
         break;
 
       default:
         break;
     }
-  }, [dispatch, handleReset, namePage, setEditValues]);
+  }, [handleReset, namePage, setEditValues, showAddPage, showEditPage]);
 
   const handleMenuClose = () => {
     formik.setTouched({ genre: true });
@@ -271,7 +281,6 @@ const FormInfo = (props) => {
 };
 
 FormInfo.propTypes = {
-  dispatch: PropTypes.func,
   filmEdit: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -290,12 +299,23 @@ FormInfo.propTypes = {
   movies: PropTypes.shape({
     data: PropTypes.array,
   }),
+  updateMovie: PropTypes.func,
+  addMovie: PropTypes.func,
+  showEditPage: PropTypes.func,
+  showAddPage: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  filmEdit: state.movieReducer.filmEdit,
+  filmEdit: state.windowReducer.filmEdit,
   moviesByCriteria: state.movieReducer.moviesByCriteria,
   movies: state.movieReducer.movies,
 });
 
-export default connect(mapStateToProps)(FormInfo);
+const mapDispatchToProps = {
+  updateMovie,
+  addMovie,
+  showEditPage,
+  showAddPage,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormInfo);

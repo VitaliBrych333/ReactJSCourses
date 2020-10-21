@@ -9,9 +9,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
   fetchMoviesByGenre,
   fetchMovieId,
-  setEditFilm,
 } from '../redux/actions/moviesActions';
-import { showEditPage, showDeletePage } from '../redux/actions/windowActions';
+import { setEditFilm } from '../redux/actions/windowActions';
 import ModalWindow from './shared/ModalWindow';
 
 const StyledCartTitle = styled(Card.Title)`
@@ -86,7 +85,13 @@ const StyledCard = styled(Card)`
 `;
 
 const Item = (props) => {
-  const { dispatch, sort, info } = props;
+  const {
+    sortType,
+    info,
+    setEditFilm,
+    fetchMoviesByGenre,
+    fetchMovieId,
+  } = props;
 
   const [value, setValue] = useState({
     dotsIsVisible: false,
@@ -95,13 +100,13 @@ const Item = (props) => {
 
   const handleClick = useCallback(
     (e) => {
-      dispatch(fetchMoviesByGenre(sort, e.target.value));
+      fetchMoviesByGenre(sortType, e.target.value);
     },
-    [dispatch, sort]
+    [fetchMoviesByGenre, sortType]
   );
 
   const handleRequests = () => {
-    dispatch(fetchMovieId(info.id));
+    fetchMovieId(info.id);
   };
 
   const showDots = () => {
@@ -124,19 +129,7 @@ const Item = (props) => {
   const handleClickTag = (e) => {
     hideDots();
     hideModal();
-
-    switch (e.target.innerHTML) {
-      case 'Edit':
-        dispatch(setEditFilm(info));
-        dispatch(showEditPage(true));
-        break;
-      case 'Delete':
-        dispatch(setEditFilm(info));
-        dispatch(showDeletePage(true));
-        break;
-      default:
-        break;
-    }
+    setEditFilm(info, e.target.innerHTML);
   };
 
   return (
@@ -198,8 +191,10 @@ const Item = (props) => {
 };
 
 Item.propTypes = {
-  dispatch: PropTypes.func,
-  sort: PropTypes.string,
+  fetchMovieId: PropTypes.func,
+  fetchMoviesByGenre: PropTypes.func,
+  setEditFilm: PropTypes.func,
+  sortType: PropTypes.string,
   info: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -209,4 +204,15 @@ Item.propTypes = {
   }),
 };
 
-export default connect()(Item);
+const mapStateToProps = (state) => ({
+  sortType: state.movieReducer.sort,
+  movies: state.movieReducer.movies,
+});
+
+const mapDispatchToProps = {
+  setEditFilm,
+  fetchMoviesByGenre,
+  fetchMovieId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

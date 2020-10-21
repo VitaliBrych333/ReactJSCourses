@@ -19,6 +19,7 @@
     "no-unused-expressions": "off",
     "no-return-assign": "off",
     "no-case-declarations": "off",
-    "no-new-object": "off"
+    "no-new-object": "off",
+    "no-shadow": "off"
   }
 }
