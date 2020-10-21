@@ -32,7 +32,7 @@ const StyleDiv = styled.div`
   }
 `;
 const SearchFilm = (props) => {
-  const { sortType, isShowAddPage, showAdd, getMovies } = props;
+  const { sortType, isShowAddPage, fetchMovies, showAddPage } = props;
 
   const [controlValue, setValue] = useState({
     disabled: true,
@@ -45,7 +45,7 @@ const SearchFilm = (props) => {
   );
 
   const handleClick = () => {
-    getMovies(sortType, controlValue.myRef.value);
+    fetchMovies(sortType, controlValue.myRef.value);
   };
 
   const handleChange = () => {
@@ -54,7 +54,7 @@ const SearchFilm = (props) => {
   };
 
   const handleAdd = () => {
-    showAdd(true);
+    showAddPage(true);
   };
 
   return (
@@ -92,8 +92,8 @@ const SearchFilm = (props) => {
 };
 
 SearchFilm.propTypes = {
-  getMovies: PropTypes.func,
-  showAdd: PropTypes.func,
+  fetchMovies: PropTypes.func,
+  showAddPage: PropTypes.func,
   sortType: PropTypes.string,
   isShowAddPage: PropTypes.bool,
 };
@@ -103,11 +103,9 @@ const mapStateToProps = (state) => ({
   isShowAddPage: state.windowReducer.isShowAddPage,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getMovies: (sortType, value) => dispatch(fetchMovies(sortType, value)),
-    showAdd: (value) => dispatch(showAddPage(value)),
-  };
+const mapDispatchToProps = {
+  fetchMovies,
+  showAddPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchFilm);

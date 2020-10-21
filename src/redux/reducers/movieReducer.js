@@ -86,7 +86,19 @@ export default function movieReducer(state = initialState, action) {
       };
 
     case SORT:
-      const typeSort = action.payload.value;
+      let typeSort;
+
+      switch (action.payload.value) {
+        case 'Release date':
+          typeSort = 'release_date';
+          break;
+        case 'Rating':
+          typeSort = 'vote_average';
+          break;
+        default:
+          break;
+      }
+
       const data = state.moviesByCriteria.data.slice();
       const sortData = sortBy(typeSort, data);
 

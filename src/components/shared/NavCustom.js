@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { setGenre } from '../../redux/actions/moviesActions';
 
 const NavCustom = (props) => {
-  const { instGenre, genre } = props;
+  const { genre, setGenre } = props;
   const [active, setActive] = useState('All');
 
   const handleSelect = (selectedKey) => {
-    instGenre(selectedKey);
+    setGenre(selectedKey);
   };
 
   useEffect(() => {
@@ -61,17 +61,15 @@ const NavCustom = (props) => {
 
 NavCustom.propTypes = {
   genre: PropTypes.string,
-  instGenre: PropTypes.func,
+  setGenre: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   genre: state.movieReducer.genre,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    instGenre: (value) => dispatch(setGenre(value)),
-  };
+const mapDispatchToProps = {
+  setGenre,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavCustom);

@@ -61,10 +61,10 @@ const FormInfo = (props) => {
     movies,
     moviesByCriteria,
     nameButton,
-    updateAllFilms,
-    addFilm,
-    showEdit,
-    showAdd,
+    updateMovie,
+    addMovie,
+    showEditPage,
+    showAddPage,
   } = props;
 
   const initialValues = {
@@ -93,7 +93,7 @@ const FormInfo = (props) => {
         };
 
         if (nameButton === 'Submit') {
-          addFilm(newFilm);
+          addMovie(newFilm);
           handleClose();
         } else if (nameButton === 'Save') {
           newFilm.id = values.id;
@@ -102,17 +102,17 @@ const FormInfo = (props) => {
           const newMoviesByCriteria = updateFilms(moviesByCriteria, newFilm);
           const newMovies = updateFilms(movies, newFilm);
 
-          updateAllFilms(newFilm, newMoviesByCriteria, newMovies);
+          updateMovie(newFilm, newMoviesByCriteria, newMovies);
         }
       },
       [
-        addFilm,
+        addMovie,
         filmEdit,
         handleClose,
         movies,
         moviesByCriteria,
         nameButton,
-        updateAllFilms,
+        updateMovie,
       ]
     ),
   });
@@ -147,18 +147,18 @@ const FormInfo = (props) => {
     switch (namePage) {
       case 'Edit movie':
         setEditValues();
-        showEdit(false);
+        showEditPage(false);
         break;
 
       case 'Add movie':
         handleReset();
-        showAdd(false);
+        showAddPage(false);
         break;
 
       default:
         break;
     }
-  }, [handleReset, namePage, setEditValues, showAdd, showEdit]);
+  }, [handleReset, namePage, setEditValues, showAddPage, showEditPage]);
 
   const handleMenuClose = () => {
     formik.setTouched({ genre: true });
@@ -299,10 +299,10 @@ FormInfo.propTypes = {
   movies: PropTypes.shape({
     data: PropTypes.array,
   }),
-  updateAllFilms: PropTypes.func,
-  addFilm: PropTypes.func,
-  showEdit: PropTypes.func,
-  showAdd: PropTypes.func,
+  updateMovie: PropTypes.func,
+  addMovie: PropTypes.func,
+  showEditPage: PropTypes.func,
+  showAddPage: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -311,14 +311,11 @@ const mapStateToProps = (state) => ({
   movies: state.movieReducer.movies,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateAllFilms: (newFilm, newMoviesByCriteria, newMovies) =>
-      dispatch(updateMovie(newFilm, newMoviesByCriteria, newMovies)),
-    addFilm: (value) => dispatch(addMovie(value)),
-    showEdit: (value) => dispatch(showEditPage(value)),
-    showAdd: (value) => dispatch(showAddPage(value)),
-  };
+const mapDispatchToProps = {
+  updateMovie,
+  addMovie,
+  showEditPage,
+  showAddPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormInfo);

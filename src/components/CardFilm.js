@@ -88,9 +88,9 @@ const Item = (props) => {
   const {
     sortType,
     info,
-    instEditFilm,
-    getMoviesByGenre,
-    getMovieById,
+    setEditFilm,
+    fetchMoviesByGenre,
+    fetchMovieId,
   } = props;
 
   const [value, setValue] = useState({
@@ -100,13 +100,13 @@ const Item = (props) => {
 
   const handleClick = useCallback(
     (e) => {
-      getMoviesByGenre(sortType, e.target.value);
+      fetchMoviesByGenre(sortType, e.target.value);
     },
-    [getMoviesByGenre, sortType]
+    [fetchMoviesByGenre, sortType]
   );
 
   const handleRequests = () => {
-    getMovieById(info.id);
+    fetchMovieId(info.id);
   };
 
   const showDots = () => {
@@ -129,7 +129,7 @@ const Item = (props) => {
   const handleClickTag = (e) => {
     hideDots();
     hideModal();
-    instEditFilm(info, e.target.innerHTML);
+    setEditFilm(info, e.target.innerHTML);
   };
 
   return (
@@ -191,9 +191,9 @@ const Item = (props) => {
 };
 
 Item.propTypes = {
-  getMoviesByGenre: PropTypes.func,
-  getMovieById: PropTypes.func,
-  instEditFilm: PropTypes.func,
+  fetchMovieId: PropTypes.func,
+  fetchMoviesByGenre: PropTypes.func,
+  setEditFilm: PropTypes.func,
   sortType: PropTypes.string,
   info: PropTypes.shape({
     id: PropTypes.number,
@@ -209,14 +209,10 @@ const mapStateToProps = (state) => ({
   movies: state.movieReducer.movies,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    instEditFilm: (value, actionType) =>
-      dispatch(setEditFilm(value, actionType)),
-    getMoviesByGenre: (sortType, value) =>
-      dispatch(fetchMoviesByGenre(sortType, value)),
-    getMovieById: (value) => dispatch(fetchMovieId(value)),
-  };
+const mapDispatchToProps = {
+  setEditFilm,
+  fetchMoviesByGenre,
+  fetchMovieId,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item);

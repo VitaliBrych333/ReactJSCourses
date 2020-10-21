@@ -19,7 +19,7 @@ const StyledGroup = styled(Dropdown)`
 `;
 
 const DropdownCustom = (props) => {
-  const { sortType, sortBy } = props;
+  const { sortType, sort } = props;
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggle = () => {
@@ -33,19 +33,9 @@ const DropdownCustom = (props) => {
   const handleClick = useCallback(
     (e) => {
       setValue(() => e.target.textContent);
-
-      switch (e.target.textContent) {
-        case 'Release date':
-          sortBy('release_date');
-          break;
-        case 'Rating':
-          sortBy('vote_average');
-          break;
-        default:
-          break;
-      }
+      sort(e.target.textContent);
     },
-    [sortBy]
+    [sort]
   );
 
   return (
@@ -63,17 +53,15 @@ const DropdownCustom = (props) => {
 
 DropdownCustom.propTypes = {
   sortType: PropTypes.string,
-  sortBy: PropTypes.func,
+  sort: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   sortType: state.movieReducer.sort,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sortBy: (value) => dispatch(sort(value)),
-  };
+const mapDispatchToProps = {
+  sort,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropdownCustom);
