@@ -7,7 +7,6 @@ import AddPage from '../AddPage';
 import useLocalStorageState from './useLocalStorageState';
 import { fetchMovies } from '../../redux/actions/moviesActions';
 import { showAddPage } from '../../redux/actions/windowActions';
-import { setGenre } from '../../redux/actions/criteriaActions';
 
 const StyledGroup = styled(InputGroup)`
   padding: 0 50px;
@@ -33,7 +32,7 @@ const StyleDiv = styled.div`
   }
 `;
 const SearchFilm = (props) => {
-  const { dispatch, sort, isShowAddPage } = props;
+  const { sortType, isShowAddPage, fetchMovies, showAddPage } = props;
 
   const [controlValue, setValue] = useState({
     disabled: true,
@@ -46,8 +45,7 @@ const SearchFilm = (props) => {
   );
 
   const handleClick = () => {
-    dispatch(setGenre('All'));
-    dispatch(fetchMovies(sort, controlValue.myRef.value));
+    fetchMovies(sortType, controlValue.myRef.value);
   };
 
   const handleChange = () => {
@@ -56,7 +54,7 @@ const SearchFilm = (props) => {
   };
 
   const handleAdd = () => {
-    dispatch(showAddPage(true));
+    showAddPage(true);
   };
 
   return (
@@ -94,14 +92,20 @@ const SearchFilm = (props) => {
 };
 
 SearchFilm.propTypes = {
-  dispatch: PropTypes.func,
-  sort: PropTypes.string,
+  fetchMovies: PropTypes.func,
+  showAddPage: PropTypes.func,
+  sortType: PropTypes.string,
   isShowAddPage: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
-  sort: state.criteriaReducer.sort,
+  sortType: state.movieReducer.sort,
   isShowAddPage: state.windowReducer.isShowAddPage,
 });
 
-export default connect(mapStateToProps)(SearchFilm);
+const mapDispatchToProps = {
+  fetchMovies,
+  showAddPage,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchFilm);

@@ -20,7 +20,7 @@ const StyledGroup = styled.div`
     border-radius: 5%;
     width: 50%;
     height: auto;
-    top: 10%;
+    top: 12%;
     left: 72%;
     background-color: rgb(161, 144, 144);
     transform: translate(-50%, -50%);

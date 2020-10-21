@@ -26,14 +26,14 @@ const StyledDiv = styled.div`
 `;
 
 const ButtonsFormGroup = (props) => {
-  const { handleReset, handleSave, nameButton } = props;
+  const { handleReset, handleSave, nameButton, disabledSave } = props;
 
   return (
     <StyledDiv>
       <Button variant="primary" onClick={handleReset}>
         Reset
       </Button>
-      <Button variant="primary" onClick={handleSave}>
+      <Button variant="primary" onClick={handleSave} disabled={disabledSave}>
         {nameButton}
       </Button>
     </StyledDiv>
@@ -44,6 +44,7 @@ ButtonsFormGroup.propTypes = {
   handleReset: PropTypes.func,
   handleSave: PropTypes.func,
   nameButton: PropTypes.string,
+  disabledSave: PropTypes.bool,
 };
 
 export default ButtonsFormGroup;

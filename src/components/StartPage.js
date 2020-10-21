@@ -25,7 +25,7 @@ const StartPage = (props) => {
   const { data, isShowEditPage, isShowDeletePage } = props;
   let main;
 
-  if (data.length) {
+  if (data && data.length) {
     main = (
       <StyledSection>
         {data.map((item) => (

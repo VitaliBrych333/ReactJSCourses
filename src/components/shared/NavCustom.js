@@ -2,29 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Nav } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setGenre } from '../../redux/actions/criteriaActions';
-import {
-  filterByGenre,
-  setMoviesByGenre,
-  sortRating,
-  sortRelease,
-} from '../../redux/actions/moviesActions';
+import { setGenre } from '../../redux/actions/moviesActions';
 
 const NavCustom = (props) => {
-  const { dispatch, movies, moviesByCriteria, genre, sort } = props;
+  const { genre, setGenre } = props;
   const [active, setActive] = useState('All');
 
   const handleSelect = (selectedKey) => {
-    dispatch(setGenre(selectedKey));
-    dispatch(setMoviesByGenre(movies));
-
-    sort === 'vote_average'
-      ? dispatch(sortRating(moviesByCriteria))
-      : dispatch(sortRelease(moviesByCriteria));
-
-    selectedKey !== 'All'
-      ? dispatch(filterByGenre(movies.data, selectedKey))
-      : undefined;
+    setGenre(selectedKey);
   };
 
   useEffect(() => {
@@ -75,20 +60,16 @@ const NavCustom = (props) => {
 };
 
 NavCustom.propTypes = {
-  dispatch: PropTypes.func,
-  sort: PropTypes.string,
   genre: PropTypes.string,
-  moviesByCriteria: PropTypes.arrayOf(PropTypes.object),
-  movies: PropTypes.shape({
-    data: PropTypes.array,
-  }),
+  setGenre: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  moviesByCriteria: state.movieReducer.moviesByCriteria.data,
-  movies: state.movieReducer.movies,
-  sort: state.criteriaReducer.sort,
-  genre: state.criteriaReducer.genre,
+  genre: state.movieReducer.genre,
 });
 
-export default connect(mapStateToProps)(NavCustom);
+const mapDispatchToProps = {
+  setGenre,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavCustom);
