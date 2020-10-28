@@ -93,10 +93,10 @@ DeleteWindow.propTypes = {
     id: PropTypes.number,
   }),
   moviesByCriteria: PropTypes.shape({
-    data: PropTypes.array,
+    data: PropTypes.arrayOf(PropTypes.object),
   }),
   movies: PropTypes.shape({
-    data: PropTypes.array,
+    data: PropTypes.arrayOf(PropTypes.object),
   }),
 };
 
