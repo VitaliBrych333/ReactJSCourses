@@ -1,23 +1,25 @@
-const getOptions = require("./utils/getOptions");
-const RPClient = require("reportportal-client");
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+const RPClient = require('reportportal-client');
+const getOptions = require('./utils/getOptions');
 const {
   getClientInitObject,
   getSuiteStartObject,
   getStartLaunchObject,
   getTestStartObject,
-} = require("./utils/objectUtils");
+} = require('./utils/objectUtils');
 
 const testItemStatuses = {
-  PASSED: "passed",
-  FAILED: "failed",
-  SKIPPED: "pending",
+  PASSED: 'passed',
+  FAILED: 'failed',
+  SKIPPED: 'pending',
 };
 const logLevels = {
-  ERROR: "error",
-  TRACE: "trace",
-  DEBUG: "debug",
-  INFO: "info",
-  WARN: "warn",
+  ERROR: 'error',
+  TRACE: 'trace',
+  DEBUG: 'debug',
+  INFO: 'info',
+  WARN: 'warn',
 };
 
 const promiseErrorHandler = (promise) => {
@@ -101,8 +103,7 @@ class JestReportPortal {
         this._finishSkippedTest();
         break;
       default:
-        // eslint-disable-next-line no-console
-        console.log("Unsupported test Status!!!");
+        console.log('Unsupported test Status!!!');
     }
   }
 
@@ -135,7 +136,7 @@ class JestReportPortal {
 
   _sendLog(message) {
     let logObject = {
-      message: message,
+      message,
       level: logLevels.ERROR,
     };
     const { promise } = this.client.sendLog(this.tempTestId, logObject);
@@ -145,7 +146,7 @@ class JestReportPortal {
 
   _finishSkippedTest() {
     let finishTestObj = {
-      status: "skipped",
+      status: 'skipped',
     };
 
     const { promise } = this.client.finishTestItem(
