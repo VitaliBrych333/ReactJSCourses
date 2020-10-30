@@ -9,7 +9,6 @@ import ErrorBoundary from './shared/ErrorBoundary';
 import IncorrectPath from './IncorrectPath';
 import StartPage from './StartPage';
 import DetailsPage from './DetailsPage';
-import MoviesPage from './MoviesPage';
 
 const App = () => (
   <Router>
@@ -24,12 +23,7 @@ const App = () => (
           <DetailsPage />
         </ErrorBoundary>
       </Route>
-      <Route path="/movies">
-        <ErrorBoundary>
-          <MoviesPage />
-        </ErrorBoundary>
-      </Route>
-      <Route path="/search/Search20Query">
+      <Route path="/search">
         <ErrorBoundary>
           <StartPage />
         </ErrorBoundary>

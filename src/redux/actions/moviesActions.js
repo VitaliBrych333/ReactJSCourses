@@ -50,7 +50,7 @@ export const setGenre = (genre) => ({
   payload: { genre },
 });
 
-export function fetchMovies(sortBy, value, directLink = false) {
+export function fetchMovies(sortBy, value) {
   const request = `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&search=${value}&searchBy=title`;
 
   return (dispatch) => {
@@ -59,7 +59,7 @@ export function fetchMovies(sortBy, value, directLink = false) {
       .then((res) => res.json())
       .then((json) => {
         dispatch(fetchMoviesSuccess(json));
-        !directLink ? dispatch(setGenre('All')) : undefined;
+        dispatch(setGenre('All'));
         return json;
       })
       .catch((error) => dispatch(fetchMoviesFailure(error)));
@@ -122,10 +122,6 @@ export function updateMovie(movie, newMoviesByCriteria, newMovies) {
 }
 
 export function fetchMoviesByGenre(sortBy, value) {
-  if (typeof value === 'object') {
-    value = value.join('%2C%20');
-  }
-
   const request = `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&searchBy=genres&filter=${value}`;
 
   return (dispatch) => {

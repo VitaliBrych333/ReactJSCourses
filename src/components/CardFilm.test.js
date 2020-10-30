@@ -114,6 +114,6 @@ describe('<CardFilm/>', () => {
       p.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
-    expect(dispath).toHaveBeenCalledTimes(3);
+    expect(dispath).toHaveBeenCalledTimes(1);
   });
 });

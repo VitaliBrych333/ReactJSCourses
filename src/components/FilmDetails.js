@@ -136,7 +136,7 @@ Details.propTypes = {
     data: PropTypes.shape({
       poster_path: PropTypes.string,
       overview: PropTypes.string,
-      genres: PropTypes.array,
+      genres: PropTypes.arrayOf(PropTypes.string),
     }),
   }),
   total: PropTypes.number,

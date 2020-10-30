@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import CardFilm from './CardFilm';
 import FilmDetails from './FilmDetails';
 import EditPage from './EditPage';
 import DeleteWindow from './DeleteWindow';
 import NotFound from './NotFound';
+import { fetchMovieId } from '../redux/actions/moviesActions';
 
 const StyledSection = styled.section`
   padding: 25px;
@@ -22,8 +24,13 @@ const StyledSection = styled.section`
 `;
 
 const DetailsPage = (props) => {
-  const { isShowEditPage, isShowDeletePage, data } = props;
+  const { isShowEditPage, isShowDeletePage, data, fetchMovieId } = props;
+  const { id } = useParams();
   let main;
+
+  useEffect(() => {
+    id ? fetchMovieId(id) : undefined;
+  }, [id, fetchMovieId]);
 
   if (data !== null && data.length) {
     main = (
@@ -51,6 +58,7 @@ DetailsPage.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   isShowEditPage: PropTypes.bool,
   isShowDeletePage: PropTypes.bool,
+  fetchMovieId: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -59,4 +67,8 @@ const mapStateToProps = (state) => ({
   isShowDeletePage: state.windowReducer.isShowDeletePage,
 });
 
-export default connect(mapStateToProps)(DetailsPage);
+const mapDispatchToProps = {
+  fetchMovieId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

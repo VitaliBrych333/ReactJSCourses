@@ -1,11 +1,11 @@
 import React, { useState, createRef } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AddPage from '../AddPage';
 import useLocalStorageState from './useLocalStorageState';
-import { fetchMovies } from '../../redux/actions/moviesActions';
 import { showAddPage } from '../../redux/actions/windowActions';
 
 const StyledGroup = styled(InputGroup)`
@@ -31,8 +31,10 @@ const StyleDiv = styled.div`
     color: #fff;
   }
 `;
+
 const SearchFilm = (props) => {
-  const { sortType, isShowAddPage, fetchMovies, showAddPage } = props;
+  const { sortType, isShowAddPage, showAddPage } = props;
+  const history = useHistory();
 
   const [controlValue, setValue] = useState({
     disabled: true,
@@ -45,7 +47,9 @@ const SearchFilm = (props) => {
   );
 
   const handleClick = () => {
-    fetchMovies(sortType, controlValue.myRef.value);
+    history.push(
+      `/search/movies?sortBy=${sortType}&sortOrder=desc&search=${controlValue.myRef.value}&searchBy=title`
+    );
   };
 
   const handleChange = () => {
@@ -92,7 +96,6 @@ const SearchFilm = (props) => {
 };
 
 SearchFilm.propTypes = {
-  fetchMovies: PropTypes.func,
   showAddPage: PropTypes.func,
   sortType: PropTypes.string,
   isShowAddPage: PropTypes.bool,
@@ -104,7 +107,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  fetchMovies,
   showAddPage,
 };
 

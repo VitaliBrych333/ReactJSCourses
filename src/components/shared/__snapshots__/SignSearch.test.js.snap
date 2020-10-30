@@ -5,7 +5,7 @@ exports[`<SignSearch/> should equals to snapshot of SignSearch 1`] = `
   className="sc-bdVaJa ioXKbX"
 >
   <a
-    href="/search/Search20Query"
+    href="/search/movies?sortBy=vote_average&sortOrder=desc&search=undefined&searchBy=title"
     onClick={[Function]}
   >
     <i

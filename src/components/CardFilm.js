@@ -1,15 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { Badge, Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import uuid from 'react-uuid';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {
-  fetchMoviesByGenre,
-  fetchMovieId,
-} from '../redux/actions/moviesActions';
+import { fetchMovieId } from '../redux/actions/moviesActions';
 import { setEditFilm } from '../redux/actions/windowActions';
 import ModalWindow from './shared/ModalWindow';
 
@@ -85,13 +82,8 @@ const StyledCard = styled(Card)`
 `;
 
 const Item = (props) => {
-  const {
-    sortType,
-    info,
-    setEditFilm,
-    fetchMoviesByGenre,
-    fetchMovieId,
-  } = props;
+  const { sortType, info, setEditFilm } = props;
+  const history = useHistory();
 
   const [value, setValue] = useState({
     dotsIsVisible: false,
@@ -100,14 +92,12 @@ const Item = (props) => {
 
   const handleClick = useCallback(
     (e) => {
-      fetchMoviesByGenre(sortType, e.target.value);
+      history.push(
+        `/search/movies?sortBy=${sortType}&sortOrder=desc&searchBy=genres&filter=${e.target.value.toLowerCase()}`
+      );
     },
-    [fetchMoviesByGenre, sortType]
+    [history, sortType]
   );
-
-  const handleRequests = () => {
-    fetchMovieId(info.id);
-  };
 
   const showDots = () => {
     setValue({ dotsIsVisible: true });
@@ -160,12 +150,7 @@ const Item = (props) => {
 
       <Card.Body>
         <StyledCartTitle>
-          <Link
-            to={{ pathname: `/movies/${info.id}` }}
-            onClick={handleRequests}
-          >
-            {info.title}
-          </Link>
+          <Link to={{ pathname: `/movies/${info.id}` }}>{info.title}</Link>
           <Badge variant="secondary">
             {info.release_date.trim().slice(0, 4)}
           </Badge>
@@ -191,14 +176,12 @@ const Item = (props) => {
 };
 
 Item.propTypes = {
-  fetchMovieId: PropTypes.func,
-  fetchMoviesByGenre: PropTypes.func,
-  setEditFilm: PropTypes.func,
   sortType: PropTypes.string,
+  setEditFilm: PropTypes.func,
   info: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    genres: PropTypes.array,
+    genres: PropTypes.arrayOf(PropTypes.string),
     release_date: PropTypes.string,
     poster_path: PropTypes.string,
   }),
@@ -211,7 +194,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setEditFilm,
-  fetchMoviesByGenre,
   fetchMovieId,
 };
 
