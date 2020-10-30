@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 import CardFilm from './CardFilm';
 import EditPage from './EditPage';
 import DeleteWindow from './DeleteWindow';
 import SearchHeader from './SearchHeader';
 import NotFound from './NotFound';
+import {
+  fetchMovies,
+  fetchMoviesByGenre,
+} from '../redux/actions/moviesActions';
 
 const StyledSection = styled.section`
   padding: 25px;
@@ -21,11 +26,42 @@ const StyledSection = styled.section`
   }
 `;
 
+const useQuery = () => new URLSearchParams(useLocation().search);
+
 const StartPage = (props) => {
-  const { data, isShowEditPage, isShowDeletePage } = props;
+  const {
+    data,
+    isShowEditPage,
+    isShowDeletePage,
+    fetchMovies,
+    fetchMoviesByGenre,
+  } = props;
+
+  const query = useQuery();
+  const history = useHistory();
+  const sortBy = query.get('sortBy');
+  const search = query.get('search');
+  const searchBy = query.get('searchBy');
+  const filter = query.get('filter');
+
   let main;
 
-  if (data && data.length) {
+  useEffect(() => {
+    sortBy && search ? fetchMovies(sortBy, search) : undefined;
+    sortBy && searchBy && filter
+      ? fetchMoviesByGenre(sortBy, filter)
+      : undefined;
+  }, [
+    sortBy,
+    search,
+    history,
+    fetchMovies,
+    searchBy,
+    filter,
+    fetchMoviesByGenre,
+  ]);
+
+  if (data !== null && data.length) {
     main = (
       <StyledSection>
         {data.map((item) => (
@@ -33,7 +69,7 @@ const StartPage = (props) => {
         ))}
       </StyledSection>
     );
-  } else {
+  } else if (data !== null && !data.length) {
     main = <NotFound />;
   }
 
@@ -51,6 +87,13 @@ StartPage.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   isShowEditPage: PropTypes.bool,
   isShowDeletePage: PropTypes.bool,
+  fetchMovies: PropTypes.func,
+  fetchMoviesByGenre: PropTypes.func,
+};
+
+const mapDispatchToProps = {
+  fetchMovies,
+  fetchMoviesByGenre,
 };
 
 const mapStateToProps = (state) => ({
@@ -59,4 +102,4 @@ const mapStateToProps = (state) => ({
   isShowDeletePage: state.windowReducer.isShowDeletePage,
 });
 
-export default connect(mapStateToProps)(StartPage);
+export default connect(mapStateToProps, mapDispatchToProps)(StartPage);

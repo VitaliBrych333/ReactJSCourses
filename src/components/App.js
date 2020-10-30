@@ -23,7 +23,7 @@ const App = () => (
           <DetailsPage />
         </ErrorBoundary>
       </Route>
-      <Route path="/search/Search20Query">
+      <Route path="/search">
         <ErrorBoundary>
           <StartPage />
         </ErrorBoundary>

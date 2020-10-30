@@ -122,10 +122,6 @@ export function updateMovie(movie, newMoviesByCriteria, newMovies) {
 }
 
 export function fetchMoviesByGenre(sortBy, value) {
-  if (typeof value === 'object') {
-    value = value.join('%2C%20');
-  }
-
   const request = `http://localhost:4000/movies?sortBy=${sortBy}&sortOrder=desc&searchBy=genres&filter=${value}`;
 
   return (dispatch) => {
