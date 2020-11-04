@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import ButtonsCriteriaSearch from './ButtonsCriteriaSearch';
@@ -15,28 +15,16 @@ describe('<ButtonsCriteriaSearch/>', () => {
       sort: 'sort',
     },
   };
-  const mockStore = configureStore();
-  let store;
 
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    store = mockStore(initialState);
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
+  const store = configureStore()(initialState);
 
   it('should equals to snapshot of ButtonsCriteriaSearch', () => {
-    const renderedValue = renderer
-      .create(
-        <Provider store={store}>
-          <ButtonsCriteriaSearch />
-        </Provider>
-      )
-      .toJSON();
+    const renderedValue = render(
+      <Provider store={store}>
+        <ButtonsCriteriaSearch />
+      </Provider>
+    );
+
     expect(renderedValue).toMatchSnapshot();
   });
 });

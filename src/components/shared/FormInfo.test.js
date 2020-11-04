@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { render, screen, fireEvent } from '@testing-library/react';
 import selectEvent from 'react-select-event';
-import { act } from 'react-dom/test-utils';
 import FormInfo from './FormInfo';
 
 describe('<FormInfo/>', () => {
@@ -23,19 +22,7 @@ describe('<FormInfo/>', () => {
       isShowDeletePage: true,
     },
   };
-  const mockStore = configureStore();
-  let store;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    store = mockStore(initialState);
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
+  const store = configureStore()(initialState);
 
   it('should not reset name of page for Edit', async () => {
     render(
@@ -48,10 +35,8 @@ describe('<FormInfo/>', () => {
     const close = screen.queryAllByRole('button');
     const h2 = screen.getByText('Edit movie');
 
-    act(() => {
-      fireEvent.click(reset);
-      fireEvent.click(close[0]);
-    });
+    fireEvent.click(reset);
+    fireEvent.click(close[0]);
 
     expect(h2.textContent).toBe('Edit movie');
   });
@@ -66,10 +51,8 @@ describe('<FormInfo/>', () => {
     const reset = screen.getByText('Reset');
     const close = screen.queryAllByRole('button');
 
-    act(() => {
-      fireEvent.click(reset);
-      fireEvent.click(close[0]);
-    });
+    fireEvent.click(reset);
+    fireEvent.click(close[0]);
 
     expect(reset.textContent).toBe('Reset');
   });
@@ -86,10 +69,8 @@ describe('<FormInfo/>', () => {
 
     const h2 = screen.getByText('Add movie');
 
-    act(() => {
-      fireEvent.click(reset);
-      fireEvent.click(close[0]);
-    });
+    fireEvent.click(reset);
+    fireEvent.click(close[0]);
 
     expect(h2.textContent).toBe('Add movie');
   });
@@ -105,9 +86,7 @@ describe('<FormInfo/>', () => {
 
     await selectEvent.select(genre, ['Comedy']);
 
-    act(() => {
-      fireEvent.blur(title);
-    });
+    fireEvent.blur(title);
 
     expect(title.nextSibling.innerHTML).toBe('Required');
   });
@@ -123,9 +102,7 @@ describe('<FormInfo/>', () => {
 
     await selectEvent.select(genre, ['Comedy']);
 
-    act(() => {
-      fireEvent.blur(url);
-    });
+    fireEvent.blur(url);
 
     expect(url.nextSibling.innerHTML).toBe('Required');
   });
@@ -141,9 +118,7 @@ describe('<FormInfo/>', () => {
 
     await selectEvent.select(genre, ['Comedy']);
 
-    act(() => {
-      fireEvent.blur(date);
-    });
+    fireEvent.blur(date);
 
     expect(date.nextSibling.innerHTML).toBe('Required');
   });
@@ -159,9 +134,7 @@ describe('<FormInfo/>', () => {
 
     await selectEvent.select(genre, ['Comedy']);
 
-    act(() => {
-      fireEvent.blur(overview);
-    });
+    fireEvent.blur(overview);
 
     expect(overview.nextSibling.innerHTML).toBe('Required');
   });
@@ -177,9 +150,7 @@ describe('<FormInfo/>', () => {
 
     await selectEvent.select(genre, ['Comedy']);
 
-    act(() => {
-      fireEvent.blur(runtime);
-    });
+    fireEvent.blur(runtime);
 
     expect(runtime.nextSibling.innerHTML).toBe('Required');
   });

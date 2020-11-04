@@ -4,7 +4,6 @@ exports[`<StartPage/> should equals to snapshot of StartPage 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
     <div>
       <section
         class="sc-bZQynM jXrBaw"
@@ -988,7 +987,6 @@ exports[`<StartPage/> should equals to snapshot of StartPage when data is not em
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
     <div>
       <section
         class="sc-bZQynM jXrBaw"
@@ -2042,7 +2040,6 @@ exports[`<StartPage/> should equals to snapshot of StartPage when data is null 1
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    <div />
     <div>
       <section
         class="sc-bZQynM jXrBaw"

@@ -14,19 +14,7 @@ describe('<DropdownCustom/>', () => {
       sort: 'release_date',
     },
   };
-  const mockStore = configureStore();
-  let store;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    store = mockStore(initialState);
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
+  const store = configureStore()(initialState);
 
   it('should set Rating', () => {
     render(

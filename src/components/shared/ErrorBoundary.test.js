@@ -1,17 +1,13 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import ErrorBoundary from './ErrorBoundary';
 import NotFound from '../IncorrectPath';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('<ErrorBoundary/>', () => {
-  it('should returns undefined', () => {
-    expect(shallow(<ErrorBoundary />).equals(undefined)).toBe(true);
-  });
-
-  it('should display an ErrorMessage if wrapped component throws', () => {
+  it('should equals to snapshot of ErrorBoundary', () => {
     const wrapper = mount(
       <ErrorBoundary>
         <NotFound />
@@ -20,5 +16,7 @@ describe('<ErrorBoundary/>', () => {
 
     const error = new Error('test');
     wrapper.find(NotFound).simulateError(error);
+
+    expect(wrapper).toMatchSnapshot();
   });
 });

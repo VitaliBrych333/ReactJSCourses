@@ -1,323 +1,631 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SearchFilm/> should equals to snapshot of SearchFilm isShowAddPage is true 1`] = `
-Array [
-  <div
-    className="sc-EHOje dACVym"
-  >
-    <section
-      className="sc-bxivhb bjzxkO"
-    >
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
       <div
-        className="modal"
+        class="sc-EHOje dACVym"
       >
         <section
-          className="modal-main"
+          class="sc-bxivhb bjzxkO"
         >
           <div
-            className="sc-htpNat iQwqzL"
+            class="modal"
           >
-            <form
-              className=""
+            <section
+              class="modal-main"
             >
               <div
-                className="sc-bwzfXH kbQCzJ"
+                class="sc-htpNat iQwqzL"
               >
-                <button
-                  className="close"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  <span>
-                    ×
-                  </span>
-                </button>
-                <h2>
-                  Add movie
-                </h2>
-              </div>
-              <div
-                className="Add movie form-group"
-              >
-                <label
-                  className="form-label"
-                >
-                  Title
-                </label>
-                <input
-                  className="form-control"
-                  name="title"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="Title"
-                  type="title"
-                  value=""
-                />
-                <label
-                  className="form-label"
-                >
-                  Release date
-                </label>
-                <input
-                  className="form-control"
-                  name="date"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="Select Date"
-                  type="date"
-                  value=""
-                />
-                <label
-                  className="form-label"
-                >
-                  Movie URL
-                </label>
-                <input
-                  className="form-control"
-                  name="url"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="Movie URL here"
-                  type="url"
-                  value=""
-                />
-                <label
-                  className="form-label"
-                >
-                  Example select
-                </label>
-                <div
-                  className="select css-2b097c-container"
-                  onKeyDown={[Function]}
+                <form
+                  class=""
                 >
                   <div
-                    className=" css-yk16xz-control"
-                    onMouseDown={[Function]}
-                    onTouchEnd={[Function]}
+                    class="sc-bwzfXH kbQCzJ"
                   >
+                    <button
+                      class="close"
+                      type="button"
+                    >
+                      <span>
+                        ×
+                      </span>
+                    </button>
+                    <h2>
+                      Add movie
+                    </h2>
+                  </div>
+                  <div
+                    class="Add movie form-group"
+                  >
+                    <label
+                      class="form-label"
+                    >
+                      Title
+                    </label>
+                    <input
+                      class="form-control"
+                      name="title"
+                      placeholder="Title"
+                      type="title"
+                      value=""
+                    />
+                    <label
+                      class="form-label"
+                    >
+                      Release date
+                    </label>
+                    <input
+                      class="form-control"
+                      name="date"
+                      placeholder="Select Date"
+                      type="date"
+                      value=""
+                    />
+                    <label
+                      class="form-label"
+                    >
+                      Movie URL
+                    </label>
+                    <input
+                      class="form-control"
+                      name="url"
+                      placeholder="Movie URL here"
+                      type="url"
+                      value=""
+                    />
+                    <label
+                      class="form-label"
+                    >
+                      Example select
+                    </label>
                     <div
-                      className=" css-g1d714-ValueContainer"
+                      class="select css-2b097c-container"
                     >
                       <div
-                        className=" css-1wa3eu0-placeholder"
-                      >
-                        Select Genre
-                      </div>
-                      <div
-                        className="css-b8ldur-Input"
+                        class=" css-yk16xz-control"
                       >
                         <div
-                          className=""
-                          style={
-                            Object {
-                              "display": "inline-block",
-                            }
-                          }
+                          class=" css-g1d714-ValueContainer"
                         >
-                          <input
-                            aria-autocomplete="list"
-                            autoCapitalize="none"
-                            autoComplete="off"
-                            autoCorrect="off"
-                            disabled={false}
-                            id="react-select-2-input"
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            spellCheck="false"
-                            style={
-                              Object {
-                                "background": 0,
-                                "border": 0,
-                                "boxSizing": "content-box",
-                                "color": "inherit",
-                                "fontSize": "inherit",
-                                "label": "input",
-                                "opacity": 1,
-                                "outline": 0,
-                                "padding": 0,
-                                "width": "1px",
-                              }
-                            }
-                            tabIndex="0"
-                            type="text"
-                            value=""
+                          <div
+                            class=" css-1wa3eu0-placeholder"
+                          >
+                            Select Genre
+                          </div>
+                          <div
+                            class="css-b8ldur-Input"
+                          >
+                            <div
+                              class=""
+                              style="display: inline-block;"
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autocapitalize="none"
+                                autocomplete="off"
+                                autocorrect="off"
+                                id="react-select-2-input"
+                                spellcheck="false"
+                                style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                                tabindex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class=" css-1hb7zxy-IndicatorsContainer"
+                        >
+                          <span
+                            class=" css-1okebmr-indicatorSeparator"
                           />
                           <div
-                            style={
-                              Object {
-                                "height": 0,
-                                "left": 0,
-                                "overflow": "scroll",
-                                "position": "absolute",
-                                "top": 0,
-                                "visibility": "hidden",
-                                "whiteSpace": "pre",
-                              }
-                            }
+                            aria-hidden="true"
+                            class=" css-tlfecz-indicatorContainer"
                           >
-                            
+                            <svg
+                              aria-hidden="true"
+                              class="css-6q0nyr-Svg"
+                              focusable="false"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              width="20"
+                            >
+                              <path
+                                d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                              />
+                            </svg>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div
-                      className=" css-1hb7zxy-IndicatorsContainer"
+                    <label
+                      class="form-label"
                     >
-                      <span
-                        className=" css-1okebmr-indicatorSeparator"
-                      />
+                      Overview
+                    </label>
+                    <input
+                      class="form-control"
+                      name="overview"
+                      placeholder="Overview here"
+                      type="text"
+                      value=""
+                    />
+                    <label
+                      class="form-label"
+                    >
+                      Runtime
+                    </label>
+                    <input
+                      class="form-control"
+                      name="runtime"
+                      placeholder="Runtime here"
+                      type="number"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    class="sc-bdVaJa kYETlp"
+                  >
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                    >
+                      Reset
+                    </button>
+                    <button
+                      class="btn btn-primary"
+                      disabled=""
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+        </section>
+        <button
+          class="add-movie btn btn-outline-danger"
+          type="button"
+        >
+          + Add movie
+        </button>
+        <h1>
+          Find your movie
+        </h1>
+      </div>
+      <div
+        class="sc-ifAKCX hOgznM mb-3 input-group"
+      >
+        <input
+          class="form-control"
+          placeholder="Please write the film name"
+          value=""
+        />
+        <div
+          class="input-group-append"
+        >
+          <button
+            class="btn btn-outline-danger"
+            disabled=""
+            type="button"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-EHOje dACVym"
+    >
+      <section
+        class="sc-bxivhb bjzxkO"
+      >
+        <div
+          class="modal"
+        >
+          <section
+            class="modal-main"
+          >
+            <div
+              class="sc-htpNat iQwqzL"
+            >
+              <form
+                class=""
+              >
+                <div
+                  class="sc-bwzfXH kbQCzJ"
+                >
+                  <button
+                    class="close"
+                    type="button"
+                  >
+                    <span>
+                      ×
+                    </span>
+                  </button>
+                  <h2>
+                    Add movie
+                  </h2>
+                </div>
+                <div
+                  class="Add movie form-group"
+                >
+                  <label
+                    class="form-label"
+                  >
+                    Title
+                  </label>
+                  <input
+                    class="form-control"
+                    name="title"
+                    placeholder="Title"
+                    type="title"
+                    value=""
+                  />
+                  <label
+                    class="form-label"
+                  >
+                    Release date
+                  </label>
+                  <input
+                    class="form-control"
+                    name="date"
+                    placeholder="Select Date"
+                    type="date"
+                    value=""
+                  />
+                  <label
+                    class="form-label"
+                  >
+                    Movie URL
+                  </label>
+                  <input
+                    class="form-control"
+                    name="url"
+                    placeholder="Movie URL here"
+                    type="url"
+                    value=""
+                  />
+                  <label
+                    class="form-label"
+                  >
+                    Example select
+                  </label>
+                  <div
+                    class="select css-2b097c-container"
+                  >
+                    <div
+                      class=" css-yk16xz-control"
+                    >
                       <div
-                        aria-hidden="true"
-                        className=" css-tlfecz-indicatorContainer"
-                        onMouseDown={[Function]}
-                        onTouchEnd={[Function]}
+                        class=" css-g1d714-ValueContainer"
                       >
-                        <svg
-                          aria-hidden="true"
-                          className="css-6q0nyr-Svg"
-                          focusable="false"
-                          height={20}
-                          viewBox="0 0 20 20"
-                          width={20}
+                        <div
+                          class=" css-1wa3eu0-placeholder"
                         >
-                          <path
-                            d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                          />
-                        </svg>
+                          Select Genre
+                        </div>
+                        <div
+                          class="css-b8ldur-Input"
+                        >
+                          <div
+                            class=""
+                            style="display: inline-block;"
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autocapitalize="none"
+                              autocomplete="off"
+                              autocorrect="off"
+                              id="react-select-2-input"
+                              spellcheck="false"
+                              style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                              tabindex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class=" css-1hb7zxy-IndicatorsContainer"
+                      >
+                        <span
+                          class=" css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          class=" css-tlfecz-indicatorContainer"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="css-6q0nyr-Svg"
+                            focusable="false"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            width="20"
+                          >
+                            <path
+                              d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <label
+                    class="form-label"
+                  >
+                    Overview
+                  </label>
+                  <input
+                    class="form-control"
+                    name="overview"
+                    placeholder="Overview here"
+                    type="text"
+                    value=""
+                  />
+                  <label
+                    class="form-label"
+                  >
+                    Runtime
+                  </label>
+                  <input
+                    class="form-control"
+                    name="runtime"
+                    placeholder="Runtime here"
+                    type="number"
+                    value=""
+                  />
                 </div>
-                <label
-                  className="form-label"
+                <div
+                  class="sc-bdVaJa kYETlp"
                 >
-                  Overview
-                </label>
-                <input
-                  className="form-control"
-                  name="overview"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="Overview here"
-                  type="text"
-                  value=""
-                />
-                <label
-                  className="form-label"
-                >
-                  Runtime
-                </label>
-                <input
-                  className="form-control"
-                  name="runtime"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="Runtime here"
-                  type="number"
-                  value=""
-                />
-              </div>
-              <div
-                className="sc-bdVaJa kYETlp"
-              >
-                <button
-                  className="btn btn-primary"
-                  disabled={false}
-                  onClick={[Function]}
-                  type="button"
-                >
-                  Reset
-                </button>
-                <button
-                  className="btn btn-primary"
-                  disabled={true}
-                  onClick={[Function]}
-                  type="button"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </div>
-    </section>
-    <button
-      className="add-movie btn btn-outline-danger"
-      disabled={false}
-      onClick={[Function]}
-      type="button"
-    >
-      + Add movie
-    </button>
-    <h1>
-      Find your movie
-    </h1>
-  </div>,
-  <div
-    className="sc-ifAKCX hOgznM mb-3 input-group"
-  >
-    <input
-      className="form-control"
-      defaultValue=""
-      onChange={[Function]}
-      placeholder="Please write the film name"
-    />
-    <div
-      className="input-group-append"
-    >
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    class="btn btn-primary"
+                    disabled=""
+                    type="button"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </div>
+      </section>
       <button
-        className="btn btn-outline-danger"
-        disabled={true}
-        onClick={[Function]}
+        class="add-movie btn btn-outline-danger"
         type="button"
       >
-        Search
+        + Add movie
       </button>
+      <h1>
+        Find your movie
+      </h1>
+    </div>
+    <div
+      class="sc-ifAKCX hOgznM mb-3 input-group"
+    >
+      <input
+        class="form-control"
+        placeholder="Please write the film name"
+        value=""
+      />
+      <div
+        class="input-group-append"
+      >
+        <button
+          class="btn btn-outline-danger"
+          disabled=""
+          type="button"
+        >
+          Search
+        </button>
+      </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`<SearchFilm/> should equals to snapshot of SearchFilm when isShowAddPage is false 1`] = `
-Array [
-  <div
-    className="sc-EHOje dACVym"
-  >
-    <button
-      className="add-movie btn btn-outline-danger"
-      disabled={false}
-      onClick={[Function]}
-      type="button"
-    >
-      + Add movie
-    </button>
-    <h1>
-      Find your movie
-    </h1>
-  </div>,
-  <div
-    className="sc-ifAKCX hOgznM mb-3 input-group"
-  >
-    <input
-      className="form-control"
-      defaultValue=""
-      onChange={[Function]}
-      placeholder="Please write the film name"
-    />
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-EHOje dACVym"
+      >
+        <button
+          class="add-movie btn btn-outline-danger"
+          type="button"
+        >
+          + Add movie
+        </button>
+        <h1>
+          Find your movie
+        </h1>
+      </div>
+      <div
+        class="sc-ifAKCX hOgznM mb-3 input-group"
+      >
+        <input
+          class="form-control"
+          placeholder="Please write the film name"
+          value=""
+        />
+        <div
+          class="input-group-append"
+        >
+          <button
+            class="btn btn-outline-danger"
+            disabled=""
+            type="button"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
     <div
-      className="input-group-append"
+      class="sc-EHOje dACVym"
     >
       <button
-        className="btn btn-outline-danger"
-        disabled={true}
-        onClick={[Function]}
+        class="add-movie btn btn-outline-danger"
         type="button"
       >
-        Search
+        + Add movie
       </button>
+      <h1>
+        Find your movie
+      </h1>
+    </div>
+    <div
+      class="sc-ifAKCX hOgznM mb-3 input-group"
+    >
+      <input
+        class="form-control"
+        placeholder="Please write the film name"
+        value=""
+      />
+      <div
+        class="input-group-append"
+      >
+        <button
+          class="btn btn-outline-danger"
+          disabled=""
+          type="button"
+        >
+          Search
+        </button>
+      </div>
     </div>
   </div>,
-]
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

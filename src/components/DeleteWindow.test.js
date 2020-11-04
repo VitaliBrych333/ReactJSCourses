@@ -26,19 +26,7 @@ describe('<DeleteWindow/>', () => {
     },
   };
   const middlewares = [thunk];
-  const mockStore = configureStore(middlewares);
-  let store;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    store = mockStore(initialState);
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
+  const store = configureStore(middlewares)(initialState);
 
   it('should not change Confirm', () => {
     render(

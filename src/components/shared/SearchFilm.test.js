@@ -1,17 +1,11 @@
 import React, { createRef } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { mount, shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { FormControl, Button } from 'react-bootstrap';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import thunk from 'redux-thunk';
 import SearchFilm from './SearchFilm';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('<SearchFilm/>', () => {
   const initialState = {
@@ -23,40 +17,17 @@ describe('<SearchFilm/>', () => {
     },
   };
   const middlewares = [thunk];
-  const mockStore = configureStore(middlewares);
-  let store;
-  let wrapper;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    store = mockStore(initialState);
-    wrapper = shallow(
-      <Provider store={store}>
-        <SearchFilm />
-      </Provider>
-    );
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
-
-  it('render component', () => {
-    expect(wrapper.find(SearchFilm).length).toEqual(1);
-  });
+  const store = configureStore(middlewares)(initialState);
 
   it('should equals to snapshot of SearchFilm when isShowAddPage is false', () => {
-    const renderedValue = renderer
-      .create(
-        <Router>
-          <Provider store={store}>
-            <SearchFilm />
-          </Provider>
-        </Router>
-      )
-      .toJSON();
+    const renderedValue = render(
+      <Router>
+        <Provider store={store}>
+          <SearchFilm />
+        </Provider>
+      </Router>
+    );
+
     expect(renderedValue).toMatchSnapshot();
   });
 
@@ -69,37 +40,19 @@ describe('<SearchFilm/>', () => {
         isShowAddPage: true,
       },
     };
-    store = mockStore(newInitialState);
-    const renderedValue = renderer
-      .create(
-        <Router>
-          <Provider store={store}>
-            <SearchFilm />
-          </Provider>
-        </Router>
-      )
-      .toJSON();
-    expect(renderedValue).toMatchSnapshot();
-  });
-
-  it('should not call onChange and onClick', () => {
-    const onChange = jest.fn();
-    const onClick = jest.fn();
-    const wrap = mount(
+    const newStore = configureStore(middlewares)(newInitialState);
+    const renderedValue = render(
       <Router>
-        <Provider store={store}>
+        <Provider store={newStore}>
           <SearchFilm />
         </Provider>
       </Router>
     );
 
-    wrap.find(FormControl).at(0).simulate('change');
-    wrap.find(Button).at(0).simulate('click');
-    expect(onChange).toHaveBeenCalledTimes(0);
-    expect(onClick).toHaveBeenCalledTimes(0);
+    expect(renderedValue).toMatchSnapshot();
   });
 
-  it('should render button with string Search', () => {
+  it('should not change values for elements by events', () => {
     const realUseState = React.useState;
     const stubInitialState = {
       disabled: false,
@@ -108,6 +61,7 @@ describe('<SearchFilm/>', () => {
     jest
       .spyOn(React, 'useState')
       .mockImplementationOnce(() => realUseState(stubInitialState));
+
     render(
       <Router>
         <Provider store={store}>
@@ -116,9 +70,17 @@ describe('<SearchFilm/>', () => {
       </Router>
     );
 
-    const countValue = screen.queryByText('Search');
-    userEvent.click(countValue);
+    const button = screen.queryByText('+ Add movie');
+    const input = screen.queryByPlaceholderText('Please write the film name');
+    const buttonInput = screen.queryByText('Search');
 
-    expect(countValue.textContent).toBe('Search');
+    userEvent.click(buttonInput);
+    userEvent.click(button);
+    userEvent.type(input, 'r');
+
+    expect(input.getAttribute('placeholder')).toBe(
+      'Please write the film name'
+    );
+    expect(button.textContent).toBe('+ Add movie');
   });
 });

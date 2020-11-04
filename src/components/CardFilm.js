@@ -126,6 +126,7 @@ const Item = (props) => {
     <StyledCard>
       {value.dotsIsVisible && (
         <MoreVertIcon
+          data-testid="custom-element"
           className="show"
           onMouseEnter={showDots}
           onClick={showModal}

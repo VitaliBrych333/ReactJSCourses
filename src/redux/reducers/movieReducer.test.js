@@ -1,4 +1,3 @@
-import expect from 'expect';
 import movieReducer from './movieReducer';
 import * as actions from '../actions/moviesActions';
 
@@ -7,10 +6,6 @@ global.fetch = jest.fn(() =>
     json: () => Promise.resolve(),
   })
 );
-
-beforeEach(() => {
-  fetch.mockClear();
-});
 
 describe('movieReducer', () => {
   it('should return the initial state', () => {
@@ -385,18 +380,10 @@ describe('movieReducer', () => {
     );
   });
 
-  it('should return a promise when directLink is false', () => {
+  it('should return a promise and not call catch', () => {
     const dispatch = jest.fn();
 
     expect(actions.fetchMovies('rating', 'test')(dispatch)).toEqual(
-      Promise.resolve()
-    );
-  });
-
-  it('should return a promise when directLink is true', () => {
-    const dispatch = jest.fn();
-
-    expect(actions.fetchMovies('rating', 'test', true)(dispatch)).toEqual(
       Promise.resolve()
     );
   });

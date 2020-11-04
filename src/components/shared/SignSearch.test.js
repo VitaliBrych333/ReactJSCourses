@@ -1,15 +1,10 @@
 import React from 'react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import SignSearch from './SignSearch';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('<SignSearch/>', () => {
   const initialState = {
@@ -18,44 +13,17 @@ describe('<SignSearch/>', () => {
     },
   };
   const middlewares = [thunk];
-  const mockStore = configureStore(middlewares);
-  let store;
-  let container = null;
+  const store = configureStore(middlewares)(initialState);
 
-  beforeEach(() => {
-    container = document.createElement('div');
-    store = mockStore(initialState);
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
-  });
-
-  it('should render the component', () => {
-    ReactDOM.render(
+  it('should equals to snapshot of SignSearch', () => {
+    const renderedValue = render(
       <Provider store={store}>
         <Router>
           <SignSearch />
         </Router>
-      </Provider>,
-      container
+      </Provider>
     );
-    ReactDOM.unmountComponentAtNode(container);
-  });
 
-  it('should equals to snapshot of SignSearch', () => {
-    const renderedValue = renderer
-      .create(
-        <Provider store={store}>
-          <Router>
-            <SignSearch />
-          </Router>
-        </Provider>
-      )
-      .toJSON();
     expect(renderedValue).toMatchSnapshot();
   });
 });

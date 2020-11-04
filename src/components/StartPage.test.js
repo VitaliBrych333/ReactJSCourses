@@ -8,17 +8,6 @@ import StartPage from './StartPage';
 
 describe('<StartPage/>', () => {
   const middlewares = [thunk];
-  const mockStore = configureStore(middlewares);
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
 
   it('should equals to snapshot of StartPage', () => {
     const initialState = {
@@ -42,7 +31,7 @@ describe('<StartPage/>', () => {
       },
     };
 
-    const store = mockStore(initialState);
+    const store = configureStore(middlewares)(initialState);
     const renderedValue = render(
       <Router
         initialEntries={[
@@ -86,7 +75,7 @@ describe('<StartPage/>', () => {
       },
     };
 
-    const store = mockStore(newInitialState);
+    const store = configureStore(middlewares)(newInitialState);
     const renderedValue = render(
       <Router
         initialEntries={[
@@ -124,7 +113,7 @@ describe('<StartPage/>', () => {
       },
     };
 
-    const store = mockStore(newInitialState);
+    const store = configureStore(middlewares)(newInitialState);
     const renderedValue = render(
       <Router>
         <Provider store={store}>

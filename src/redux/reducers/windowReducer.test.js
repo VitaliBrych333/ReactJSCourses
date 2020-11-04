@@ -1,4 +1,3 @@
-import expect from 'expect';
 import windowReducer from './windowReducer';
 import * as actions from '../actions/windowActions';
 

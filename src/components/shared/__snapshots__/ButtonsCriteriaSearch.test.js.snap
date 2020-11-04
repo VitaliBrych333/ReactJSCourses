@@ -1,54 +1,152 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ButtonsCriteriaSearch/> should equals to snapshot of ButtonsCriteriaSearch 1`] = `
-<div>
-  <p>
-    Sort by
-  </p>
-  <div
-    className="sc-bdVaJa iAmyqe dropdown"
-    onKeyDown={[Function]}
-  >
-    <div
-      className="drop dropdown"
-      onKeyDown={[Function]}
-    >
-      <button
-        aria-expanded={false}
-        aria-haspopup={true}
-        aria-label={null}
-        className="dropdown-toggle btn btn-secondary"
-        onClick={[Function]}
-        type="button"
-      >
-        Rating
-      </button>
-      <div
-        aria-hidden={true}
-        className="dropdown-menu"
-        role="menu"
-        tabIndex="-1"
-      >
-        <button
-          className="dropdown-item"
-          onClick={[Function]}
-          role="menuitem"
-          tabIndex="0"
-          type="button"
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div>
+        <p>
+          Sort by
+        </p>
+        <div
+          class="sc-bdVaJa iAmyqe dropdown"
         >
-          Release date
-        </button>
-        <button
-          className="dropdown-item"
-          onClick={[Function]}
-          role="menuitem"
-          tabIndex="0"
-          type="button"
-        >
-          Rating
-        </button>
+          <div
+            class="drop dropdown"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              class="dropdown-toggle btn btn-secondary"
+              type="button"
+            >
+              Rating
+            </button>
+            <div
+              aria-hidden="true"
+              class="dropdown-menu"
+              role="menu"
+              tabindex="-1"
+            >
+              <button
+                class="dropdown-item"
+                role="menuitem"
+                tabindex="0"
+                type="button"
+              >
+                Release date
+              </button>
+              <button
+                class="dropdown-item"
+                role="menuitem"
+                tabindex="0"
+                type="button"
+              >
+                Rating
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div>
+      <p>
+        Sort by
+      </p>
+      <div
+        class="sc-bdVaJa iAmyqe dropdown"
+      >
+        <div
+          class="drop dropdown"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="dropdown-toggle btn btn-secondary"
+            type="button"
+          >
+            Rating
+          </button>
+          <div
+            aria-hidden="true"
+            class="dropdown-menu"
+            role="menu"
+            tabindex="-1"
+          >
+            <button
+              class="dropdown-item"
+              role="menuitem"
+              tabindex="0"
+              type="button"
+            >
+              Release date
+            </button>
+            <button
+              class="dropdown-item"
+              role="menuitem"
+              tabindex="0"
+              type="button"
+            >
+              Rating
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
