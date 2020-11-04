@@ -1,8 +1,13 @@
 {
-    "presets": [
-        "@babel/preset-env",
-        "@babel/preset-react",
-        "babel-preset-expo"
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "babel-preset-expo"
     ],
-    "plugins": ["@babel/plugin-proposal-class-properties"]
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "react-hot-loader/babel",
+    "@loadable/babel-plugin"
+  ]
 }

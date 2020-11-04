@@ -9,7 +9,8 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
 
-  .btn-primary {
+  .btn-primary,
+  .btn-primary:disabled {
     background-color: #232323;
     border-color: #f65261;
     color: #f65261;

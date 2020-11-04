@@ -1,5 +1,7 @@
 import { showAddPage, showEditPage, showDeletePage } from './windowActions';
 
+const fetch = require('node-fetch').default;
+
 export const FETCH_MOVIES_BEGIN = 'FETCH_MOVIES_BEGIN';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';
 export const FETCH_MOVIES_FAILURE = 'FETCH_MOVIES_FAILURE';

@@ -2,9 +2,6 @@ import React from 'react';
 import { MDBIcon } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import useLocalStorageState from './useLocalStorageState';
 
 const StyledSpan = styled.span`
   display: flex;
@@ -24,14 +21,12 @@ const StyledSpan = styled.span`
   }
 `;
 
-const SignSearch = ({ sortType }) => {
-  const [defaultValue] = useLocalStorageState('my-app-defaultValueSearch');
-
+const SignSearch = () => {
   return (
     <StyledSpan>
       <Link
         to={{
-          pathname: `/search/movies?sortBy=${sortType}&sortOrder=desc&search=${defaultValue}&searchBy=title`,
+          pathname: `/`,
         }}
       >
         <MDBIcon icon="search" size="1x" className="pr-3" />
@@ -40,12 +35,4 @@ const SignSearch = ({ sortType }) => {
   );
 };
 
-SignSearch.propTypes = {
-  sortType: PropTypes.string,
-};
-
-const mapStateToProps = (state) => ({
-  sortType: state.movieReducer.sort,
-});
-
-export default connect(mapStateToProps)(SignSearch);
+export default SignSearch;

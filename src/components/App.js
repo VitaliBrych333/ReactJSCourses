@@ -1,41 +1,58 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
-import ErrorBoundary from './shared/ErrorBoundary';
-import IncorrectPath from './IncorrectPath';
-import StartPage from './StartPage';
-import DetailsPage from './DetailsPage';
+import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import loadable from '@loadable/component';
+import { hot } from 'react-hot-loader';
 
-const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/">
-        <ErrorBoundary>
-          <StartPage />
-        </ErrorBoundary>
-      </Route>
-      <Route path="/movies/:id">
-        <ErrorBoundary>
-          <DetailsPage />
-        </ErrorBoundary>
-      </Route>
-      <Route path="/search">
-        <ErrorBoundary>
-          <StartPage />
-        </ErrorBoundary>
-      </Route>
-      <Route path="/404">
-        <ErrorBoundary>
-          <IncorrectPath />
-        </ErrorBoundary>
-      </Route>
-      <Redirect from="*" to="/404" />
-    </Switch>
-  </Router>
+const StartPage = loadable(
+  () =>
+    import(/* webpackChunkName: 'StartPage' */ '../pages/StartPage/StartPage'),
+  {
+    ssr: true,
+  }
+);
+const DetailsPage = loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'DetailsPage' */ '../pages/DetailsPage/DetailsPage'
+    ),
+  {
+    ssr: true,
+  }
+);
+const IncorrectPath = loadable(
+  () =>
+    import(
+      /* webpackChunkName: 'IncorrectPath' */ '../pages/NotFoundPage/IncorrectPath'
+    ),
+  { ssr: true }
 );
 
-export default App;
+const App = ({ Router, location, context, store }) => (
+  <Provider store={store}>
+    <Router location={location} context={context}>
+      <Switch>
+        <Route exact path="/" component={StartPage} />
+        <Route path="/movies/:id" component={DetailsPage} />
+        <Route path="/search" component={StartPage} />
+        <Route path="/404" component={IncorrectPath} />
+        <Route path="*" component={IncorrectPath} />
+      </Switch>
+    </Router>
+  </Provider>
+);
+
+App.propTypes = {
+  Router: PropTypes.func.isRequired,
+  location: PropTypes.string,
+  context: PropTypes.shape({
+    url: PropTypes.string,
+  }),
+  store: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default hot(module)(App);

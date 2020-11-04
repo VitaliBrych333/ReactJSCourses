@@ -1,0 +1,160 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "4.44.2",
+  "hash": "75de0f131bef5c6db761",
+  "publicPath": "",
+  "outputPath": "C:\\Users\\Vitali_Brych\\Desktop\\ReactJSCourses\\public",
+  "assetsByChunkName": {
+    "DetailsPage": "js/DetailsPage.js",
+    "IncorrectPath": "js/IncorrectPath.js",
+    "StartPage": "js/StartPage.js",
+    "serverRenderer": "js/serverRenderer.js"
+  },
+  "assets": [
+    {
+      "name": "js/DetailsPage.js",
+      "size": 33581,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "DetailsPage"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "js/IncorrectPath.js",
+      "size": 2457,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [
+        "IncorrectPath"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "js/StartPage.js",
+      "size": 33122,
+      "chunks": [
+        2
+      ],
+      "chunkNames": [
+        "StartPage"
+      ],
+      "info": {},
+      "emitted": false
+    },
+    {
+      "name": "js/serverRenderer.js",
+      "size": 51999,
+      "chunks": [
+        3,
+        0,
+        1,
+        2
+      ],
+      "chunkNames": [
+        "serverRenderer"
+      ],
+      "info": {},
+      "emitted": false
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "serverRenderer": {
+      "chunks": [
+        3
+      ],
+      "assets": [
+        "js/serverRenderer.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "StartPage": {
+      "chunks": [
+        2
+      ],
+      "assets": [
+        "js/StartPage.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "DetailsPage": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "js/DetailsPage.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "IncorrectPath": {
+      "chunks": [
+        1
+      ],
+      "assets": [
+        "js/IncorrectPath.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "serverRenderer": {
+      "chunks": [
+        3
+      ],
+      "assets": [
+        "js/serverRenderer.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "StartPage": {
+      "chunks": [
+        2
+      ],
+      "assets": [
+        "js/StartPage.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "DetailsPage": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "js/DetailsPage.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "IncorrectPath": {
+      "chunks": [
+        1
+      ],
+      "assets": [
+        "js/IncorrectPath.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 2,
+      "debug": false
+    }
+  },
+  "children": []
+}
