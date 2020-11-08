@@ -1,78 +1,86 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { mount, shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { FormControl } from 'react-bootstrap';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import thunk from 'redux-thunk';
 import SearchFilm from './SearchFilm';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('<SearchFilm/>', () => {
   const initialState = {
-    criteriaReducer: {
-      search: 'search',
+    movieReducer: {
       sort: 'sort',
     },
-    movieReducer: {
-      movies: [{ id: 1 }],
-    },
     windowReducer: {
-      showModal: false,
-      showEditPage: false,
-      showDeletePage: false,
-      showAddPage: false,
+      isShowAddPage: false,
     },
   };
-  const mockStore = configureStore();
-  let store;
-  let wrapper;
+  const middlewares = [thunk];
+  const store = configureStore(middlewares)(initialState);
 
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    store = mockStore(initialState);
-    wrapper = shallow(
-      <Provider store={store}>
-        <SearchFilm />
-      </Provider>
-    );
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
-
-  it('render component', () => {
-    expect(wrapper.find(SearchFilm).length).toEqual(1);
-  });
-
-  it('should equals to snapshot of CriteriaSearch', () => {
-    const renderedValue = renderer
-      .create(
-        <Router>
-          <Provider store={store}>
-            <SearchFilm />
-          </Provider>
-        </Router>
-      )
-      .toJSON();
-    expect(renderedValue).toMatchSnapshot();
-  });
-
-  it('should not call onChange', () => {
-    const onChange = jest.fn();
-    const wrap = mount(
+  it('should equals to snapshot of SearchFilm when isShowAddPage is false', () => {
+    const renderedValue = render(
       <Router>
         <Provider store={store}>
           <SearchFilm />
         </Provider>
       </Router>
     );
-    wrap.find(FormControl).at(0).simulate('change');
-    expect(onChange).toHaveBeenCalledTimes(0);
+
+    expect(renderedValue).toMatchSnapshot();
+  });
+
+  it('should equals to snapshot of SearchFilm isShowAddPage is true', () => {
+    const newInitialState = {
+      movieReducer: {
+        sort: 'sort',
+      },
+      windowReducer: {
+        isShowAddPage: true,
+      },
+    };
+    const newStore = configureStore(middlewares)(newInitialState);
+    const renderedValue = render(
+      <Router>
+        <Provider store={newStore}>
+          <SearchFilm />
+        </Provider>
+      </Router>
+    );
+
+    expect(renderedValue).toMatchSnapshot();
+  });
+
+  it('should not change values for elements by events', () => {
+    const realUseState = React.useState;
+    const stubInitialState = {
+      disabled: false,
+      myRef: createRef(),
+    };
+    jest
+      .spyOn(React, 'useState')
+      .mockImplementationOnce(() => realUseState(stubInitialState));
+
+    render(
+      <Router>
+        <Provider store={store}>
+          <SearchFilm />
+        </Provider>
+      </Router>
+    );
+
+    const button = screen.queryByText('+ Add movie');
+    const input = screen.queryByPlaceholderText('Please write the film name');
+    const buttonInput = screen.queryByText('Search');
+
+    userEvent.click(buttonInput);
+    userEvent.click(button);
+    userEvent.type(input, 'r');
+
+    expect(input.getAttribute('placeholder')).toBe(
+      'Please write the film name'
+    );
+    expect(button.textContent).toBe('+ Add movie');
   });
 });

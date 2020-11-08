@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorBoundary/> should equals to snapshot of ErrorBoundary 1`] = `ReactWrapper {}`;

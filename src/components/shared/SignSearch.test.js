@@ -1,49 +1,29 @@
-// import React from 'react';
-// import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-// import Adapter from 'enzyme-adapter-react-16';
-// import Enzyme, { shallow } from 'enzyme';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// import renderer from 'react-test-renderer';
-// import SignSearch from './SignSearch';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import SignSearch from './SignSearch';
 
-// Enzyme.configure({ adapter: new Adapter() });
+describe('<SignSearch/>', () => {
+  const initialState = {
+    movieReducer: {
+      sort: 'vote_average',
+    },
+  };
+  const middlewares = [thunk];
+  const store = configureStore(middlewares)(initialState);
 
-// describe('<SignSearch/>', () => {
-//   let container = null;
-//   beforeEach(() => {
-//     container = document.createElement('div');
-//     document.body.appendChild(container);
-//   });
+  it('should equals to snapshot of SignSearch', () => {
+    const renderedValue = render(
+      <Provider store={store}>
+        <Router>
+          <SignSearch />
+        </Router>
+      </Provider>
+    );
 
-//   afterEach(() => {
-//     unmountComponentAtNode(container);
-//     container.remove();
-//     container = null;
-//   });
-
-//   it('should render the component', () => {
-//     const wrapper = shallow(
-//       <Router>
-//         <SignSearch />
-//       </Router>,
-//     ).dive();
-//     ReactDOM.render(
-//       <Router>
-//         <SignSearch />
-//       </Router>,
-//       container,
-//     );
-//     ReactDOM.unmountComponentAtNode(container);
-//   });
-
-//   it('should equals to snapshot of CriteriaSearch', () => {
-//     const renderedValue = renderer
-//       .create(
-//         <Router>
-//           <SignSearch />
-//         </Router>,
-//       )
-//       .toJSON();
-//     expect(renderedValue).toMatchSnapshot();
-//   });
-// });
+    expect(renderedValue).toMatchSnapshot();
+  });
+});

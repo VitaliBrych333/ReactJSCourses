@@ -60,7 +60,7 @@ export default function movieReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload.error,
-        movies: { data: [], total: 0 },
+        movies: { data: [], totalAmount: 0 },
       };
 
     case FETCH_FILMID_BEGIN:
