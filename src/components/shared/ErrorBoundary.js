@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// PATTERN: Destructuring Arguments, Conditional Rendering
 export default class ErrorBoundary extends Component {
   constructor() {
     super();

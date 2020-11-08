@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import {
   FETCH_MOVIES_BEGIN,
   FETCH_MOVIES_SUCCESS,
@@ -10,7 +11,7 @@ import {
 } from '../actions/moviesActions';
 
 const initialState = {
-  movies: { data: [], totalAmount: 0 },
+  movies: { data: List(), totalAmount: 0 },
   moviesByCriteria: { data: null, totalAmount: 0 },
   filmId: {},
   sort: 'release_date',
@@ -60,7 +61,7 @@ export default function movieReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload.error,
-        movies: { data: [], totalAmount: 0 },
+        movies: { data: List(), totalAmount: 0 },
       };
 
     case FETCH_FILMID_BEGIN:

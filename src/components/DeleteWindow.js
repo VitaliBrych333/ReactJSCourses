@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -52,6 +52,7 @@ const updateFilms = (films, id) => {
   return newValueMovies;
 };
 
+// PATTERN: Destructuring Arguments, Style component
 const DeleteWindow = (props) => {
   const {
     moviesByCriteria,
@@ -111,4 +112,4 @@ const mapDispatchToProps = {
   showDeletePage,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteWindow);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(DeleteWindow));

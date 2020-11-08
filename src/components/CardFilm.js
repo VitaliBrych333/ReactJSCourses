@@ -81,6 +81,7 @@ const StyledCard = styled(Card)`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Style component, Array as children, Conditional Rendering
 const Item = (props) => {
   const { sortType, info, setEditFilm } = props;
   const history = useHistory();
@@ -144,9 +145,12 @@ const Item = (props) => {
       )}
       <Card.Img
         variant="top"
+        alt="img"
         src={info.poster_path}
         onMouseEnter={showDots}
         onMouseLeave={hideDots}
+        width="230"
+        height="300"
       />
 
       <Card.Body>

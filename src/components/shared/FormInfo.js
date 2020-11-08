@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, memo } from 'react';
 import { Form } from 'react-bootstrap';
 import Select from 'react-select';
 import { connect } from 'react-redux';
@@ -54,6 +54,7 @@ const StyledGroup = styled.div`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Conditional Rendering, Event switch
 const FormInfo = (props) => {
   const {
     namePage,
@@ -287,17 +288,17 @@ FormInfo.propTypes = {
     release_date: PropTypes.string,
     poster_path: PropTypes.string,
     vote_average: PropTypes.number,
-    genres: PropTypes.array,
+    genres: PropTypes.arrayOf(PropTypes.string),
     overview: PropTypes.string,
     runtime: PropTypes.number,
   }),
   namePage: PropTypes.string,
   nameButton: PropTypes.string,
   moviesByCriteria: PropTypes.shape({
-    data: PropTypes.array,
+    data: PropTypes.arrayOf(PropTypes.object),
   }),
   movies: PropTypes.shape({
-    data: PropTypes.array,
+    data: PropTypes.arrayOf(PropTypes.object),
   }),
   updateMovie: PropTypes.func,
   addMovie: PropTypes.func,
@@ -318,4 +319,4 @@ const mapDispatchToProps = {
   showAddPage,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(FormInfo));

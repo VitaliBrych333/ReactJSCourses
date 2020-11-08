@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MDBIcon } from 'mdbreact';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -21,6 +21,7 @@ const StyledSpan = styled.span`
   }
 `;
 
+// PATTERN: Stateless function
 const SignSearch = () => {
   return (
     <StyledSpan>
@@ -35,4 +36,4 @@ const SignSearch = () => {
   );
 };
 
-export default SignSearch;
+export default memo(SignSearch);

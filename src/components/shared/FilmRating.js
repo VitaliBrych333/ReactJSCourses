@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -30,6 +30,7 @@ const StyledDiv = styled.div`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Stateless function
 const Rating = ({ filmId }) => (
   <StyledDiv>
     <h3>
@@ -51,4 +52,4 @@ const mapStateToProps = (state) => ({
   filmId: state.movieReducer.filmId.data,
 });
 
-export default connect(mapStateToProps)(Rating);
+export default connect(mapStateToProps)(memo(Rating));

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -22,6 +22,7 @@ const StyledSection = styled.section`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Array as children, Children Types, Conditional Rendering
 class DetailsPage extends PureComponent {
   static initialAction(req) {
     return fetchMovieId(req.url.substring(8));
@@ -86,4 +87,4 @@ const mapDispatchToProps = {
   fetchMovieId,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(DetailsPage));

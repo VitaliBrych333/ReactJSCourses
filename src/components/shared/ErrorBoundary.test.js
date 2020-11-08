@@ -2,7 +2,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount } from 'enzyme';
 import ErrorBoundary from './ErrorBoundary';
-import NotFound from '../IncorrectPath';
+import NotFound from '../../pages/NotFoundPage/IncorrectPath';
 
 Enzyme.configure({ adapter: new Adapter() });
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
@@ -39,6 +39,7 @@ const Styledh3 = styled.h3`
   }
 `;
 
+// PATTERN: Stateless function, Style component
 const NotFound = () => {
   const history = useHistory();
   const handleClick = () => {
@@ -56,4 +57,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default memo(NotFound);

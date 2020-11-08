@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -46,6 +46,7 @@ const StyledGroup = styled.div`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Stateless function, Children Types
 const ModalWindow = (props) => {
   const { handleClose, children } = props;
 
@@ -73,4 +74,4 @@ ModalWindow.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default ModalWindow;
+export default memo(ModalWindow);

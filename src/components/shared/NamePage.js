@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -13,6 +13,7 @@ const Styled = styled.div`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Stateless function
 const NamePage = (props) => {
   const { namePage, handleClose } = props;
 
@@ -31,4 +32,4 @@ NamePage.propTypes = {
   namePage: PropTypes.string,
 };
 
-export default NamePage;
+export default memo(NamePage);

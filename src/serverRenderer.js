@@ -31,9 +31,9 @@ function parseScripts(scriptTags) {
 function renderHTML(linkTags, styleTags, html, scriptTags, preloadedState) {
   return `
       <!doctype html>
-      <html>
+      <html lang="en">
         <head>
-          <meta charset=utf-8>
+          <meta charset=utf-8 name="viewport" content="width=device-width, initial-scale=1.0">
           <title>React Server Side Rendering</title>
           ${linkTags}
           ${styleTags}

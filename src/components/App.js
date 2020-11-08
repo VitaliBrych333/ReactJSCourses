@@ -29,6 +29,7 @@ const IncorrectPath = loadable(
   { ssr: true }
 );
 
+// PATTERN: Destructuring Arguments
 const App = ({ Router, location, context, store }) => (
   <Provider store={store}>
     <Router location={location} context={context}>
