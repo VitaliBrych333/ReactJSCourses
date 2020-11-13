@@ -18,6 +18,7 @@ const StyledGroup = styled(Dropdown)`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Style component
 const DropdownCustom = (props) => {
   const { sortType, sort } = props;
   const [dropdownOpen, setDropdownOpen] = useState(false);

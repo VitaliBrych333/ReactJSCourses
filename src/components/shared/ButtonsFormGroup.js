@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -26,6 +26,7 @@ const StyledDiv = styled.div`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Stateless function, Style component
 const ButtonsFormGroup = (props) => {
   const { handleReset, handleSave, nameButton, disabledSave } = props;
 
@@ -48,4 +49,4 @@ ButtonsFormGroup.propTypes = {
   disabledSave: PropTypes.bool,
 };
 
-export default ButtonsFormGroup;
+export default memo(ButtonsFormGroup);

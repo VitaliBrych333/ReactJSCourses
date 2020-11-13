@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -27,7 +27,8 @@ const StyledSection = styled.section`
   }
 `;
 
-class StartPage extends PureComponent {
+// PATTERN: Destructuring Arguments, Array as children, Children Types, Conditional Rendering
+class StartPage extends Component {
   static initialAction(req) {
     const { sortBy, search, searchBy, filter } = req.query;
     if (sortBy && search) {
@@ -39,6 +40,19 @@ class StartPage extends PureComponent {
     }
 
     return fetchMoviesBegin();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { location, data, isShowEditPage, isShowDeletePage } = this.props;
+    const nextLocation = nextProps.location;
+
+    return (
+      location.pathname !== nextLocation.pathname ||
+      location.search !== nextProps.location.search ||
+      JSON.stringify(data) !== JSON.stringify(nextProps.data) ||
+      isShowEditPage !== nextProps.isShowEditPage ||
+      isShowDeletePage !== nextProps.isShowDeletePage
+    );
   }
 
   componentDidUpdate(prevProps) {

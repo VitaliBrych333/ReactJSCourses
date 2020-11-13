@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setGenre } from '../../redux/actions/moviesActions';
 
+// PATTERN: Destructuring Arguments, Children Types, Conditional Rendering
 const NavCustom = (props) => {
   const { genre, setGenre } = props;
   const [active, setActive] = useState('All');

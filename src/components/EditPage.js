@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import FormInfo from './shared/FormInfo';
 
@@ -25,6 +25,7 @@ const StyledSection = styled.section`
   }
 `;
 
+// PATTERN: Stateless function
 const EditPage = () => (
   <StyledSection>
     <div className="modal">
@@ -35,4 +36,4 @@ const EditPage = () => (
   </StyledSection>
 );
 
-export default EditPage;
+export default memo(EditPage);

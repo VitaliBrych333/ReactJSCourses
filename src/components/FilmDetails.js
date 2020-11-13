@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -100,6 +100,7 @@ const StyledHeader = styled.header`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Conditional Rendering
 const Details = (props) => {
   const { filmId, total } = props;
   const value = filmId.data;
@@ -148,4 +149,4 @@ const mapStateToProps = (state) => ({
   total: state.movieReducer.moviesByCriteria.totalAmount,
 });
 
-export default connect(mapStateToProps)(Details);
+export default connect(mapStateToProps)(memo(Details));

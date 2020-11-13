@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -71,6 +71,7 @@ const StyledHeader = styled.header`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Conditional Rendering
 const SearchHeader = ({ total }) => (
   <StyledHeader>
     <SearchFilm />
@@ -92,4 +93,4 @@ const mapStateToProps = (state) => ({
   total: state.movieReducer.moviesByCriteria.totalAmount,
 });
 
-export default connect(mapStateToProps)(SearchHeader);
+export default connect(mapStateToProps)(memo(SearchHeader));

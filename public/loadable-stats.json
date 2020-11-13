@@ -2,7 +2,7 @@
   "errors": [],
   "warnings": [],
   "version": "4.44.2",
-  "hash": "75de0f131bef5c6db761",
+  "hash": "99b4ca6bff13ce099943",
   "publicPath": "",
   "outputPath": "C:\\Users\\Vitali_Brych\\Desktop\\ReactJSCourses\\public",
   "assetsByChunkName": {
@@ -14,7 +14,7 @@
   "assets": [
     {
       "name": "js/DetailsPage.js",
-      "size": 33581,
+      "size": 33705,
       "chunks": [
         0
       ],
@@ -26,7 +26,7 @@
     },
     {
       "name": "js/IncorrectPath.js",
-      "size": 2457,
+      "size": 2552,
       "chunks": [
         1
       ],
@@ -38,7 +38,7 @@
     },
     {
       "name": "js/StartPage.js",
-      "size": 33122,
+      "size": 33481,
       "chunks": [
         2
       ],
@@ -50,7 +50,7 @@
     },
     {
       "name": "js/serverRenderer.js",
-      "size": 51999,
+      "size": 52566,
       "chunks": [
         3,
         0,

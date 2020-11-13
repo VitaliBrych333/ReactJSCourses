@@ -32,6 +32,7 @@ const StyleDiv = styled.div`
   }
 `;
 
+// PATTERN: Destructuring Arguments, Style component, Conditional Rendering
 const SearchFilm = (props) => {
   const { sortType, isShowAddPage, showAddPage } = props;
   const history = useHistory();

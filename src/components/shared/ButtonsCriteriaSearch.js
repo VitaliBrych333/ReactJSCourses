@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import DropdownCustom from './DropdownCustom';
 
+// PATTERN: Stateless function
 const CriteriaSearch = () => (
   <div>
     <p>Sort by</p>
@@ -8,4 +9,4 @@ const CriteriaSearch = () => (
   </div>
 );
 
-export default CriteriaSearch;
+export default memo(CriteriaSearch);
